@@ -1,4 +1,4 @@
-import React, {useState, useMemo, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import {Dropdown} from "monday-ui-react-core/";
 import "monday-ui-react-core/dist/main.css"
 import TextField from '@mui/material/TextField';
@@ -28,7 +28,6 @@ const BookingForm = (officeId,bookingPlace) => {
 
     useEffect(() => {
       getAvailableHours(officeId,bookingPlace,startDate,endDate);
-      console.log(startDate);
     }, [startDate]);
 
 
