@@ -13,15 +13,16 @@ const SignUpForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(firstName, lastName, email, password, username, company);
-    const res = await userClient.signUp(
-      firstName,
-      lastName,
-      email,
-      password,
-      username,
-      company,
-      true
-    );
+    const newUser = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+      userName: username,
+      company: company,
+      isAdmin: true,
+    };
+    const res = await userClient.register(newUser);
     if (res) {
       console.log("GOOD");
     }
