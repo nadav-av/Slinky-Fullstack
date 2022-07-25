@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Login from "./Pages/Login/Login";
 import Navbar from "./Components/Generics/NavBar/NavBar";
+import BookingForm from "./Components/BookingForm/BookingForm";
 import NotFound from "./Pages/NotFound/NotFound";
 
 import "./App.css";

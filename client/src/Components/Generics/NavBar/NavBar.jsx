@@ -24,7 +24,7 @@ function Navbar() {
           </li>
           <li className="nav-item">
             <NavLink to="/booking" className={"nav-links"}>
-              booking
+              Booking
             </NavLink>
           </li>
         </ul>

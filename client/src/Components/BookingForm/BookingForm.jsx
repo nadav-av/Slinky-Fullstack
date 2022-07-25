@@ -8,40 +8,44 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import "./bookingForm.css";
 import bookingClient from "../../Services/bookingClient";
 
-const BookingForm = () => {
+const BookingForm = (officeId,bookingPlace) => {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [startHour, setStartHour] = useState(-1);
     const [endHour, setEndHour] = useState(-1);
+    const [availableHours, setAvailableHours] = useState([]);
+    const [availableEndHours, setAvailableEndHours] = useState([]);
+    officeId=1;
+    bookingPlace='c2';
 
-    let availableHours = [];
-
-    const getAvailableHours = async (date) => {
+    const getAvailableHours = async (officeId,bookingPlace,startDate,endDate) => {
       try {
-        availableHours = await bookingClient.getAvailableHours(date);
-        console.log(availableHours);
+        setAvailableHours(await bookingClient.getAvailableStartHours(officeId,bookingPlace,startDate,endDate));
       } catch (err) {
         console.error('err');
       }
     };
 
     useEffect(() => {
-      getAvailableHours(startDate);
-    }, []);
-    
-    //need to delete (when available hours will load ok to dropdown)
-    const options = useMemo(() => 
-        [{
-            value: 7,
-            label: "07:00"
-          }, {
-            value: 8,
-            label: "08:00"
-          }, {
-            value: 9,
-            label: "09:00"
-        }]
-        , []);
+      getAvailableHours(officeId,bookingPlace,startDate,endDate);
+      console.log(startDate);
+    }, [startDate]);
+
+
+    useEffect(() => {
+      setAvailableEndHours(availableHours);
+    }, [startHour]);
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      try {
+        await bookingClient.addBooking(officeId,bookingPlace,startDate,endDate,startHour,endHour);
+      }
+      catch {
+        console.err('err');
+      }
+    };
+  
 
   return (
     <div className="booking-form">
@@ -50,7 +54,7 @@ const BookingForm = () => {
           <h1>Book the office</h1>
         </div>
         <div className="booking-form-body">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="form-date">
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DatePicker
@@ -58,6 +62,7 @@ const BookingForm = () => {
                     value={startDate}
                     onChange={(date) => {
                       setStartDate(date);setEndDate(date);
+                      setStartHour(-1);setEndHour(-1)
                     }}
                     renderInput={(params) => <TextField {...params} />}
                 />
@@ -79,19 +84,15 @@ const BookingForm = () => {
             </div>*/}
             <div className="form-hours">
               <div className="start-hour"> 
-              {//need to load it only after get availableHours
-              }
-                <Dropdown placeholder="Start Hour" options={options} className="dropdown-stories-styles_big-spacing"
+                <Dropdown placeholder="Start Hour" options={availableHours} className="dropdown-stories-styles_big-spacing"
                   onOptionSelect={(input) => {setStartHour(input.value)}}
-                  onClear={() => {setStartHour(-1);setEndHour(-1)}} //need to clear end-hour dropdown too
+                  onClear={() => {setStartHour(-1);setEndHour(-1)}}
                   />
               </div>
               </div>
             <div className="form-hours">
               <div className="end-hour">
-              {//need to load it only after get availableHours
-              }
-                <Dropdown placeholder="End Hour" options={options} className="dropdown-stories-styles_big-spacing" 
+                <Dropdown placeholder="End Hour" options={availableEndHours} className="dropdown-stories-styles_big-spacing" 
                   disabled={(startHour === -1)? true:false}
                   onOptionSelect={(input) => {setEndHour(input.value)}}
                   onOptionRemove={() => {setEndHour(-1)}}
