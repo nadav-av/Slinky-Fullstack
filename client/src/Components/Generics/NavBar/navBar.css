@@ -30,7 +30,8 @@
     cursor: pointer;
     text-decoration: none;
     font-size: 2rem;
-    flex-grow: 1;
+    position: absolute;
+    left: 20px;
   }
 
 .nav-logo i {
@@ -42,6 +43,8 @@
     list-style: none;
     text-align: center;
     margin-right: 2rem;
+    position: absolute;
+    right: 20px;
   }
   
   .nav-links {

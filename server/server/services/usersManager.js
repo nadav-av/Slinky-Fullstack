@@ -1,31 +1,36 @@
-const { User, sequelize } = require("../storages/models");
+const { User } = require("../storages/models");
 
 class UserManager {
-  constructor() {
-    this.user = User;
-  }
-
-  async getUser(userName) {
-    return await this.user.findOne({
+  async getUser(username) {
+    return await User.findOne({
       where: {
-        userName,
+        userName: username,
       },
     });
   }
 
-  async createUser(userName, password, firstName, lastName, email, company) {
-    return await this.user.create({
+  async createUser(
+    userName,
+    password,
+    firstName,
+    lastName,
+    email,
+    company,
+    isAdmin
+  ) {
+    return await User.create({
       userName,
       password,
       firstName,
       lastName,
       email,
       company,
+      isAdmin,
     });
   }
 
   async updateUser(userName, password, firstName, lastName, email, company) {
-    return await this.user.update(
+    return await User.update(
       {
         userName,
         password,
@@ -43,13 +48,12 @@ class UserManager {
   }
 
   async deleteUser(userName) {
-    return await this.user.destroy({
+    return await User.destroy({
       where: {
         userName,
       },
     });
   }
-
 }
 
-export default new UserManager();
+module.exports = new UserManager();

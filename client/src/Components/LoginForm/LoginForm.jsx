@@ -1,27 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
+import "./loginForm.css";
+import userClient from "../../Services/userClient";
 
 const LoginForm = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginRes, setloginRes] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(username, password);
+    const res = await userClient.login(username, password);
+    if (res) {
+      setloginRes(res);
+    }
+  };
+
   return (
-    <div className="login-form">
-      <div className="login-form-container">
-        <div className="login-form-header">
-          <h1>Login</h1>
+    <div className="center login-center">
+      <h1>Login</h1>
+      <form onSubmit={handleSubmit}>
+        <div className="txt_field">
+          <input
+            type="text"
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+          <span></span>
+          <label>Username</label>
         </div>
-        <div className="login-form-body">
-          <form>
-            <div className="login-form-input-container">
-              <label htmlFor="email">Email</label>
-              <input type="text" id="email" />
-            </div>
-            <div className="login-form-input-container">
-              <label htmlFor="password">Password</label>
-              <input type="password" id="password" />
-            </div>
-            <div className="login-form-input-container">
-              <button type="submit">Login</button>
-            </div>
-          </form>
+        <div className="txt_field">
+          <input
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <span></span>
+          <label>Password</label>
         </div>
+        <input type="submit" />
+      </form>
+      <div>
+        {loginRes && (
+          <div>
+            <h2>{loginRes}</h2>
+          </div>
+        )}
       </div>
     </div>
   );
