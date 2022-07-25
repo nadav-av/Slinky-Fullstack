@@ -8,19 +8,20 @@ export default class bookingClient {
             }
         }
 
-        const takenHours = this.getTakenHours(officeId,bookingPlace,startDate,endDate); //[{startHour: 10, endHour: 12},{startHour: 16, endHour: 17}]
-        takenHours.forEach((element) => {
-            const diff = element.endHour - element.startHour;
-            availableHours.splice(element.startHour,diff);
-        })
+        const takenHours = await this.getTakenHours(officeId,bookingPlace,startDate,endDate); //[{startHour: 10, endHour: 12},{startHour: 16, endHour: 17}]
+        if (takenHours.length!==0)
+        {  takenHours.forEach((element) => {
+              const diff = element.endHour - element.startHour;
+              availableHours.splice(element.startHour,diff);
+          })}
         console.log(availableHours);
         return availableHours;
       }
 
       static async getTakenHours(officeId,bookingPlace,startDate,endDate) {
         const userJWTToken = localStorage.getItem('x-auth-token');
-        const response = await fetch('/get-all-booking-by-date-and-place', {
-            method: 'GET',
+        const response = await fetch('http://localhost:3042/get-all-booking-by-date-and-place', {
+            method: 'POST',
             headers: { 
                 'Content-Type': 'application/json',
                 'x-auth-token':  userJWTToken},
@@ -28,12 +29,13 @@ export default class bookingClient {
           });
         
         const takenHours = await response.json();
+        console.log(takenHours);
         return takenHours;
       }
 
       static async addBooking(officeId,bookingPlace,startDate,endDate,startHour,endHour) {
         const userJWTToken = localStorage.getItem('x-auth-token');
-        const response = await fetch('/create-booking', {
+        const response = await fetch('http://localhost:3042/create-booking', {
           method: 'POST',
           headers: { 
             'Content-Type': 'application/json',
