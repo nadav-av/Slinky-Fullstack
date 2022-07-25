@@ -1,17 +1,35 @@
-import React, {useState, useMemo} from "react";
+import React, {useState, useMemo, useEffect} from "react";
 import {Dropdown} from "monday-ui-react-core/";
 import "monday-ui-react-core/dist/main.css"
 import TextField from '@mui/material/TextField';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import "./bookingForm.css";
+import bookingClient from "../../Services/bookingClient";
 
 const BookingForm = () => {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
-    const [startHour, setStartHour] = useState();
-    const [endHour, setEndHour] = useState();
+    const [startHour, setStartHour] = useState(-1);
+    const [endHour, setEndHour] = useState(-1);
 
+    let availableHours = [];
+
+    const getAvailableHours = async (date) => {
+      try {
+        availableHours = await bookingClient.getAvailableHours(date);
+        console.log(availableHours);
+      } catch (err) {
+        console.error('err');
+      }
+    };
+
+    useEffect(() => {
+      getAvailableHours(startDate);
+    }, []);
+    
+    //need to delete (when available hours will load ok to dropdown)
     const options = useMemo(() => 
         [{
             value: 7,
@@ -33,19 +51,20 @@ const BookingForm = () => {
         </div>
         <div className="booking-form-body">
           <form>
-            <div className="start-date">
+            <div className="form-date">
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DatePicker
                     label="Start Date"
                     value={startDate}
                     onChange={(date) => {
-                    setStartDate(date);setEndDate(date);
+                      setStartDate(date);setEndDate(date);
                     }}
                     renderInput={(params) => <TextField {...params} />}
                 />
                 </LocalizationProvider>
             </div>
-            <div className="end-date">
+            {/*
+            <div className="form-date">
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DatePicker
                         label="End Date"
@@ -57,14 +76,29 @@ const BookingForm = () => {
                         renderInput={(params) => <TextField {...params} />}
                     />
                 </LocalizationProvider>
+            </div>*/}
+            <div className="form-hours">
+              <div className="start-hour"> 
+              {//need to load it only after get availableHours
+              }
+                <Dropdown placeholder="Start Hour" options={options} className="dropdown-stories-styles_big-spacing"
+                  onOptionSelect={(input) => {setStartHour(input.value)}}
+                  onClear={() => {setStartHour(-1);setEndHour(-1)}} //need to clear end-hour dropdown too
+                  />
+              </div>
+              </div>
+            <div className="form-hours">
+              <div className="end-hour">
+              {//need to load it only after get availableHours
+              }
+                <Dropdown placeholder="End Hour" options={options} className="dropdown-stories-styles_big-spacing" 
+                  disabled={(startHour === -1)? true:false}
+                  onOptionSelect={(input) => {setEndHour(input.value)}}
+                  onOptionRemove={() => {setEndHour(-1)}}
+                />
+              </div>
             </div>
-            <div className="start-hour">
-                <Dropdown defaultValue={[options[0]]} placeholder="Start Hour" options={options} className="dropdown-stories-styles_big-spacing" />
-            </div>
-            <div className="end-hour">
-            <Dropdown defaultValue={[options[0]]} placeholder="End Hour" options={options} className="dropdown-stories-styles_big-spacing" />
-            </div>
-            <button className="booking-submit">Submit</button>
+            <input type="Submit" className="booking-submit"/>
           </form>
         </div>
       </div>
