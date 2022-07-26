@@ -11,7 +11,7 @@ export default class bookingClient {
         const takenHours = await this.getTakenHours(officeId,bookingPlace,startDate,endDate); //[{startHour: 10, endHour: 12},{startHour: 16, endHour: 17}]
         if (takenHours.length!==0)
         {  takenHours.forEach((element) => {
-          availableHours = availableHours.filter(data => data.value < element.startHour || data.value > element.endHour);
+          availableHours = availableHours.filter(data => data.value < element.startHour || data.value > element.endHour); // viko change
               // const diff = element.endHour - element.startHour;
               // console.log("diff is : ", diff);
               // availableHours.splice(element.startHour,diff);
