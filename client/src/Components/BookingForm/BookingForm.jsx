@@ -62,7 +62,7 @@ const BookingForm = (officeId,bookingPlace) => {
                     label="Start Date"
                     value={startDate}
                     onChange={(date) => {
-                      setStartDate(date);setEndDate(date);
+                      setStartDate(new Date(date));setEndDate(new Date(date));
                       setStartHour(-1);setEndHour(-1)
                     }}
                     renderInput={(params) => <TextField {...params} />}
@@ -86,7 +86,9 @@ const BookingForm = (officeId,bookingPlace) => {
             <div className="form-hours">
               <div className="start-hour"> 
                 <Dropdown placeholder="Start Hour" options={availableHours} className="dropdown-stories-styles_big-spacing"
-                  onOptionSelect={(input) => {setStartHour(input.value); startDate.setHours(input.value)}}
+                  onOptionSelect={(input) => {setStartHour(input.value); startDate.setHours(input.value); startDate.setMinutes(0); startDate.setSeconds(0); 
+                    console.log("dropdown start date", startDate.toString())
+                  }}
                   onClear={() => {setStartHour(-1);setEndHour(-1)}}
                   />
               </div>
@@ -95,8 +97,8 @@ const BookingForm = (officeId,bookingPlace) => {
               <div className="end-hour">
                 <Dropdown placeholder="End Hour" options={availableEndHours} className="dropdown-stories-styles_big-spacing" 
                   disabled={(startHour === -1)? true:false}
-                  onOptionSelect={(input) => {setEndHour(input.value); endDate.setHours(input.value)
-                  console.log("helllooo", endDate)}}
+                  onOptionSelect={(input) => {setEndHour(input.value); endDate.setHours(input.value); endDate.setMinutes(0); endDate.setSeconds(0);
+                  console.log("dropdown end date", endDate.toString())}}
                   onOptionRemove={() => {setEndHour(-1)}}
                 />
               </div>

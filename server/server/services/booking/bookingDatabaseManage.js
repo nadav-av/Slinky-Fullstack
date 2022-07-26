@@ -60,8 +60,8 @@ class BookingDatabaseManage {
       console.log("booking place");
       console.log(startDate);
       const bookingByChairAndDate = Booking.findAll({where:{officeId, bookingPlace,
-        startDate : {[Op.lt]: new Date(new Date(endDate).getTime() + 60 * 60 * 24 * 1000 - 1),
-                    [Op.gt]: new Date(startDate)}}});
+        startDate : {[Op.lt]: ((endDate).getTime() + 60 * 60 * 24 * 1000 - 1),
+                    [Op.gt]: (startDate)}}});
       return bookingByChairAndDate;
     } catch(error){
       throw error;
