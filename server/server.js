@@ -3,7 +3,7 @@ const express = require("express");
 const users = require("./server/routes/users");
 const booking = require('./server/routes/booking/booking');
 const logger = require("./server/middleware/logger.js");
-const auth = require("./server/middleware/auth.js");
+// const auth = require("./server/middleware/auth.js");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
