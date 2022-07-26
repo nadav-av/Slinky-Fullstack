@@ -10,7 +10,6 @@ class BookingManager {
     if (
       this.bookingManagerValidator.isBookingInformationValid(officeId, bookingPlace, startDate, endDate) === false
     ) {
-      console.log("123")
       const newError = Error("parameters are not good");
       newError.statusCode = 400;
       throw newError;

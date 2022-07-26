@@ -57,11 +57,11 @@ class BookingDatabaseManage {
   }
   getBookingByDateAndPlace = async (officeId, bookingPlace, startDate, endDate) => {
     try{
-      console.log("booking place");
-      console.log(startDate);
+      const startDateLimit = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), 0, 0, 0, 0);
+      const endDateLimist = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate()+1, 0, 0, 0, 0);
       const bookingByChairAndDate = Booking.findAll({where:{officeId, bookingPlace,
-        startDate : {[Op.lt]: ((endDate).getTime() + 60 * 60 * 24 * 1000 - 1),
-                    [Op.gt]: (startDate)}}});
+        startDate : {[Op.gt]: (startDateLimit)},
+        endDate: {[Op.lt]: endDateLimist}}});
       return bookingByChairAndDate;
     } catch(error){
       throw error;

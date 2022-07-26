@@ -11,10 +11,13 @@ export default class bookingClient {
         const takenHours = await this.getTakenHours(officeId,bookingPlace,startDate,endDate); //[{startHour: 10, endHour: 12},{startHour: 16, endHour: 17}]
         if (takenHours.length!==0)
         {  takenHours.forEach((element) => {
-              const diff = element.endHour - element.startHour;
-              availableHours.splice(element.startHour,diff);
+          availableHours = availableHours.filter(data => data.value < element.startHour || data.value > element.endHour);
+              // const diff = element.endHour - element.startHour;
+              // console.log("diff is : ", diff);
+              // availableHours.splice(element.startHour,diff);
+              // console.log("arr after splice is : ", availableHours);
           })}
-        console.log(availableHours);
+        console.log("availableHours is : ", availableHours);
         return availableHours;
       }
 
@@ -35,7 +38,6 @@ export default class bookingClient {
 
       static async addBooking(officeId,bookingPlace,startDate,endDate,startHour,endHour) {
         const userJWTToken = localStorage.getItem('x-auth-token');
-        console.log("i am after token", startDate)
         const response = await fetch('http://localhost:3042/create-booking', {
           method: 'POST',
           headers: { 

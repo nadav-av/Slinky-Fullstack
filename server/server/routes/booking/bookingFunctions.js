@@ -61,17 +61,15 @@ async function getBookingByBookingPlace(req, res){
 
 async function getBookingByDateAndPlace(req, res){
     try{
-        console.log("getBookingByDateAndPlace");
         const { officeId, bookingPlace, startDate, endDate } = req.body;
         const newStartDate = new Date(startDate);
         const newEndDate = new Date(endDate);
         const listOfBookings = await BookingManager.getBookingByDateAndPlace(officeId, bookingPlace, newStartDate, newEndDate);
-        console.log("passed");
         const bookedHours = listOfBookings.map((bookingOrder) => {
             return ({"startHour" : bookingOrder.startDate.getHours(),
                      "endHour": bookingOrder.endDate.getHours()});
         })
-        console.log(bookedHours);
+        console.log("bookedHours is : ",bookedHours);
         res.status(200).send(JSON.stringify(bookedHours));
     } catch(error){
         res.status(error.statusCode).send(JSON.stringify(error.message));
