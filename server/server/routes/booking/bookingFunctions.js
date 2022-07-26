@@ -3,7 +3,11 @@ const BookingManager = require('../../services/booking/bookingManager');
 async function createBooking(req, res){
     try{
         const { officeId, bookingPlace, startDate, endDate } = req.body;
-        const returnedBooking = await BookingManager.addBookingOrder(officeId, bookingPlace, startDate, endDate, req.tokenData.userName);
+        const newStartDate = new Date();
+        console.log("start date", startDate);
+        console.log(newStartDate);
+        const newEndDate = new Date(endDate);
+        const returnedBooking = await BookingManager.addBookingOrder(officeId, bookingPlace, newStartDate, newEndDate, "req.tokenData.userName");
         res.status(200).send(JSON.stringify(returnedBooking));
         res.end();
     } catch(error){
@@ -62,10 +66,12 @@ async function getBookingByDateAndPlace(req, res){
         console.log("getBookingByDateAndPlace");
         const { officeId, bookingPlace, startDate, endDate } = req.body;
         const listOfBookings = await BookingManager.getBookingByDateAndPlace(officeId, bookingPlace, startDate, endDate);
+        console.log("passed");
         const bookedHours = listOfBookings.map((bookingOrder) => {
             return ({"startHour" : bookingOrder.startDate.getUTCHours(),
                      "endHour": bookingOrder.endDate.getUTCHours()});
         })
+        console.log(bookedHours);
         res.status(200).send(JSON.stringify(bookedHours));
     } catch(error){
         res.status(error.statusCode).send(JSON.stringify(error.message));

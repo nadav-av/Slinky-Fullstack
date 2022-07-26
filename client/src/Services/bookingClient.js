@@ -35,6 +35,7 @@ export default class bookingClient {
 
       static async addBooking(officeId,bookingPlace,startDate,endDate,startHour,endHour) {
         const userJWTToken = localStorage.getItem('x-auth-token');
+        console.log("i am after token", startDate)
         const response = await fetch('http://localhost:3042/create-booking', {
           method: 'POST',
           headers: { 

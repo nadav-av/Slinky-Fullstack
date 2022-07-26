@@ -1,4 +1,5 @@
 const { Booking } = require('../../storages/models');
+const { Op } = require('sequelize');
 
 class BookingDatabaseManage {
 
@@ -56,7 +57,11 @@ class BookingDatabaseManage {
   }
   getBookingByDateAndPlace = async (officeId, bookingPlace, startDate, endDate) => {
     try{
-      const bookingByChairAndDate = Booking.findAll({where:{officeId, bookingPlace, startDate}});
+      console.log("booking place");
+      console.log(startDate);
+      const bookingByChairAndDate = Booking.findAll({where:{officeId, bookingPlace,
+        startDate : {[Op.lt]: new Date(new Date(endDate).getTime() + 60 * 60 * 24 * 1000 - 1),
+                    [Op.gt]: new Date(startDate)}}});
       return bookingByChairAndDate;
     } catch(error){
       throw error;

@@ -5,7 +5,7 @@ class BookingManagerValidator{
         if(this._isBookingPlaceNotValid(bookingPlace)) return false;
         if(this._isDateTimeNotValid(startDate)) return false;
         if(this._isDateTimeNotValid(endDate)) return false;
-        if(this._isStartDateIsNotBeforeEndDate(startDate, endDate)) return false;
+        // if(this._isStartDateIsNotBeforeEndDate(startDate, endDate)) return false;
         return true;
     }
     _isInputBlank(str) {

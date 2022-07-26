@@ -38,6 +38,8 @@ const BookingForm = (officeId,bookingPlace) => {
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
+        console.log("start date", startDate.toString());
+        console.log("end date", endDate.toString());
         await bookingClient.addBooking(officeId,bookingPlace,startDate,endDate,startHour,endHour);
       }
       catch {
@@ -84,7 +86,7 @@ const BookingForm = (officeId,bookingPlace) => {
             <div className="form-hours">
               <div className="start-hour"> 
                 <Dropdown placeholder="Start Hour" options={availableHours} className="dropdown-stories-styles_big-spacing"
-                  onOptionSelect={(input) => {setStartHour(input.value)}}
+                  onOptionSelect={(input) => {setStartHour(input.value); startDate.setHours(input.value)}}
                   onClear={() => {setStartHour(-1);setEndHour(-1)}}
                   />
               </div>
@@ -93,7 +95,8 @@ const BookingForm = (officeId,bookingPlace) => {
               <div className="end-hour">
                 <Dropdown placeholder="End Hour" options={availableEndHours} className="dropdown-stories-styles_big-spacing" 
                   disabled={(startHour === -1)? true:false}
-                  onOptionSelect={(input) => {setEndHour(input.value)}}
+                  onOptionSelect={(input) => {setEndHour(input.value); endDate.setHours(input.value)
+                  console.log("helllooo", endDate)}}
                   onOptionRemove={() => {setEndHour(-1)}}
                 />
               </div>
