@@ -11,7 +11,7 @@ export default class bookingClient {
         const takenHours = await this.getTakenHours(officeId,bookingPlace,startDate,endDate); //[{startHour: 10, endHour: 12},{startHour: 16, endHour: 17}]
         if (takenHours.length!==0)
         {  takenHours.forEach((element) => {
-          availableHours = availableHours.filter(data => data.value < element.startHour || data.value > element.endHour); // viko change
+          availableHours = availableHours.filter(data => data.value < element.startHour || data.value >= element.endHour); // viko change
               // const diff = element.endHour - element.startHour;
               // console.log("diff is : ", diff);
               // availableHours.splice(element.startHour,diff);
@@ -23,7 +23,7 @@ export default class bookingClient {
 
       static async getTakenHours(officeId,bookingPlace,startDate,endDate) {
         const userJWTToken = localStorage.getItem('x-auth-token');
-        const response = await fetch('http://localhost:3042/get-all-booking-by-date-and-place', {
+        const response = await fetch('http://localhost:3042/booking/get-all-booking-by-date-and-place', {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export default class bookingClient {
 
       static async addBooking(officeId,bookingPlace,startDate,endDate,startHour,endHour) {
         const userJWTToken = localStorage.getItem('x-auth-token');
-        const response = await fetch('http://localhost:3042/create-booking', {
+        const response = await fetch('http://localhost:3042/booking/create-booking', {
           method: 'POST',
           headers: { 
             'Content-Type': 'application/json',
