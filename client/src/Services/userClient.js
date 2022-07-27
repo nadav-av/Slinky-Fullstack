@@ -1,6 +1,6 @@
 class UserClient {
   constructor() {
-    this.url = "http://localhost:3001/users";
+    this.url = "http://localhost:3042/users";
   }
 
   async login(userName, password) {

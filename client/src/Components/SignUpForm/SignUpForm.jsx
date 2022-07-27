@@ -34,7 +34,6 @@ const SignUpForm = () => {
       if (res) {
         console.log("GOOD");
       }
-
     }
   };
 
@@ -61,6 +60,7 @@ const SignUpForm = () => {
     if (username.length < 5) {
       return false; //when redux is implemented, toggle error message to preset at top of page
     } else {
+      console.log("VALID");
       return true;
     }
   };
