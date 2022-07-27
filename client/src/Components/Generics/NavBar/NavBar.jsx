@@ -26,6 +26,9 @@ function Navbar() {
             <NavLink to="/booking" className={"nav-links"}>
               Booking
             </NavLink>
+            <NavLink to="/visualmap" className={"nav-links"}>
+              Visual Map
+            </NavLink>
           </li>
         </ul>
       </div>
