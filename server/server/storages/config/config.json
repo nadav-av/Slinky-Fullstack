@@ -14,11 +14,13 @@
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
+
+  
   "production": {
     "username": "root",
     "password": "password",
     "database": "slinky_fullstack",
-    "host": "127.0.0.1",
+    "host": "mysqldb",
     "dialect": "mysql"
   }
 }

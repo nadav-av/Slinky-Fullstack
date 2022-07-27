@@ -1,11 +1,10 @@
 class UserClient {
   constructor() {
-    this.url = "http://localhost:3042/users";
+    this.url = "http://localhost:3001/users";
   }
 
   async login(userName, password) {
     console.log(userName, password);
-
 
     const response = await fetch(`${this.url}/login`, {
       method: "POST",
