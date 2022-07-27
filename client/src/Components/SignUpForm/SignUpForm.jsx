@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import userClient from "../../Services/userClient";
 import "./signUpForm.css";
+const emailValidator = require("email-validator");
 
 const SignUpForm = () => {
   const [firstName, setFirstName] = useState("");
@@ -11,20 +12,56 @@ const SignUpForm = () => {
   const [company, setCompany] = useState("");
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(firstName, lastName, email, password, username, company);
-    const newUser = {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      password: password,
-      userName: username,
-      company: company,
-      isAdmin: true,
-    };
-    const res = await userClient.register(newUser);
-    if (res) {
-      console.log("GOOD");
+    const isDataValid = isUserDataValid(
+      firstName,
+      lastName,
+      email,
+      password,
+      username,
+      company
+    );
+    if (isDataValid) {
+      const newUser = {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
+        userName: username,
+        company: company,
+        isAdmin: true,
+      };
+      const res = await userClient.register(newUser);
+      if (res) {
+        console.log("GOOD");
+      }
+
+    }
+  };
+
+  const isUserDataValid = (
+    firstName,
+    lastName,
+    email,
+    password,
+    username,
+    company
+  ) => {
+    if (firstName.length < 3) {
+      return false; //when redux is implemented, toggle error message to preset at top of page
+    }
+    if (lastName.length < 3) {
+      return false; //when redux is implemented, toggle error message to preset at top of page
+    }
+    if (!emailValidator.validate(email)) {
+      return false; //when redux is implemented, toggle error message to preset at top of page
+    }
+    if (password.length < 5) {
+      return false; //when redux is implemented, toggle error message to preset at top of page
+    }
+    if (username.length < 5) {
+      return false; //when redux is implemented, toggle error message to preset at top of page
+    } else {
+      return true;
     }
   };
 

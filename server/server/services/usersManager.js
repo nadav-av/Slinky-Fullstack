@@ -18,33 +18,43 @@ class UserManager {
     company,
     isAdmin
   ) {
-    return await User.create({
-      userName,
-      password,
-      firstName,
-      lastName,
-      email,
-      company,
-      isAdmin,
-    });
-  }
-
-  async updateUser(userName, password, firstName, lastName, email, company) {
-    return await User.update(
-      {
+    try {
+      const user = await User.create({
         userName,
         password,
         firstName,
         lastName,
         email,
         company,
-      },
-      {
-        where: {
-          userName,
+        isAdmin,
+      });
+      return user;
+    } catch (err) {
+      console.log(err);
+      return { err: err };
+    }
+  }
+
+  async updateUser(userName, password, firstName, lastName, email, company) {
+    try {
+      return await User.update(
+        {
+          password,
+          firstName,
+          lastName,
+          email,
+          company,
         },
-      }
-    );
+        {
+          where: {
+            userName,
+          },
+        }
+      );
+    } catch (err) {
+      console.log(err);
+      return { err: err };
+    }
   }
 
   async deleteUser(userName) {

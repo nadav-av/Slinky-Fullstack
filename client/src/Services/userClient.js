@@ -48,6 +48,9 @@ class UserClient {
     } else if (response.status === 400) {
       return "User already exists";
     }
+    if (response.status === 500) {
+      return "Server error";
+    }
   }
 }
 
