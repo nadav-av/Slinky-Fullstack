@@ -4,16 +4,17 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 400px;
-    height: 650px;
     background: white;
     border-radius: 10px;
     box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
+  }
+  .booking-form-body{
+    margin-top: 20px;
   }
   .booking-form-container h1{
     text-align: center;
     padding: 20px 0;
     border-bottom: 1px solid silver;
-    margin-bottom: 15px;
   }
   .booking-form-container form{
     padding: 0 40px;
@@ -22,17 +23,16 @@
   form .form-date{
     text-align: center;
     position: relative;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
   }
   form .form-hours{
     margin: auto;
     display: block;
     width: 80%;
-    height: 40px;
+    /*height: 40px;*/
     font-size: 16px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
   }
-  
   input[type="submit"]{
     position: relative;
     width: 100%;
@@ -45,6 +45,7 @@
     font-weight: 700;
     cursor: pointer;
     outline: none;
+    margin-bottom: 20px;
   }
   input[type="submit"]:hover{
     border-color: #2691d9;

@@ -1,7 +1,9 @@
 const express = require("express");
-const bookingRouter = require('../server/server/routes/booking/booking');
+// const bookingRouter = require('../server/server/routes/booking/booking');
 const users = require("./server/routes/users");
+const booking = require('./server/routes/booking/booking');
 const logger = require("./server/middleware/logger.js");
+// const auth = require("./server/middleware/auth.js");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
@@ -11,7 +13,8 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logger);
-app.use(bookingRouter);
+app.use("/booking", booking);
+// app.use(bookingRouter);
 app.use("/users", users);
 
 const port = process.env.PORT || "3042";

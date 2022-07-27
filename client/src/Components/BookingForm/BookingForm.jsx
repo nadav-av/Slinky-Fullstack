@@ -7,16 +7,17 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import "./bookingForm.css";
 import bookingClient from "../../Services/bookingClient";
+import { set } from "date-fns";
 
 const BookingForm = (officeId,bookingPlace) => {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
-    const [startHour, setStartHour] = useState(-1);
-    const [endHour, setEndHour] = useState(-1);
+    const [isStartHour, setIsStartHour] = useState(false);
+    const [isEndHour, setIsEndHour] = useState(false);
     const [availableHours, setAvailableHours] = useState([]);
     const [availableEndHours, setAvailableEndHours] = useState([]);
-    officeId=1;
-    bookingPlace='c2';
+    officeId=1; //mock
+    bookingPlace='c2'; //mock
 
     const getAvailableHours = async (officeId,bookingPlace,startDate,endDate) => {
       try {
@@ -30,21 +31,49 @@ const BookingForm = (officeId,bookingPlace) => {
       getAvailableHours(officeId,bookingPlace,startDate,endDate);
     }, [startDate]);
 
+    const calcAvailableEndHours = () => {
+      const endHours=[];
+      let i=availableHours.indexOf(startDate.getHours());
+      while(i<availableHours.length-1 && availableHours[i]+1===availableHours[i+1])
+      {
+        endHours.push((availableHours[i]+1));
+        i++;
+      }
+      endHours.push((availableHours[i]+1));
+      return endHours;
+    };
 
     useEffect(() => {
-      setAvailableEndHours(availableHours);
-    }, [startHour]);
+      if (isStartHour) {
+        setAvailableEndHours(calcAvailableEndHours());
+      }
+    }, [isStartHour]);
 
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-        await bookingClient.addBooking(officeId,bookingPlace,startDate,endDate,startHour,endHour);
+        isStartHour&&isEndHour?
+          await bookingClient.addBooking(officeId,bookingPlace,startDate,endDate)
+          :
+          alert('Booking Failed. You must enter start date and end date');
       }
       catch {
         console.err('err');
       }
     };
-  
+
+    const convertToDropdownComp = (hoursArray) => {
+      return hoursArray.map((value) => {
+        const obj={}
+        obj.value = value;
+        obj.label = numHourToString(value);
+        return obj;
+      })
+    }
+
+    const numHourToString = (value) => {
+      return value>9? (value.toString()+":00"):("0"+value.toString()+":00")
+    }
 
   return (
     <div className="booking-form">
@@ -57,44 +86,34 @@ const BookingForm = (officeId,bookingPlace) => {
             <div className="form-date">
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DatePicker
-                    label="Start Date"
+                    class="ui-datepicker"
+                    label="Date"
+                    inputFormat="dd/MM/yyyy"
                     value={startDate}
                     onChange={(date) => {
-                      setStartDate(date);setEndDate(date);
-                      setStartHour(-1);setEndHour(-1)
+                      setStartDate(new Date(date));setEndDate(new Date(date));
+                      setIsStartHour(false);setIsEndHour(false);
                     }}
-                    renderInput={(params) => <TextField {...params} />}
+                    renderInput={(params) => <TextField size="small" {...params} />}
                 />
                 </LocalizationProvider>
             </div>
-            {/*
-            <div className="form-date">
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <DatePicker
-                        label="End Date"
-                        value={endDate}
-                        onChange={(date) => {
-                            if (date>=startDate) {
-                                setEndDate(date)};
-                        }}
-                        renderInput={(params) => <TextField {...params} />}
-                    />
-                </LocalizationProvider>
-            </div>*/}
             <div className="form-hours">
               <div className="start-hour"> 
-                <Dropdown placeholder="Start Hour" options={availableHours} className="dropdown-stories-styles_big-spacing"
-                  onOptionSelect={(input) => {setStartHour(input.value)}}
-                  onClear={() => {setStartHour(-1);setEndHour(-1)}}
+                <Dropdown placeholder="Start Hour" className="dropdown-stories-styles_big-spacing" size={Dropdown.size.SMALL}
+                  options={convertToDropdownComp(availableHours)} 
+                  onOptionSelect={(input) => { setIsStartHour(true); startDate.setHours(input.value); startDate.setMinutes(0); startDate.setSeconds(0);}}
+                  onClear={() => {setIsStartHour(false);setIsEndHour(false);}}
                   />
               </div>
               </div>
             <div className="form-hours">
               <div className="end-hour">
-                <Dropdown placeholder="End Hour" options={availableEndHours} className="dropdown-stories-styles_big-spacing" 
-                  disabled={(startHour === -1)? true:false}
-                  onOptionSelect={(input) => {setEndHour(input.value)}}
-                  onOptionRemove={() => {setEndHour(-1)}}
+                <Dropdown placeholder="End Hour" className="dropdown-stories-styles_big-spacing"  size={Dropdown.size.SMALL}
+                  options={convertToDropdownComp(availableEndHours)} 
+                  onOptionSelect={(input) => {setIsEndHour(true); endDate.setHours(input.value); endDate.setMinutes(0); endDate.setSeconds(0);}}
+                  onClear={() => {setIsEndHour(-1);}}
+                  disabled={(isStartHour)? false:true}
                 />
               </div>
             </div>
