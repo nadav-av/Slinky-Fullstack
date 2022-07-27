@@ -10,7 +10,11 @@ COPY . .
 
 WORKDIR /usr/code/server/storages
 
-RUN 
+ENV NODE_ENV=production
+
+RUN npm i sequelize-cli
+RUN npx sequelize-cli db:migrate
+
 
 EXPOSE 3001
 
