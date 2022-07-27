@@ -38,7 +38,7 @@ export default class bookingClient {
           headers: { 
             'Content-Type': 'application/json',
             'x-auth-token':  userJWTToken},
-          body: JSON.stringify({ officeId: officeId, bookingPlace: bookingPlace, startDate: startDate, endDate: endDate,  startHour: startHour, endHour: endHour})
+          body: JSON.stringify({ officeId: officeId, bookingPlace: bookingPlace, startDate: startDate, endDate: endDate})
         });
         return response.ok;
      }
