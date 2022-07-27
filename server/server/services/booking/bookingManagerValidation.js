@@ -1,7 +1,6 @@
 class BookingManagerValidator{
     constructor(){}
-    isBookingInformationValid(bookingInformation){
-        const { officeId, bookingPlace, startDate, endDate } = bookingInformation;
+    isBookingInformationValid(officeId, bookingPlace, startDate, endDate){
         if(this._isNotNumber(officeId)) return false;
         if(this._isBookingPlaceNotValid(bookingPlace)) return false;
         if(this._isDateTimeNotValid(startDate)) return false;

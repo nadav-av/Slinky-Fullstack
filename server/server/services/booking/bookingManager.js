@@ -6,15 +6,14 @@ class BookingManager {
     this.bookingManagerValidator = new BookingManagerValidator();
     this.bookingDatabase = new BookingDatabaseManage();
   }
-  async addBookingOrder(bookingInformation, userName) {
+  async addBookingOrder(officeId, bookingPlace, startDate, endDate, userName) {
     if (
-      this.bookingManagerValidator.isBookingInformationValid(bookingInformation) === false
+      this.bookingManagerValidator.isBookingInformationValid(officeId, bookingPlace, startDate, endDate) === false
     ) {
       const newError = Error("parameters are not good");
       newError.statusCode = 400;
       throw newError;
     }
-    const { officeId, bookingPlace, startDate, endDate } = bookingInformation;
     const bookOrder = await this.bookingDatabase.addBooking(officeId, bookingPlace, userName, startDate, endDate);
     return bookOrder;
   }
