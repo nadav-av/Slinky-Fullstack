@@ -12,6 +12,7 @@ import { set } from "date-fns";
 const BookingForm = (officeId,bookingPlace) => {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
+    const [startHour, setStartHour] = useState(-1);
     const [isStartHour, setIsStartHour] = useState(false);
     const [isEndHour, setIsEndHour] = useState(false);
     const [availableHours, setAvailableHours] = useState([]);
@@ -44,10 +45,14 @@ const BookingForm = (officeId,bookingPlace) => {
     };
 
     useEffect(() => {
-      if (isStartHour) {
-        setAvailableEndHours(calcAvailableEndHours());
+      if (isStartHour&&startHour!==-1) {
+        setIsEndHour(false);
+        const a = calcAvailableEndHours();
+        console.log('calc av end h'+a)
+        setAvailableEndHours(a);
+        console.log('end av hours2'+availableEndHours)
       }
-    }, [isStartHour]);
+    }, [isStartHour,startHour]);
 
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -93,6 +98,7 @@ const BookingForm = (officeId,bookingPlace) => {
                     onChange={(date) => {
                       setStartDate(new Date(date));setEndDate(new Date(date));
                       setIsStartHour(false);setIsEndHour(false);
+                      setStartHour(-1);
                     }}
                     renderInput={(params) => <TextField size="small" {...params} />}
                 />
@@ -102,8 +108,8 @@ const BookingForm = (officeId,bookingPlace) => {
               <div className="start-hour"> 
                 <Dropdown placeholder="Start Hour" className="dropdown-stories-styles_big-spacing" size={Dropdown.size.SMALL}
                   options={convertToDropdownComp(availableHours)} 
-                  onOptionSelect={(input) => { setIsStartHour(true); startDate.setHours(input.value); startDate.setMinutes(0); startDate.setSeconds(0);}}
-                  onClear={() => {setIsStartHour(false);setIsEndHour(false);}}
+                  onOptionSelect={(input) => { setIsStartHour(true); setStartHour(input.value); startDate.setHours(input.value); startDate.setMinutes(0); startDate.setSeconds(0);}}
+                  onClear={() => {setIsStartHour(false);setIsEndHour(false); setStartHour(-1);}}
                   />
               </div>
               </div>
