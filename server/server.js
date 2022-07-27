@@ -17,7 +17,7 @@ app.use("/booking", booking);
 // app.use(bookingRouter);
 app.use("/users", users);
 
-const port = process.env.PORT || "3042";
+const port = process.env.PORT || "3001";
 
 // process.on('unhandledRejection', (reason, promise) => {
 //   console.log("Unhandled Rejection", reason.message);
@@ -28,5 +28,6 @@ const port = process.env.PORT || "3042";
 // });
 
 app.listen(port, () => {
+  console.log("THIS IS MY CONSOLE");
   console.log("Server started on port", port);
 });
