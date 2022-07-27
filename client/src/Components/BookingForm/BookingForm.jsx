@@ -52,7 +52,10 @@ const BookingForm = (officeId,bookingPlace) => {
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-        await bookingClient.addBooking(officeId,bookingPlace,startDate,endDate);
+        isStartHour&&isEndHour?
+          await bookingClient.addBooking(officeId,bookingPlace,startDate,endDate)
+          :
+          alert('Booking Failed. You must enter start date and end date');
       }
       catch {
         console.err('err');
