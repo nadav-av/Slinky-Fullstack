@@ -34,9 +34,10 @@ const SignUpForm = () => {
       };
       const res = await userClient.register(newUser);
       if (res !== USER_EXISTS) {
-        console.log("GOOD");
+        alert("User created successfully");
+        document.location.reload(); //later redirect to another page
       } else {
-        console.log("BAD"); //when redux -> toggle error message in res to preset at top of page
+        alert(res); //when redux -> toggle error message in res to preset at top of page
       }
     }
   };
@@ -50,18 +51,23 @@ const SignUpForm = () => {
     company
   ) => {
     if (firstName.length < 3) {
+      alert("First name must be at least 3 characters");
       return false; //when redux is implemented, toggle error message to preset at top of page
     }
     if (lastName.length < 3) {
+      alert("Last name must be at least 3 characters");
       return false; //when redux is implemented, toggle error message to preset at top of page
     }
     if (!emailValidator.validate(email)) {
+      alert("Email is not valid");
       return false; //when redux is implemented, toggle error message to preset at top of page
     }
     if (password.length < 5) {
+      alert("Password must be at least 5 characters");
       return false; //when redux is implemented, toggle error message to preset at top of page
     }
     if (username.length < 5) {
+      alert("Username must be at least 5 characters");
       return false; //when redux is implemented, toggle error message to preset at top of page
     } else {
       console.log("VALID");
