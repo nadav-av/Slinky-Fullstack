@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import userClient from "../../Services/userClient";
+import { USER_EXISTS } from "../../Services/Consts";
 import "./signUpForm.css";
 const emailValidator = require("email-validator");
 
@@ -12,6 +13,7 @@ const SignUpForm = () => {
   const [company, setCompany] = useState("");
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
     const isDataValid = isUserDataValid(
       firstName,
       lastName,
@@ -31,8 +33,10 @@ const SignUpForm = () => {
         isAdmin: true,
       };
       const res = await userClient.register(newUser);
-      if (res) {
+      if (res !== USER_EXISTS) {
         console.log("GOOD");
+      } else {
+        console.log("BAD"); //when redux -> toggle error message to preset at top of page
       }
     }
   };
