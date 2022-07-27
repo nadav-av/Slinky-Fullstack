@@ -36,7 +36,7 @@ const SignUpForm = () => {
       if (res !== USER_EXISTS) {
         console.log("GOOD");
       } else {
-        console.log("BAD"); //when redux -> toggle error message to preset at top of page
+        console.log("BAD"); //when redux -> toggle error message in res to preset at top of page
       }
     }
   };
