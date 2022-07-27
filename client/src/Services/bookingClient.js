@@ -2,21 +2,16 @@ export default class bookingClient {
     static async getAvailableStartHours(officeId,bookingPlace,startDate,endDate) {
         let availableHours = new Array(24);
         for (let i=0; i<24; i++) { 
-            availableHours[i] = {
-                value: i, 
-                label: i>9? (i.toString()+":00"):("0"+i.toString()+":00"),
-            }
+            availableHours[i] = i;
         }
 
-        const takenHours = await this.getTakenHours(officeId,bookingPlace,startDate,endDate); //[{startHour: 10, endHour: 12},{startHour: 16, endHour: 17}]
-        if (takenHours.length!==0)
-        {  takenHours.forEach((element) => {
-          availableHours = availableHours.filter(data => data.value < element.startHour || data.value >= element.endHour); // viko change
-              // const diff = element.endHour - element.startHour;
-              // console.log("diff is : ", diff);
-              // availableHours.splice(element.startHour,diff);
-              // console.log("arr after splice is : ", availableHours);
-          })}
+        const takenHours = await this.getTakenHours(officeId,bookingPlace,startDate,endDate);
+        if (takenHours.length !== 0){
+          takenHours.forEach(element => {
+            const diff = element.endHour - element.startHour;
+            const index = availableHours.indexOf(element.startHour);
+            if (index !== -1) {availableHours.splice(index,diff)};
+        })};   
         console.log("availableHours is : ", availableHours);
         return availableHours;
       }
