@@ -24,6 +24,9 @@ router.post("/register", async (req, res) => {
           company,
           isAdmin
         );
+        if (newUser.err) {
+          res.status(500).send(newUser.err);
+        }
         const token = jwt.sign(
           {
             userId: newUser.id,
