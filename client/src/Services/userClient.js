@@ -1,3 +1,10 @@
+import {
+  USER_EXISTS,
+  INVALID_PASSWORD,
+  USER_NOT_FOUND,
+  SERVER_ERROR,
+} from "./Consts";
+
 class UserClient {
   constructor() {
     this.url = "http://localhost:3042/users";
@@ -19,13 +26,14 @@ class UserClient {
       localStorage.setItem("x-auth-token", res.token);
       return res.user.userName;
     } else if (response.status === 401) {
-      return "Invalid password";
+      return INVALID_PASSWORD;
     } else if (response.status === 404) {
-      return "User not found";
+      return USER_NOT_FOUND;
     }
   }
 
   async register(user) {
+    console.log("register");
     const response = await fetch(`${this.url}/register`, {
       method: "POST",
       headers: {
@@ -46,10 +54,10 @@ class UserClient {
       localStorage.setItem("x-auth-token", res.token);
       return true; //Temporary - need to implement a login after register and pass to landing page
     } else if (response.status === 400) {
-      return "User already exists";
+      return USER_EXISTS;
     }
     if (response.status === 500) {
-      return "Server error";
+      return SERVER_ERROR;
     }
   }
 }

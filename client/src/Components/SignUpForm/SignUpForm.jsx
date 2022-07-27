@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import userClient from "../../Services/userClient";
+import { USER_EXISTS } from "../../Services/Consts";
 import "./signUpForm.css";
 const emailValidator = require("email-validator");
 
@@ -12,6 +13,7 @@ const SignUpForm = () => {
   const [company, setCompany] = useState("");
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
     const isDataValid = isUserDataValid(
       firstName,
       lastName,
@@ -31,8 +33,11 @@ const SignUpForm = () => {
         isAdmin: true,
       };
       const res = await userClient.register(newUser);
-      if (res) {
-        console.log("GOOD");
+      if (res !== USER_EXISTS) {
+        alert("User created successfully");
+        document.location.reload(); //later redirect to another page
+      } else {
+        alert(res); //when redux -> toggle error message in res to preset at top of page
       }
     }
   };
@@ -46,18 +51,23 @@ const SignUpForm = () => {
     company
   ) => {
     if (firstName.length < 3) {
+      alert("First name must be at least 3 characters");
       return false; //when redux is implemented, toggle error message to preset at top of page
     }
     if (lastName.length < 3) {
+      alert("Last name must be at least 3 characters");
       return false; //when redux is implemented, toggle error message to preset at top of page
     }
     if (!emailValidator.validate(email)) {
+      alert("Email is not valid");
       return false; //when redux is implemented, toggle error message to preset at top of page
     }
     if (password.length < 5) {
+      alert("Password must be at least 5 characters");
       return false; //when redux is implemented, toggle error message to preset at top of page
     }
     if (username.length < 5) {
+      alert("Username must be at least 5 characters");
       return false; //when redux is implemented, toggle error message to preset at top of page
     } else {
       console.log("VALID");
