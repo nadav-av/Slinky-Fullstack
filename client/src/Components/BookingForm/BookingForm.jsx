@@ -9,7 +9,7 @@ import "./bookingForm.css";
 import bookingClient from "../../Services/bookingClient";
 import { set } from "date-fns";
 
-const BookingForm = (officeId, bookingPlace) => {
+const BookingForm = ({officeId,bookingPlace}) => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [startHour, setStartHour] = useState(-1);
@@ -17,8 +17,12 @@ const BookingForm = (officeId, bookingPlace) => {
   const [isEndHour, setIsEndHour] = useState(false);
   const [availableHours, setAvailableHours] = useState([]);
   const [availableEndHours, setAvailableEndHours] = useState([]);
-  officeId = 1; //mock
-  bookingPlace = "c2"; //mock
+  console.log(officeId,"officeId");
+  console.log(bookingPlace,"bookingPlace");
+
+  
+  // officeId = 1; //mock
+  // bookingPlace = "c2"; //mock
 
   const getAvailableHours = async (
     officeId,
