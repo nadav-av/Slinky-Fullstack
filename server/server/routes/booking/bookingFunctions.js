@@ -1,22 +1,16 @@
 const BookingManager = require("../../services/booking/bookingManager");
 
-async function createBooking(req, res) {
-  try {
-    const { officeId, bookingPlace, startDate, endDate } = req.body;
-    const newStartDate = new Date(startDate);
-    const newEndDate = new Date(endDate);
-    const returnedBooking = await BookingManager.addBookingOrder(
-      officeId,
-      bookingPlace,
-      newStartDate,
-      newEndDate,
-      "req.tokenData.userName"
-    );
-    res.status(200).send(JSON.stringify(returnedBooking));
-    res.end();
-  } catch (error) {
-    res.status(error.statusCode).send(JSON.stringify(error.message));
-  }
+async function createBooking(req, res){
+    try{
+        const { officeId, bookingPlace, startDate, endDate } = req.body;
+        const newStartDate = new Date(startDate);
+        const newEndDate = new Date(endDate);
+        const returnedBooking = await BookingManager.addBookingOrder(officeId, bookingPlace, newStartDate, newEndDate, req.tokenData.userName);
+        res.status(200).send(JSON.stringify(returnedBooking));
+        res.end();
+    } catch(error){
+        res.status(error.statusCode).send(JSON.stringify(error.message));
+    }
 }
 
 async function getAllBookings(req, res) {

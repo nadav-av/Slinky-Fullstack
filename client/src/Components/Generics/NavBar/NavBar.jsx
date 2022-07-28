@@ -13,6 +13,11 @@ function Navbar() {
 
         <ul className="nav-menu">
           <li className="nav-item">
+            <NavLink to="/" className={"nav-links"}>
+              Home
+            </NavLink>
+          </li>
+          <li className="nav-item">
             <NavLink to="/login" className={"nav-links"}>
               Login
             </NavLink>
