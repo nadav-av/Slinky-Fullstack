@@ -35,9 +35,10 @@ class BookingDatabaseManage {
   };
   deleteBooking = async (bookingId, officeId, userName) => {
     try {
-      return await Booking.destroy({
+      const del = await Booking.destroy({
         where: { id: bookingId, officeId, userName },
       });
+      return del;
     } catch (error) {
       throw error;
     }

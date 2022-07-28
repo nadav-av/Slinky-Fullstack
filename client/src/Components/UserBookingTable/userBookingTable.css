@@ -1,7 +1,61 @@
-.user-booking-table
+.content-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  min-width: 400px;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+
+.content-table thead tr {
+  background-color: #36304a;
+  color: #ffffff; 
+  text-align: left;
+  font-weight: bold;
+}
+
+.content-table th,
+.content-table td {
+  padding: 12px 15px;
+}
+
+.content-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.content-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.content-table tbody tr:nth-of-type(odd) {
+  background-color: #ffffff;
+}
+
+.content-table tbody tr:last-of-type {
+  border-bottom: 2px solid #36304a;
+}
+
+.content-table tbody tr.active-row {
+  font-weight: bold;
+  color: #36304a;
+}
+
+.del-book-btn
 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  background-color: #36304a;
+  color: #ffffff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: 0.3s ease all;
+}
+
+.del-book-btn:hover
+{
+  color: rgb(255, 70, 70);
 }

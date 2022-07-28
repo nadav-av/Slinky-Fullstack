@@ -31,9 +31,13 @@ function Navbar() {
             <NavLink to="/booking" className={"nav-links"}>
               Booking
             </NavLink>
+          </li>
+          <li className="nav-item">
             <NavLink to="/visualmap" className={"nav-links"}>
               Visual Map
             </NavLink>
+          </li>
+          <li className="nav-item">
             <NavLink to="/mybookings" className={"nav-links"}>
               My Bookings
             </NavLink>

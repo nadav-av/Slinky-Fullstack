@@ -1,16 +1,22 @@
 const BookingManager = require("../../services/booking/bookingManager");
 
-async function createBooking(req, res){
-    try{
-        const { officeId, bookingPlace, startDate, endDate } = req.body;
-        const newStartDate = new Date(startDate);
-        const newEndDate = new Date(endDate);
-        const returnedBooking = await BookingManager.addBookingOrder(officeId, bookingPlace, newStartDate, newEndDate, req.tokenData.userName);
-        res.status(200).send(JSON.stringify(returnedBooking));
-        res.end();
-    } catch(error){
-        res.status(error.statusCode).send(JSON.stringify(error.message));
-    }
+async function createBooking(req, res) {
+  try {
+    const { officeId, bookingPlace, startDate, endDate } = req.body;
+    const newStartDate = new Date(startDate);
+    const newEndDate = new Date(endDate);
+    const returnedBooking = await BookingManager.addBookingOrder(
+      officeId,
+      bookingPlace,
+      newStartDate,
+      newEndDate,
+      req.tokenData.userName
+    );
+    res.status(200).send(JSON.stringify(returnedBooking));
+    res.end();
+  } catch (error) {
+    res.status(error.statusCode).send(JSON.stringify(error.message));
+  }
 }
 
 async function getAllBookings(req, res) {
@@ -23,7 +29,6 @@ async function getAllBookings(req, res) {
 }
 
 async function getBookingsOfUser(req, res) {
-  console.log("req.tokenData.userName is : ", req.tokenData.userName);
   try {
     const listToReturn = await BookingManager.getBookingsOfUser(
       req.tokenData.userName
@@ -42,6 +47,7 @@ async function deleteBooking(req, res) {
       req.body.officeId,
       req.tokenData.userName
     );
+    console.log("lsit ====>", listToReturn);
     res.status(200).send(JSON.stringify(listToReturn));
   } catch (error) {
     res.status(error.statusCode).send(JSON.stringify(error.message));
