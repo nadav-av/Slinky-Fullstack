@@ -7,6 +7,7 @@ import NotFound from "./Pages/NotFound/NotFound";
 import "./App.css";
 import SignUp from "./Pages/SignUp/SignUp";
 import VisualMap from "./Pages/visualMap/VisualMap";
+import HomePage from "./Pages/HomePage/HomePage";
 
 const App = () => {
   return (
@@ -15,7 +16,7 @@ const App = () => {
         <Navbar />
         <div className="contaier">
           <Routes>
-            <Route path="/" element={<Login />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
             <Route path="/visualmap" element={<VisualMap />} />
