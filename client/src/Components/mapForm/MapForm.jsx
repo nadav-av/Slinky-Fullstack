@@ -1,13 +1,23 @@
 import React, { useState } from "react";
 import "./mapForm.css";
-
+import GenericModal from "../GenericModal/genericModal";
+import BookingForm from "../BookingForm/BookingForm";
 
 const MapForm = () => {
   const [officeId, setofficeId] = useState(1);
   const [officePosition, setOfficePosition] = useState(["c1","c2","c3","c4","c5","c6","c7","c8","o1","o2","o3","o4","o5","o6"]);
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [bookingPlace, setBookingPlace] = useState("c1")
   const getBooking = async (officeId,bookingPlace) => {  
-    console.log(officeId,bookingPlace)  
+    setBookingPlace(bookingPlace);
+    setIsOpenModal(true);
+    setofficeId(officeId);
   };
+
+  if(isOpenModal){
+    return (    <GenericModal open={true} onClose ={()=> {}}
+    content={<BookingForm officeId={officeId} bookingPlace={bookingPlace}/>} onSubmit={()=>{}}/>)
+  }
 
   return (
     <div className="map-center">
