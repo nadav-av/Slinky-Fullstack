@@ -14,12 +14,14 @@ const MapForm = () => {
     setofficeId(officeId);
   };
 
-  if(isOpenModal){
-    return (    <GenericModal open={true} onClose ={()=> {}}
-    content={<BookingForm officeId={officeId} bookingPlace={bookingPlace}/>} onSubmit={()=>{}}/>)
-  }
+  
 
   return (
+
+    <>
+    {isOpenModal === true ? 
+    <GenericModal open ={isOpenModal} onClose ={()=> {}} content={<BookingForm officeId={officeId} bookingPlace={bookingPlace}/>}onSubmit={()=>{}}/>
+    :
     <div className="map-center">
       <h1>map</h1>
       <div id="mapBackGround"> 
@@ -28,7 +30,8 @@ const MapForm = () => {
       )}
       </div>
       </div>
-
+    }
+    </>
   );
 };
 
