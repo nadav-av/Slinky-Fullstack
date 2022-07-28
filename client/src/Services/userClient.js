@@ -3,17 +3,18 @@ import {
   INVALID_PASSWORD,
   USER_NOT_FOUND,
   SERVER_ERROR,
+  INVALID_TOKEN,
 } from "./Consts";
 
 class UserClient {
   constructor() {
-    this.url = "http://localhost:3042/users";
+    this.url = "http://localhost:3042";
   }
 
   async login(userName, password) {
     console.log(userName, password);
 
-    const response = await fetch(`${this.url}/login`, {
+    const response = await fetch(`${this.url}/user/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -34,7 +35,7 @@ class UserClient {
 
   async register(user) {
     console.log("register");
-    const response = await fetch(`${this.url}/register`, {
+    const response = await fetch(`${this.url}/user/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -58,6 +59,23 @@ class UserClient {
     }
     if (response.status === 500) {
       return SERVER_ERROR;
+    }
+  }
+
+  async getUserBookings() {
+    const response = await fetch(`${this.url}/booking/get-bookings-of-user`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("x-auth-token"),
+      },
+    });
+    if (response.status === 200) {
+      const res = await response.json();
+      return res;
+    }
+    if (response.status === 400) {
+      return INVALID_TOKEN;
     }
   }
 }

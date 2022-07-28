@@ -29,6 +29,9 @@ function Navbar() {
             <NavLink to="/visualmap" className={"nav-links"}>
               Visual Map
             </NavLink>
+            <NavLink to="/mybookings" className={"nav-links"}>
+              My Bookings
+            </NavLink>
           </li>
         </ul>
       </div>
