@@ -1,0 +1,11 @@
+.notification-container
+{
+    position: relative;   
+    height: 100vh;
+}
+.notification-container-array{
+        display: flex;
+        flex-direction:row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }

@@ -17,8 +17,6 @@ const BookingForm = ({officeId,bookingPlace}) => {
   const [isEndHour, setIsEndHour] = useState(false);
   const [availableHours, setAvailableHours] = useState([]);
   const [availableEndHours, setAvailableEndHours] = useState([]);
-  console.log(officeId,"officeId");
-  console.log(bookingPlace,"bookingPlace");
 
   
   // officeId = 1; //mock

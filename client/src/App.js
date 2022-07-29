@@ -8,7 +8,7 @@ import "./App.css";
 import SignUp from "./Pages/SignUp/SignUp";
 import VisualMap from "./Pages/visualMap/VisualMap";
 import HomePage from "./Pages/HomePage/HomePage";
-
+import Notification from "./Pages/NotificationPage/Notification";
 const App = () => {
   return (
     <React.Fragment>
@@ -22,6 +22,8 @@ const App = () => {
             <Route path="/visualmap" element={<VisualMap />} />
             <Route path="*" element={<NotFound />} />
             <Route path="/booking" element={<BookingForm />} />
+            <Route path="/notification" element={<Notification />} />
+
           </Routes>
         </div>
       </div>

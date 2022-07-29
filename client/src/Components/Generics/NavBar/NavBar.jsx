@@ -35,6 +35,11 @@ function Navbar() {
               Visual Map
             </NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink to="/notification" className={"nav-links"}>
+              Notification
+            </NavLink>
+          </li>
         </ul>
       </div>
     </nav>
