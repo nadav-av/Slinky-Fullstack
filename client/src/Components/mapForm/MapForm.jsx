@@ -25,7 +25,7 @@ const MapForm = () => {
     }/>
     {/* : */}
     <div className="map-center">
-      <h1>map</h1>
+      <h1>Choose your office:</h1>
       <div id="mapBackGround"> 
       {officePosition.map((element) =>       
          <button className="btn" id={element} key={element} onClick={()=> getBooking(officeId,element)}>{element}</button>
