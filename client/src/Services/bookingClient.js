@@ -1,21 +1,15 @@
-export default class bookingClient {
-  static async getAvailableStartHours(
-    officeId,
-    bookingPlace,
-    startDate,
-    endDate
-  ) {
+class bookingClient {
+  constructor() {
+    this.url = "http://localhost:3042";
+  }
+
+  async getAvailableStartHours(officeId, bookingPlace, startDate, endDate) {
     let availableHours = new Array(24);
     for (let i = 0; i < 24; i++) {
       availableHours[i] = i;
     }
 
-    const takenHours = await this.getTakenHours(
-      officeId,
-      bookingPlace,
-      startDate,
-      endDate
-    );
+    const takenHours = await this.getTakenHours(officeId, bookingPlace, startDate, endDate);
     if (takenHours.length !== 0) {
       takenHours.forEach((element) => {
         const diff = element.endHour - element.startHour;
@@ -29,10 +23,9 @@ export default class bookingClient {
     return availableHours;
   }
 
-  static async getTakenHours(officeId, bookingPlace, startDate, endDate) {
+  async getTakenHours(officeId, bookingPlace, startDate, endDate) {
     const userJWTToken = localStorage.getItem("x-auth-token");
-    const response = await fetch(
-      "http://localhost:3042/booking/get-all-booking-by-date-and-place",
+    const response = await fetch((this.url+"/booking/get-all-booking-by-date-and-place"),
       {
         method: "POST",
         headers: {
@@ -53,17 +46,9 @@ export default class bookingClient {
     return takenHours;
   }
 
-  static async addBooking(
-    officeId,
-    bookingPlace,
-    startDate,
-    endDate,
-    startHour,
-    endHour
-  ) {
+  async addBooking(officeId, bookingPlace, startDate, endDate) {
     const userJWTToken = localStorage.getItem("x-auth-token");
-    const response = await fetch(
-      "http://localhost:3042/booking/create-booking",
+    const response = await fetch(this.url+"/booking/create-booking",
       {
         method: "POST",
         headers: {
@@ -81,11 +66,10 @@ export default class bookingClient {
     return response.ok;
   }
 
-  static async deleteBooking(bookId, officeId) {
+  async deleteBooking(bookId, officeId) {
     console.log("officeID is : ", officeId);
     const userJWTToken = localStorage.getItem("x-auth-token");
-    const response = await fetch(
-      "http://localhost:3042/booking/delete-booking",
+    const response = await fetch(this.url+"/booking/delete-booking",
       {
         method: "DELETE",
         headers: {
@@ -105,3 +89,5 @@ export default class bookingClient {
     }
   }
 }
+
+export default new bookingClient();
