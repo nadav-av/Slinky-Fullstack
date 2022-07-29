@@ -2,8 +2,7 @@ const NotificationManager = require("../../services/Notification/notificationMan
 
 async function createNotification(req, res) {
   try {
-    req.params.officeId;
-    const { content, category, madeBy } = req.body;
+    const { officeId, content, category, madeBy } = req.body;
     const returnedNotification = await NotificationManager.addNotification(
       officeId,
       content,
@@ -18,9 +17,9 @@ async function createNotification(req, res) {
   }
 }
 
-async function getAllNotifications(req, res) {
+async function getAllNotificationOfOfficeId(req, res) {
   try {
-    const listToReturn = await NotificationManager.getAllNotifications();
+    const listToReturn = await NotificationManager.getAllNotificationOfOfficeId(req.params.officeId);
     res.status(200).send(JSON.stringify(listToReturn));
   } catch (error) {
     res.status(error.statusCode).send(JSON.stringify(error.message));
@@ -45,7 +44,8 @@ async function updateNotification(req, res) {
     const listToReturn = await NotificationManager.updateNotification(
       req.body.notificationId,
       req.body.content,
-      req.tokenData.userName
+      req.tokenData.userName,
+      req.body.category
     );
     res.status(200).send(JSON.stringify(listToReturn));
   } catch (error) {
@@ -53,9 +53,11 @@ async function updateNotification(req, res) {
   }
 }
 
+//ADD GET ALL (GENERAL)
+
 module.exports = {
     createNotification,
-    getAllNotifications,
+    getAllNotificationOfOfficeId,
     deleteNotification,
     updateNotification,
 };

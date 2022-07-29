@@ -6,7 +6,7 @@ class NotificationManager {
     this.notificationManagerValidator = new NotificationManagerValidator();
     this.notificationDatabase = new NotificationDatabaseManage();
   }
-  async createNotification(officeId, content, madeBy, category) {
+  async createNotification(officeId, content, category , madeBy) {
     this._validate(officeId, content, madeBy, category);
     const notification = await this.notificationDatabase.createNotification(
         officeId, content, madeBy, category
