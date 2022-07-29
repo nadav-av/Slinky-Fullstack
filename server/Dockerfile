@@ -8,15 +8,9 @@ RUN npm install
 
 COPY . .
 
-WORKDIR /usr/code/server/storages
-
 ENV NODE_ENV=production
 
-RUN npm i sequelize-cli
-RUN npx sequelize-cli db:migrate
-
-
-EXPOSE 3001
+EXPOSE 3042
 
 CMD ["npm", "start"]
 

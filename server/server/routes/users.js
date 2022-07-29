@@ -5,6 +5,7 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 
 router.post("/register", async (req, res) => {
+  console.log("HERE");
   const { userName, password, firstName, lastName, email, company, isAdmin } =
     req.body;
   const user = await usersManager.getUser(userName);
@@ -44,6 +45,7 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
+  console.log("HERE");
   const { userName, password } = req.body;
   console.log(userName, password);
   const user = await usersManager.getUser(userName);

@@ -31,6 +31,8 @@ function Navbar() {
             <NavLink to="/booking" className={"nav-links"}>
               Booking
             </NavLink>
+          </li>
+          <li className="nav-item">
             <NavLink to="/visualmap" className={"nav-links"}>
               Visual Map
             </NavLink>
@@ -38,6 +40,8 @@ function Navbar() {
           <li className="nav-item">
             <NavLink to="/notification" className={"nav-links"}>
               Notification
+            <NavLink to="/mybookings" className={"nav-links"}>
+              My Bookings
             </NavLink>
           </li>
         </ul>

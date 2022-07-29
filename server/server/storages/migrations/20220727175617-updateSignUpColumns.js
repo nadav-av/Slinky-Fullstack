@@ -13,7 +13,7 @@ module.exports = {
     });
     await queryInterface.changeColumn("Users", "userName", {
       type: Sequelize.STRING,
-      unique: true,npx sequelize-cli db:migrate
+      unique: true,
       allowNull: false,
     });
     await queryInterface.changeColumn("Users", "isAdmin", {
