@@ -40,7 +40,10 @@ function Navbar() {
           <li className="nav-item">
             <NavLink to="/notification" className={"nav-links"}>
               Notification
-            <NavLink to="/mybookings" className={"nav-links"}>
+              </NavLink>
+          </li>
+          <li className="nav-item">
+          <NavLink to="/mybookings" className={"nav-links"}>
               My Bookings
             </NavLink>
           </li>
