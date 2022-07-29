@@ -38,6 +38,8 @@ function Navbar() {
             </NavLink>
           </li>
           <li className="nav-item">
+            <NavLink to="/notification" className={"nav-links"}>
+              Notification
             <NavLink to="/mybookings" className={"nav-links"}>
               My Bookings
             </NavLink>

@@ -21,7 +21,6 @@ const BookingForm = ({officeId,bookingPlace}) => {
   let navigate = useNavigate();
   console.log(officeId,"officeId");
   console.log(typeof(bookingPlace),"bookingPlace");
-
   const getAvailableHours = async (
     officeId,
     bookingPlace,
