@@ -17,10 +17,10 @@ services:
     networks:
       - internalnet
 
-  nodeapp:
+  slinky-api:
     container_name: nodeappcontainer
     build: .
-    image: nodeapp:v1
+    image: slinky_api
     ports:
       - "3042:3042"
     expose:

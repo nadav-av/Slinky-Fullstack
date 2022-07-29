@@ -14,6 +14,7 @@ const TableBody = ({ tableData, columns, userBookings, setUserBookings }) => {
   return (
     <tbody>
       {tableData.map((data) => {
+        const differentEndDate = data.start_date !== data.end_date;
         return (
           <tr key={data.id}>
             {columns.map(({ accessor }) => {
@@ -29,6 +30,13 @@ const TableBody = ({ tableData, columns, userBookings, setUserBookings }) => {
                     </button>
                   </td>
                 );
+              }
+              if (differentEndDate) {
+                if (accessor === "end_hour") {
+                  return (
+                    <td key={accessor}>{`${tData} (${data.end_date})`}</td>
+                  );
+                }
               }
               return <td key={accessor}>{tData}</td>;
             })}
