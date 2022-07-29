@@ -1,7 +1,9 @@
-export function isInputBlank(str) {
+function isInputBlank(str) {
     const isWhiteSpacesOnlyRegex = /^\s*$/;
     return (!str || isWhiteSpacesOnlyRegex.test(str));
 }
-export function isNotNumber(value){
+function isNotNumber(value){
     return isNaN(Number(value))
 }
+
+module.exports ={isNotNumber, isInputBlank}

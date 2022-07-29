@@ -1,4 +1,5 @@
-import { isInputBlank, isNotNumber } from "../generalValidator";
+//import { isInputBlank, isNotNumber } from "../generalValidator";
+const { isInputBlank, isNotNumber } = require('../generalValidator');
 class NotificationManagerValidator{
     constructor(){}
     isNotificationValid(officeId, content, madeBy, category){
