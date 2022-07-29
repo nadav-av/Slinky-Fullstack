@@ -7,6 +7,7 @@ import NotFound from "./Pages/NotFound/NotFound";
 import "./App.css";
 import SignUp from "./Pages/SignUp/SignUp";
 import VisualMap from "./Pages/visualMap/VisualMap";
+import UserBooking from "./Pages/UserBookings/UserBookings";
 import HomePage from "./Pages/HomePage/HomePage";
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
             <Route path="/visualmap" element={<VisualMap />} />
             <Route path="*" element={<NotFound />} />
             <Route path="/booking" element={<BookingForm />} />
+            <Route path="/mybookings" element={<UserBooking />} />
           </Routes>
         </div>
       </div>

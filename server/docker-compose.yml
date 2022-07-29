@@ -18,14 +18,13 @@ services:
       - internalnet
 
   nodeapp:
-    entrypoint: ["/bin/bash", "./entrypoint.sh"]
     container_name: nodeappcontainer
     build: .
     image: nodeapp:v1
     ports:
-      - "3001:3001"
+      - "3042:3042"
     expose:
-      - 3001
+      - 3042
     environment:
       DB_HOST: mysqldb
       DB_PORT: 3306
@@ -34,7 +33,7 @@ services:
       DB_CONNECTION_LIMIT: 20
       SERVICE_TAGS: prod
       SERVICE_NAME: nodeappservice
-      SERVER_PORT: 3001
+      SERVER_PORT: 3042
     depends_on:
       - mysqldb
     networks:
