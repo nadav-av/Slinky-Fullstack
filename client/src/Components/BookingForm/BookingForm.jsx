@@ -7,7 +7,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import "./bookingForm.css";
 import bookingClient from "../../Services/bookingClient";
-import { set } from "date-fns";
+import { useNavigate } from "react-router-dom";
 
 const BookingForm = ({officeId,bookingPlace}) => {
   const [startDate, setStartDate] = useState(new Date());
@@ -17,13 +17,9 @@ const BookingForm = ({officeId,bookingPlace}) => {
   const [isEndHour, setIsEndHour] = useState(false);
   const [availableHours, setAvailableHours] = useState([]);
   const [availableEndHours, setAvailableEndHours] = useState([]);
+  let navigate = useNavigate();
   console.log(officeId,"officeId");
-  console.log(bookingPlace,"bookingPlace");
-
-  
-  // officeId = 1; //mock
-  // bookingPlace = "c2"; //mock
-
+  console.log(typeof(bookingPlace),"bookingPlace");
   const getAvailableHours = async (
     officeId,
     bookingPlace,
@@ -66,32 +62,34 @@ const BookingForm = ({officeId,bookingPlace}) => {
     if (isStartHour && startHour !== -1) {
       setIsEndHour(false);
       const a = calcAvailableEndHours();
-      console.log("calc av end h" + a);
       setAvailableEndHours(a);
-      console.log("end av hours2" + availableEndHours);
     }
   }, [isStartHour, startHour]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      isStartHour && isEndHour
-        ? await bookingClient.addBooking(
-            officeId,
-            bookingPlace,
-            startDate,
-            endDate
-          )
-        : alert("Booking Failed. You must enter start date and end date");
-    } catch {
-      console.err("err");
+    if (isStartHour && isEndHour) {
+      try {
+            await bookingClient.addBooking(
+              officeId,
+              bookingPlace,
+              startDate,
+              endDate
+            )
+          
+      } catch {
+        console.err("err");
+      }
+      alert('Booking success!');
+      navigate('/mybookings');
     }
+    else { alert("Booking Failed. You must enter start date and end date"); }
   };
 
   const convertToDropdownComp = (hoursArray) => {
     return hoursArray.map((value) => {
       const obj = {};
-      obj.value = value;
+      obj.value = value.toString();
       obj.label = numHourToString(value);
       return obj;
     });
@@ -102,6 +100,20 @@ const BookingForm = ({officeId,bookingPlace}) => {
       ? value.toString() + ":00"
       : "0" + value.toString() + ":00";
   };
+
+  const showStartValue = () => {
+    if (startHour === -1) {
+       return null;
+    }
+    return convertToDropdownComp([startHour])[0]
+  }
+
+  const showEndValue = () => {
+    if (startHour === -1 || !isEndHour) {
+       return null;
+    }
+    return convertToDropdownComp([endDate.getHours()])[0]
+  }
 
   return (
     <div className="bokkingformWrapper">
@@ -139,6 +151,7 @@ const BookingForm = ({officeId,bookingPlace}) => {
                     className="dropdown-stories-styles_big-spacing"
                     size={Dropdown.size.SMALL}
                     options={convertToDropdownComp(availableHours)}
+                    value={showStartValue()}
                     onOptionSelect={(input) => {
                       setIsStartHour(true);
                       setStartHour(input.value);
@@ -161,6 +174,7 @@ const BookingForm = ({officeId,bookingPlace}) => {
                     className="dropdown-stories-styles_big-spacing"
                     size={Dropdown.size.SMALL}
                     options={convertToDropdownComp(availableEndHours)}
+                    value={showEndValue()}
                     onOptionSelect={(input) => {
                       setIsEndHour(true);
                       endDate.setHours(input.value);
