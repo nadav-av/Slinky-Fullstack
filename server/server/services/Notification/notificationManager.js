@@ -7,10 +7,11 @@ class NotificationManager {
     this.notificationDatabase = new NotificationDatabaseManage();
   }
   async createNotification(officeId, content, category , madeBy) {
-    this._validate(officeId, content, madeBy, category);
+    //this._validate(officeId, content, madeBy, category);
     const notification = await this.notificationDatabase.createNotification(
-        officeId, content, madeBy, category
+        officeId, content, category, madeBy
     );
+    console.log("notification", notification);
     return notification;
   }
   async getAllNotification() {
@@ -39,7 +40,6 @@ class NotificationManager {
           officeId, content, madeBy, category
         ) === false
       ) {
-        const newError = Error("parameters are not good");
         newError.statusCode = 400;
         throw newError;
       }

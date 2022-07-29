@@ -9,7 +9,7 @@ class NotificationDatabaseManage {
       throw error;
     }
   };
-  createNotification = async (officeId, content, madeBy, category) => {
+  createNotification = async (officeId, content, category , madeBy) => {
     try {
       return await Notification.create({
         officeId,
