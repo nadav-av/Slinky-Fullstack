@@ -1,5 +1,6 @@
 const NotificationManagerValidator = require("./notificationManagerValidation");
 const NotificationDatabaseManage = require("./notificationDatabaseManager");
+const { createError } = require("../General/errorCreator");
 
 class NotificationManager {
   constructor() {
@@ -39,9 +40,7 @@ class NotificationManager {
           officeId, content, madeBy, category
         ) === false
       ) {
-        const newError = Error("parameters are not good");
-        newError.statusCode = 400;
-        throw newError;
+        throw createError("parameters are not good", 400);
       }
   }
 }
