@@ -1,17 +1,15 @@
-From node:16.14.0
+FROM node:16-alpine
 
-WORKDIR /usr/code
+WORKDIR /app
 
-COPY package*.json ./
+COPY server server
+COPY package.json .
+COPY server.js .
 
 RUN npm install
-
-
-COPY . .
+RUN npm install -g sequelize-cli 
 
 ENV NODE_ENV=production
-
-EXPOSE 3042
 
 CMD ["npm", "start"]
 
