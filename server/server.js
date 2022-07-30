@@ -5,9 +5,7 @@ const booking = require("./server/routes/booking/booking");
 const logger = require("./server/middleware/logger.js");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const path = require("path");
 
-app.use(express.static(path.join(__dirname + "/server/public")));
 const app = express();
 app.use(express.json());
 app.use(cors());
