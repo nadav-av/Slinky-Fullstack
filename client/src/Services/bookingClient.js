@@ -1,8 +1,4 @@
 export default class bookingClient {
-  constructor() {
-    this.url = process.env.REACT_APP_SERVER_URL || "http://localhost:3042";
-  }
-
   static async getAvailableStartHours(
     officeId,
     bookingPlace,
@@ -36,7 +32,7 @@ export default class bookingClient {
   static async getTakenHours(officeId, bookingPlace, startDate, endDate) {
     const userJWTToken = localStorage.getItem("x-auth-token");
     const response = await fetch(
-      `${this.url}/booking/get-all-booking-by-date-and-place`,
+      "https://slinky-server.herokuapp.com/booking/get-all-booking-by-date-and-place",
       {
         method: "POST",
         headers: {
@@ -66,36 +62,42 @@ export default class bookingClient {
     endHour
   ) {
     const userJWTToken = localStorage.getItem("x-auth-token");
-    const response = await fetch(`${this.url}/booking/create-booking`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-auth-token": userJWTToken,
-      },
-      body: JSON.stringify({
-        officeId: officeId,
-        bookingPlace: bookingPlace,
-        startDate: startDate,
-        endDate: endDate,
-      }),
-    });
+    const response = await fetch(
+      "https://slinky-server.herokuapp.com/booking/create-booking",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": userJWTToken,
+        },
+        body: JSON.stringify({
+          officeId: officeId,
+          bookingPlace: bookingPlace,
+          startDate: startDate,
+          endDate: endDate,
+        }),
+      }
+    );
     return response.ok;
   }
 
   static async deleteBooking(bookId, officeId) {
     console.log("officeID is : ", officeId);
     const userJWTToken = localStorage.getItem("x-auth-token");
-    const response = await fetch(`${this.url}/booking/booking/delete-booking`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        "x-auth-token": userJWTToken,
-      },
-      body: JSON.stringify({
-        bookingId: bookId,
-        officeId: officeId,
-      }),
-    });
+    const response = await fetch(
+      "https://slinky-server.herokuapp.com/booking/delete-booking",
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": userJWTToken,
+        },
+        body: JSON.stringify({
+          bookingId: bookId,
+          officeId: officeId,
+        }),
+      }
+    );
     if (response.status === 200) {
       return true;
     } else {
