@@ -11,7 +11,7 @@ function createNewErrorFromDatabaseError(error){
             newError = createError("Trying to enter unique value that already exists", 400);
             break;
         case "validation error":
-            newError = createError("I have no idea", 500);
+            newError = createError("The params didnt match there fields", 4004);
             break;
         default:
             newError = createError("Something went wrong", 400);
