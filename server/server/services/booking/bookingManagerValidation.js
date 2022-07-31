@@ -13,7 +13,7 @@ class BookingManagerValidator{
     isBookingPlaceNotValid(bookingPlace){
         if(isInputBlank(bookingPlace)) return true;
         if(bookingPlace[0] !== "c" && bookingPlace[0] !== "o") return true;
-        if(this.isNotNumber(bookingPlace.slice(1, bookingPlace.length))) return true;
+        if(isNotNumber(bookingPlace.slice(1, bookingPlace.length))) return true;
         return false;
     }
     isDateTimeNotValid(date){

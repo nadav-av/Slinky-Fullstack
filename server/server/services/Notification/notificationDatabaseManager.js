@@ -12,12 +12,13 @@ class NotificationDatabaseManage {
   };
   createNotification = async (officeId, content, madeBy, category) => {
     try {
-      return await Notification.create({
-        officeId,
-        madeBy,
-        content,
-        category
-      });
+            const notification = await Notification.create({
+                officeId,
+                madeBy,
+                content,
+                category
+              });
+            return notification;
     } catch (error) {
       throw createNewErrorFromDatabaseError(error);
     }
