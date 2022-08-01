@@ -67,21 +67,21 @@ const UserBookingTable = () => {
       .catch(setIsLoading(true));
   }, []);
 
-  const columns = [
+  const pastColumns = [
     { label: "Start Date", accessor: "start_date" },
     { label: "Start Hour", accessor: "start_hour" },
     { label: "End Hour", accessor: "end_hour" },
     { label: "Reseved Place", accessor: "reserved_place" },
     { label: "Office", accessor: "office" },
   ];
-
   const deleteCol = { label: "Delete", accessor: "delete" };
+  const futureColumns = [...pastColumns, deleteCol];
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  const noBookings = () => {
+  const showNoBookings = () => {
     return (
       <>
         <div className="img-div">
@@ -107,31 +107,31 @@ const UserBookingTable = () => {
           <TabPanel value={value} index={0}>
             {userFutureBookings.length > 0 ? (
               <table className="content-table">
-                <TableHead columns={[...columns, deleteCol]} />
+                <TableHead columns={futureColumns} />
                 <TableBody
-                  columns={columns}
+                  columns={futureColumns}
                   tableData={userFutureBookings}
                   userBookings={userFutureBookings}
                   setUserBookings={setUserFutureBookings}
                 />
               </table>
             ) : (
-              noBookings()
+              showNoBookings()
             )}
           </TabPanel>
           <TabPanel value={value} index={1}>
             {userPastBookings.length > 0 ? (
               <table className="content-table">
-                <TableHead columns={columns} />
+                <TableHead columns={pastColumns} />
                 <TableBody
-                  columns={columns}
+                  columns={pastColumns}
                   tableData={userPastBookings}
                   userBookings={userPastBookings}
                   setUserBookings={setUserPastBookings}
                 />
               </table>
             ) : (
-              noBookings()
+              showNoBookings()
             )}
           </TabPanel>
         </>
