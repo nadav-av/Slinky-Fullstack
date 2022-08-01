@@ -1,5 +1,7 @@
 const BookingManagerValidator = require("./bookingManagerValidation");
 const BookingDatabaseManage = require("./bookingDatabaseManage");
+const { createError } = require("../General/errorCreator");
+const { isNotNumber } = require('../General/generalValidator');
 
 class BookingManager {
   constructor() {
@@ -15,9 +17,7 @@ class BookingManager {
         endDate
       ) === false
     ) {
-      const newError = Error("parameters are not good");
-      newError.statusCode = 400;
-      throw newError;
+      throw createError("parameters are not good", 400);
     }
     const bookOrder = await this.bookingDatabase.addBooking(
       officeId,
@@ -41,18 +41,14 @@ class BookingManager {
       userName
     );
   }
-  async updateBooking(bookingInformation, userName) {
+  async updateBooking(bookingId, officeId, bookingPlace, startDate, endDate, userName) {
     if (
       this.bookingManagerValidator.isBookingInformationValid(
-        bookingInformation
-      ) === false
+        officeId, bookingPlace, startDate, endDate
+      ) === false || isNotNumber(bookingId) === true
     ) {
-      const newError = Error("parameters are not good");
-      newError.statusCode = 400;
-      throw newError;
+      throw createError("parameters are not good", 400);
     }
-    const { bookingId, officeId, bookingPlace, startDate, endDate } =
-      bookingInformation;
     await this.bookingDatabase.updateBooking(
       bookingId,
       officeId,

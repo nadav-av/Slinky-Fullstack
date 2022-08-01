@@ -1,4 +1,4 @@
-const BookingManager = require("../../services/Booking/bookingManager");
+const BookingManager = require("../../services/booking/bookingManager");
 
 async function createBooking(req, res) {
   try {
@@ -15,7 +15,7 @@ async function createBooking(req, res) {
     res.status(200).send(JSON.stringify(returnedBooking));
     res.end();
   } catch (error) {
-    res.status(error.statusCode).send(JSON.stringify(error.message));
+    _errorHandler(error, res);
   }
 }
 
@@ -24,7 +24,7 @@ async function getAllBookings(req, res) {
     const listToReturn = await BookingManager.getAllBookings();
     res.status(200).send(JSON.stringify(listToReturn));
   } catch (error) {
-    res.status(error.statusCode).send(JSON.stringify(error.message));
+    _errorHandler(error, res);
   }
 }
 
@@ -35,8 +35,7 @@ async function getBookingsOfUser(req, res) {
     );
     res.status(200).send(JSON.stringify(listToReturn));
   } catch (error) {
-    console.log("Error is : ", error);
-    res.status(error.statusCode).send(JSON.stringify(error.message));
+    _errorHandler(error, res);
   }
 }
 
@@ -47,22 +46,26 @@ async function deleteBooking(req, res) {
       req.body.officeId,
       req.tokenData.userName
     );
-    console.log("lsit ====>", listToReturn);
     res.status(200).send(JSON.stringify(listToReturn));
   } catch (error) {
-    res.status(error.statusCode).send(JSON.stringify(error.message));
+    _errorHandler(error, res);
   }
 }
 
 async function updateBooking(req, res) {
   try {
+    const { bookingId, officeId, bookingPlace, startDate, endDate } = req.body;
     const listToReturn = await BookingManager.updateBooking(
-      req.body.bookingInformation,
+      bookingId,
+      officeId,
+      bookingPlace,
+      startDate,
+      endDate,
       req.tokenData.userName
     );
     res.status(200).send(JSON.stringify(listToReturn));
   } catch (error) {
-    res.status(error.statusCode).send(JSON.stringify(error.message));
+    _errorHandler(error, res);
   }
 }
 
@@ -71,10 +74,9 @@ async function getBookingByBookingPlace(req, res) {
     const listToReturn = await BookingManager.getBookingByPlaceArea(
       req.body.bookingPlace
     );
-    console.log(listToReturn);
     res.status(200).send(JSON.stringify(listToReturn));
   } catch (error) {
-    res.status(error.statusCode).send(JSON.stringify(error.message));
+    _errorHandler(error, res);
   }
 }
 
@@ -95,10 +97,17 @@ async function getBookingByDateAndPlace(req, res) {
         endHour: bookingOrder.endDate.getHours(),
       };
     });
-    console.log("bookedHours is : ", bookedHours);
     res.status(200).send(JSON.stringify(bookedHours));
   } catch (error) {
+    _errorHandler(error, res);
+  }
+}
+
+function _errorHandler(error, res){
+  try{
     res.status(error.statusCode).send(JSON.stringify(error.message));
+  } catch(error){
+    res.status(500).send(JSON.stringify("Something went wrong"));
   }
 }
 

@@ -2,12 +2,11 @@ const NotificationManager = require("../../services/Notification/notificationMan
 
 async function createNotification(req, res) {
   try {
-    const { officeId, content, category, madeBy } = req.body;
+    const { officeId, content, category } = req.body;
     const returnedNotification = await NotificationManager.addNotification(
       officeId,
       content,
       category,
-      madeBy,
       req.tokenData.userName
     );
     res.status(200).send(JSON.stringify(returnedNotification));
