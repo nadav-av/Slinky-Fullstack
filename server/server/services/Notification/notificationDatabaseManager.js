@@ -2,11 +2,17 @@ const { Notification } = require("../../storages/models");
 
 class NotificationDatabaseManage {
   getAllNotification = async () => {
+    console.log('in getAllNotification 3');
+
     try {
-      const data = await Notification.findAll();
+      const data = await Notification.findAll({where:{officeId:1}});
+      console.log('in getAllNotification 3'+ data);
+
       return data;
+
     } catch (error) {
-      throw error;
+      console.log(error);
+      // throw error;
     }
   };
   createNotification = async (officeId, content, madeBy, category) => {

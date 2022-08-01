@@ -1,31 +1,41 @@
 const NotificationManager = require("../../services/Notification/notificationManager");
 
+
 async function createNotification(req, res) {
   try {
-    const { officeId, content, category, madeBy } = req.body;
+    const { officeId, content, category } = req.body;
     const returnedNotification = await NotificationManager.addNotification(
       officeId,
       content,
       category,
-      madeBy,
       req.tokenData.userName
     );
     res.status(200).send(JSON.stringify(returnedNotification));
     res.end();
   } catch (error) {
-    res.status(error.statusCode).send(JSON.stringify(error.message));
+    errorHandler(error, res);
+  }
+}
+
+async function getAllNotification(req, res) {
+  try {
+    console.log('in getAllNotification 1');
+
+    const listToReturn = await NotificationManager.getAllNotification();
+    console.log('notifications list '+listToReturn);
+    res.status(200).send(JSON.stringify(listToReturn));
+  } catch (error) {
+    errorHandler(error, res);
   }
 }
 
 async function getAllNotificationOfOfficeId(req, res) {
   try {
-    console.log('123');
-    console.log(req.params.officeId);
     const listToReturn = await NotificationManager.getAllNotificationOfOfficeId(req.params.officeId);
     console.log(listToReturn);
     res.status(200).send(JSON.stringify(listToReturn));
   } catch (error) {
-    res.status(error.statusCode).send(JSON.stringify(error.message));
+    errorHandler(error, res);
   }
 }
 
@@ -38,7 +48,7 @@ async function deleteNotification(req, res) {
     );
     res.status(200).send(JSON.stringify(listToReturn));
   } catch (error) {
-    res.status(error.statusCode).send(JSON.stringify(error.message));
+    errorHandler(error, res);
   }
 }
 
@@ -52,7 +62,7 @@ async function updateNotification(req, res) {
     );
     res.status(200).send(JSON.stringify(listToReturn));
   } catch (error) {
-    res.status(error.statusCode).send(JSON.stringify(error.message));
+    errorHandler(error, res);
   }
 }
 
@@ -60,6 +70,7 @@ async function updateNotification(req, res) {
 
 module.exports = {
     createNotification,
+    getAllNotification,
     getAllNotificationOfOfficeId,
     deleteNotification,
     updateNotification,

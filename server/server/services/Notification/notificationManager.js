@@ -14,6 +14,9 @@ class NotificationManager {
     return notification;
   }
   async getAllNotification() {
+    console.log('in getAllNotification 2');
+    console.log('in getAllNotification 2'+ await this.notificationDatabase.getAllNotification());
+
     return await this.notificationDatabase.getAllNotification();
   }
   async deleteNotification(notificationId, officeId, madeBy) {
