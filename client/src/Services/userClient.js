@@ -62,6 +62,23 @@ class UserClient {
     }
   }
 
+  async checkIfUserLoggedIn() {
+    const response = await fetch(`${this.url}/users/me`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("x-auth-token"),
+      },
+    });
+    if (response.status === 200) {
+      const res = await response.json();
+      return res.userName;
+    }
+    if (response.status === 400) {
+      return INVALID_TOKEN;
+    }
+  }
+
   async getUserBookings() {
     const response = await fetch(`${this.url}/booking/get-bookings-of-user`, {
       method: "GET",

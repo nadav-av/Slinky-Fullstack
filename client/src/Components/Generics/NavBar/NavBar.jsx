@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./navBar.css";
 
-function Navbar() {
+function NavBar({ loggedIn }) {
+  const [click, setClick] = useState(false);
+
+  const handleClick = () => setClick(!click);
+
   return (
     <nav className="navbar">
       <div className="nav-container">
@@ -11,41 +15,80 @@ function Navbar() {
           <i className="fa-solid fa-chart-simple"></i>
         </NavLink>
 
-        <ul className="nav-menu">
+        <ul className={click ? "nav-menu active" : "nav-menu"}>
           <li className="nav-item">
-            <NavLink to="/" className={"nav-links"}>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                "nav-links" + (isActive ? " activated" : "")
+              }
+              onClick={handleClick}
+            >
               Home
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/login" className={"nav-links"}>
+            <NavLink
+              to="/login"
+              className={({ isActive }) =>
+                "nav-links" + (isActive ? " activated" : "")
+              }
+              onClick={handleClick}
+            >
               Login
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/signup" className={"nav-links"}>
+            <NavLink
+              to="/signup"
+              className={({ isActive }) =>
+                "nav-links" + (isActive ? " activated" : "")
+              }
+              onClick={handleClick}
+            >
               SignUp
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/visualmap" className={"nav-links"}>
-              Booking
+            <NavLink
+              to="/notification"
+              className={({ isActive }) =>
+                "nav-links" + (isActive ? " activated" : "")
+              }
+              onClick={handleClick}
+            >
+              Notification
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/notification" className={"nav-links"}>
-              Notification
-              </NavLink>
+            <NavLink
+              to="/visualmap"
+              className={({ isActive }) =>
+                "nav-links" + (isActive ? " activated" : "")
+              }
+              onClick={handleClick}
+            >
+              Bookings
+            </NavLink>
           </li>
           <li className="nav-item">
-          <NavLink to="/mybookings" className={"nav-links"}>
+            <NavLink
+              to="/mybookings"
+              className={({ isActive }) =>
+                "nav-links" + (isActive ? " activated" : "")
+              }
+              onClick={handleClick}
+            >
               My Bookings
             </NavLink>
           </li>
         </ul>
+        <div className="nav-icon" onClick={handleClick}>
+          <i className={click ? "fas fa-times" : "fas fa-bars"}></i>
+        </div>
       </div>
     </nav>
   );
 }
 
-export default Navbar;
+export default NavBar;

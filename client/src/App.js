@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { INVALID_TOKEN } from "./Services/Consts";
 import { Routes, Route } from "react-router-dom";
 import Login from "./Pages/Login/Login";
 import Navbar from "./Components/Generics/NavBar/NavBar";
@@ -10,12 +11,25 @@ import VisualMap from "./Pages/visualMap/VisualMap";
 import UserBooking from "./Pages/UserBookings/UserBookings";
 import HomePage from "./Pages/HomePage/HomePage";
 import Notification from "./Pages/NotificationPage/Notification";
+import userClient from "./Services/userClient";
 const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    userClient.checkIfUserLoggedIn().then((res) => {
+      if (res === INVALID_TOKEN) {
+        setIsLoggedIn(false);
+      } else {
+        setIsLoggedIn(true);
+      }
+    });
+  });
+
   return (
     <React.Fragment>
       <div className="App">
-        <Navbar />
         <div className="contaier">
+          <Navbar loggedIn={isLoggedIn} />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/signup" element={<SignUp />} />
