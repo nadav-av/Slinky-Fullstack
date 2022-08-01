@@ -66,9 +66,9 @@ class BookingDatabaseManage {
       throw createNewErrorFromDatabaseError(error);
     }
   };
-  getBookingByPlaceArea = async (bookingPlace) => {
+  getBookingOfOfficeByPlaceArea = async (officeId, bookingPlace) => {
     try {
-      return await Booking.findAll({ where: { bookingPlace } });
+      return await Booking.findAll({ where: { officeId, bookingPlace } });
     } catch (error) {
       throw createNewErrorFromDatabaseError(error);
     }
