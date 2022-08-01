@@ -17,9 +17,9 @@ async function createNotification(req, res) {
   }
 }
 
-async function getAllNotifications(req, res) {
+async function getAllNotification(req, res) {
   try {
-    const listToReturn = await NotificationManager.getAllNotifications();
+    const listToReturn = await NotificationManager.getAllNotification();
     console.log(listToReturn);
     res.status(200).send(JSON.stringify(listToReturn));
   } catch (error) {
@@ -68,7 +68,7 @@ async function updateNotification(req, res) {
 
 module.exports = {
     createNotification,
-    getAllNotifications,
+    getAllNotification,
     getAllNotificationOfOfficeId,
     deleteNotification,
     updateNotification,
