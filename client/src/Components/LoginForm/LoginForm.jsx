@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import "./loginForm.css";
 import userClient from "../../Services/userClient";
 import { useNavigate } from "react-router-dom";
+import { INVALID_PASSWORD, USER_NOT_FOUND } from "../../Services/Consts";
 
-const LoginForm = () => {
+
+const LoginForm = ({ setLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginRes, setloginRes] = useState(null);
@@ -13,11 +15,11 @@ const LoginForm = () => {
     e.preventDefault();
     console.log(username, password);
     const res = await userClient.login(username, password);
-    if (res) {
-      if (username === res) {
-        navigate('/mybookings');
-      }
-      else {setloginRes(res)};
+    if (res !== INVALID_PASSWORD && res !== USER_NOT_FOUND) {
+      setLoggedIn(true);
+      navigate("/");
+    } else {
+      setloginRes(res);
     }
   };
 
@@ -40,18 +42,18 @@ const LoginForm = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+
           <span></span>
           <label>Password</label>
         </div>
-        <input className="login-submit" type="submit" />
-      </form>
-      <div>
         {loginRes && (
-          <div>
-            <h2>{loginRes}</h2>
+          <div className="login-err-msg">
+            <h3>{loginRes}</h3>
           </div>
         )}
-      </div>
+        <input className="login-submit" type="submit" />
+      </form>
+      <div></div>
     </div>
   );
 };

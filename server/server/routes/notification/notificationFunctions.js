@@ -17,6 +17,16 @@ async function createNotification(req, res) {
   }
 }
 
+async function getAllNotification(req, res) {
+  try {
+    const listToReturn = await NotificationManager.getAllNotification();
+    console.log(listToReturn);
+    res.status(200).send(JSON.stringify(listToReturn));
+  } catch (error) {
+    errorHandler(error, res);
+  }
+}
+
 async function getAllNotificationOfOfficeId(req, res) {
   try {
     const listToReturn = await NotificationManager.getAllNotificationOfOfficeId(req.params.officeId);
@@ -58,6 +68,7 @@ async function updateNotification(req, res) {
 
 module.exports = {
     createNotification,
+    getAllNotification,
     getAllNotificationOfOfficeId,
     deleteNotification,
     updateNotification,

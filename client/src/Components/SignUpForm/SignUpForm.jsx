@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import userClient from "../../Services/userClient";
 import { USER_EXISTS } from "../../Services/Consts";
+import { useNavigate } from "react-router-dom";
 import "./signUpForm.css";
 const emailValidator = require("email-validator");
 
-const SignUpForm = () => {
+const SignUpForm = ({ setLoggedIn }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [company, setCompany] = useState("");
+  let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,8 +36,8 @@ const SignUpForm = () => {
       };
       const res = await userClient.register(newUser);
       if (res !== USER_EXISTS) {
-        alert("User created successfully");
-        document.location.reload(); //later redirect to another page
+        setLoggedIn(true);
+        navigate("/");
       } else {
         alert(res); //when redux -> toggle error message in res to preset at top of page
       }
