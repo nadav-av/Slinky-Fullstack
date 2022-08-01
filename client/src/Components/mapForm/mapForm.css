@@ -1,6 +1,9 @@
-/* body{
-background-image:url("./large-regular-office-floor-plan.png");
-} */
+
+.map-center
+{
+    position: relative;
+}
+
 #mapBackGround{
 background-image:url("./large-regular-office-floor-plan.png");
 height: 635px;
