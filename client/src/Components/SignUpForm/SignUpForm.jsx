@@ -3,6 +3,7 @@ import userClient from "../../Services/userClient";
 import { USER_EXISTS } from "../../Services/Consts";
 import { useNavigate } from "react-router-dom";
 import "./signUpForm.css";
+import confetti from "canvas-confetti";
 const emailValidator = require("email-validator");
 
 const SignUpForm = ({ setLoggedIn }) => {
@@ -37,6 +38,7 @@ const SignUpForm = ({ setLoggedIn }) => {
       const res = await userClient.register(newUser);
       if (res !== USER_EXISTS) {
         setLoggedIn(true);
+        confetti();
         navigate("/");
       } else {
         alert(res); //when redux -> toggle error message in res to preset at top of page
