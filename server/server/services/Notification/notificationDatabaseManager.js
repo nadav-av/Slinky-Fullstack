@@ -6,7 +6,7 @@ class NotificationDatabaseManage {
     console.log('in getAllNotification 3');
 
     try {
-      const data = await Notification.findAll({where:{officeId:1}});
+      const data = await Notification.findAll();
       console.log('in getAllNotification 3'+ data);
 
       return data;
