@@ -3,14 +3,24 @@ import "./userBookingTable.css";
 import userClient from "../../Services/userClient";
 import TableHead from "./TableHead";
 import TableBody from "./TableBody";
+import { Loader } from "monday-ui-react-core";
+
 
 const UserBookingTable = () => {
   const [userBookings, setUserBookings] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    userClient.getUserBookings().then((res) => {
-      setUserBookings(res);
-    });
+    userClient.getUserBookings()
+      .then((res) => {
+        setUserBookings(res);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 500); //only for better visualization
+      })
+      .catch (
+        setIsLoading(true)
+      );
   }, []);
 
   const columns = [
@@ -22,7 +32,20 @@ const UserBookingTable = () => {
     { label: "Delete", accessor: "delete" },
   ];
 
-  return (
+  if (isLoading) {
+    return (
+        <Loader size={40} />
+    );
+  }
+  else if (userBookings[0] === undefined) {
+    console.log('no bookings');
+    return (
+      <h2>No orders found</h2>
+    );
+  }
+  else {
+    console.log('table');
+    return (
     <div className="user-booking-table">
       <>
         <table className="content-table">
@@ -37,6 +60,6 @@ const UserBookingTable = () => {
       </>
     </div>
   );
-};
+}};
 
 export default UserBookingTable;
