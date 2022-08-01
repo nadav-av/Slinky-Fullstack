@@ -1,3 +1,10 @@
+.user-booking-table
+{
+  position: absolute;
+  top:200px;
+}
+
+
 .content-table {
   border-collapse: collapse;
   margin: 25px 0;
