@@ -32,8 +32,14 @@ const App = () => {
           <Navbar loggedIn={isLoggedIn} />
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/login" element={<Login />} />
+            <Route
+              path="/signup"
+              element={<SignUp setLoggedIn={setIsLoggedIn} />}
+            />
+            <Route
+              path="/login"
+              element={<Login setLoggedIn={setIsLoggedIn} />}
+            />
             <Route path="/visualmap" element={<VisualMap />} />
             <Route path="*" element={<NotFound />} />
             <Route path="/booking" element={<BookingForm />} />
