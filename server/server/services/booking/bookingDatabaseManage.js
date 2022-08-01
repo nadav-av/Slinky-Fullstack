@@ -9,9 +9,7 @@ class BookingDatabaseManage {
       if(officeId === null){
         data = await Booking.findAll();
       } else {
-        console.log("who is officeId", officeId);
         data = await Booking.findAll({where:{officeId}});
-        console.log(data);
       }
       return data;
     } catch (error) {

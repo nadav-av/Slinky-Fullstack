@@ -37,7 +37,6 @@ router.post("/register", async (req, res) => {
           "jwtPrivateKey",
           { expiresIn: "24h" }
         );
-        console.log(token);
         res.status(200).send({ user: newUser, token: token });
       }
     });
@@ -46,14 +45,12 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   const { userName, password } = req.body;
-  console.log(userName, password);
   const user = await usersManager.getUser(userName);
   if (user) {
     bcrypt.compare(password, user.password, (err, result) => {
       if (err) {
         res.status(500).send(err);
       } else if (result) {
-        console.log(user);
         const token = jwt.sign(
           { userId: user.id, userName: user.userName, isAdmin: user.isAdmin },
           "jwtPrivateKey",
@@ -70,7 +67,6 @@ router.post("/login", async (req, res) => {
 });
 
 router.get("/me", [auth], async (req, res) => {
-  console.log(req.tokenData.userName);
   const user = await usersManager.getUser(req.tokenData.userName);
   if (user) {
     res.status(200).send(user);

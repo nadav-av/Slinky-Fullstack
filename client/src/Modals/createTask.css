@@ -9,8 +9,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height:300px;
-    width: 300px;
+    height:400px;
+    width: 400px;
     background: white;
     border-radius: 10px;
     box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
@@ -27,3 +27,14 @@
   .create-task{
    
   }
+  .hovertext:before {
+    content: attr(data-hover);
+  }
+#content-input:hover:before {
+  opacity: 1;
+  visibility: visible;
+}
+#category-input:hover:before {
+  opacity: 1;
+  visibility: visible;
+}
