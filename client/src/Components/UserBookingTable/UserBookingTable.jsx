@@ -14,12 +14,11 @@ const UserBookingTable = () => {
   }, []);
 
   const columns = [
-    { label: "Office", accessor: "office" },
-    { label: "Reseved Place", accessor: "reserved_place" },
     { label: "Start Date", accessor: "start_date" },
     { label: "Start Hour", accessor: "start_hour" },
-    { label: "End Date", accessor: "end_date" },
     { label: "End Hour", accessor: "end_hour" },
+    { label: "Reseved Place", accessor: "reserved_place" },
+    { label: "Office", accessor: "office" },
     { label: "Delete", accessor: "delete" },
   ];
 

@@ -32,7 +32,7 @@ export default class bookingClient {
   static async getTakenHours(officeId, bookingPlace, startDate, endDate) {
     const userJWTToken = localStorage.getItem("x-auth-token");
     const response = await fetch(
-      "http://localhost:3042/booking/get-all-booking-by-date-and-place",
+      "https://slinky-server.herokuapp.com/booking/get-all-booking-by-date-and-place",
       {
         method: "POST",
         headers: {
@@ -63,7 +63,7 @@ export default class bookingClient {
   ) {
     const userJWTToken = localStorage.getItem("x-auth-token");
     const response = await fetch(
-      "http://localhost:3042/booking/create-booking",
+      "https://slinky-server.herokuapp.com/booking/create-booking",
       {
         method: "POST",
         headers: {
@@ -85,7 +85,7 @@ export default class bookingClient {
     console.log("officeID is : ", officeId);
     const userJWTToken = localStorage.getItem("x-auth-token");
     const response = await fetch(
-      "http://localhost:3042/booking/delete-booking",
+      "https://slinky-server.herokuapp.com/booking/delete-booking",
       {
         method: "DELETE",
         headers: {

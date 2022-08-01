@@ -1,4 +1,4 @@
-const BookingManager = require("../../services/Booking/bookingManager");
+const BookingManager = require("../../services/booking/bookingManager");
 
 async function createBooking(req, res) {
   try {
