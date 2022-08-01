@@ -8,12 +8,10 @@ import {
 
 class UserClient {
   constructor() {
-    this.url = "http://localhost:3042";
+    this.url = process.env.REACT_APP_SERVER_URL || "http://localhost:3042";
   }
 
   async login(userName, password) {
-    console.log(userName, password);
-
     const response = await fetch(`${this.url}/users/login`, {
       method: "POST",
       headers: {
@@ -59,6 +57,23 @@ class UserClient {
     }
     if (response.status === 500) {
       return SERVER_ERROR;
+    }
+  }
+
+  async checkIfUserLoggedIn() {
+    const response = await fetch(`${this.url}/users/me`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("x-auth-token"),
+      },
+    });
+    if (response.status === 200) {
+      const res = await response.json();
+      return res.userName;
+    }
+    if (response.status === 400 || response.status === 401) {
+      return INVALID_TOKEN;
     }
   }
 

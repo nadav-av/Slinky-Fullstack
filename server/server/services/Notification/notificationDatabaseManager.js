@@ -1,4 +1,5 @@
 const { Notification } = require("../../storages/models");
+const { createNewErrorFromDatabaseError } = require("../General/errorCreator");
 
 class NotificationDatabaseManage {
   getAllNotification = async () => {
@@ -11,20 +12,20 @@ class NotificationDatabaseManage {
       return data;
 
     } catch (error) {
-      console.log(error);
-      // throw error;
+      throw createNewErrorFromDatabaseError(error);
     }
   };
   createNotification = async (officeId, content, madeBy, category) => {
     try {
-      return await Notification.create({
-        officeId,
-        madeBy,
-        content,
-        category
-      });
+            const notification = await Notification.create({
+                officeId,
+                madeBy,
+                content,
+                category
+              });
+            return notification;
     } catch (error) {
-      throw error;
+      throw createNewErrorFromDatabaseError(error);
     }
   };
   deleteNotification = async (notificationId, officeId, madeBy) => {
@@ -34,14 +35,14 @@ class NotificationDatabaseManage {
       });
       return del;
     } catch (error) {
-      throw error;
+      throw createNewErrorFromDatabaseError(error);
     }
   };
   deleteAllNotification = async () => {
     try {
       return await Notification.truncate();
     } catch (error) {
-      throw error;
+      throw createNewErrorFromDatabaseError(error);
     }
   };
   updateNotification = async (
@@ -53,14 +54,14 @@ class NotificationDatabaseManage {
         { where: { id: notificationId } }
       );
     } catch (error) {
-      throw error;
+      throw createNewErrorFromDatabaseError(error);
     }
   };
   getAllNotificationOfOfficeId = async (officeId) => {
     try {
       return await Notification.findAll({ where: { officeId } });
     } catch (error) {
-      throw error;
+      throw createNewErrorFromDatabaseError(error);
     }
   };
 }

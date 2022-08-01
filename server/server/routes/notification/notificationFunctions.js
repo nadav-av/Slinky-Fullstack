@@ -1,4 +1,5 @@
 const NotificationManager = require("../../services/Notification/notificationManager");
+const { errorHandler } = require("../Generals/errorHandler");
 
 
 async function createNotification(req, res) {
@@ -19,10 +20,8 @@ async function createNotification(req, res) {
 
 async function getAllNotification(req, res) {
   try {
-    console.log('in getAllNotification 1');
-
     const listToReturn = await NotificationManager.getAllNotification();
-    console.log('notifications list '+listToReturn);
+    console.log(listToReturn);
     res.status(200).send(JSON.stringify(listToReturn));
   } catch (error) {
     errorHandler(error, res);

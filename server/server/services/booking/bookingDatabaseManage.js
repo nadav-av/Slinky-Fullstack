@@ -1,5 +1,6 @@
 const { Booking } = require("../../storages/models");
 const { Op } = require("sequelize");
+const { createNewErrorFromDatabaseError } = require("../General/errorCreator");
 
 class BookingDatabaseManage {
   getAllBookings = async () => {
@@ -7,7 +8,7 @@ class BookingDatabaseManage {
       const data = await Booking.findAll();
       return data;
     } catch (error) {
-      throw error;
+      throw createNewErrorFromDatabaseError(error);
     }
   };
   getBookingsOfUser = async (userName) => {
@@ -15,9 +16,7 @@ class BookingDatabaseManage {
       const data = await Booking.findAll({ where: { userName } });
       return data;
     } catch (error) {
-      const err = Error(error.message);
-      err.statusCode = 400;
-      throw err;
+      throw createNewErrorFromDatabaseError(error);
     }
   };
   addBooking = async (officeId, bookingPlace, userName, startDate, endDate) => {
@@ -30,7 +29,7 @@ class BookingDatabaseManage {
         endDate,
       });
     } catch (error) {
-      throw error;
+      throw createNewErrorFromDatabaseError(error);
     }
   };
   deleteBooking = async (bookingId, officeId, userName) => {
@@ -40,14 +39,14 @@ class BookingDatabaseManage {
       });
       return del;
     } catch (error) {
-      throw error;
+      throw createNewErrorFromDatabaseError(error);
     }
   };
   deleteAllBookings = async () => {
     try {
       return await Booking.truncate();
     } catch (error) {
-      throw error;
+      throw createNewErrorFromDatabaseError(error);
     }
   };
   updateBooking = async (
@@ -64,14 +63,14 @@ class BookingDatabaseManage {
         { where: { id: bookingId } }
       );
     } catch (error) {
-      throw error;
+      throw createNewErrorFromDatabaseError(error);
     }
   };
   getBookingByPlaceArea = async (bookingPlace) => {
     try {
       return await Booking.findAll({ where: { bookingPlace } });
     } catch (error) {
-      throw error;
+      throw createNewErrorFromDatabaseError(error);
     }
   };
   getBookingByDateAndPlace = async (
@@ -109,7 +108,7 @@ class BookingDatabaseManage {
       });
       return bookingByChairAndDate;
     } catch (error) {
-      throw error;
+      throw createNewErrorFromDatabaseError(error);
     }
   };
 }
