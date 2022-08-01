@@ -11,9 +11,52 @@ const TableBody = ({ tableData, columns, userBookings, setUserBookings }) => {
     }
   };
 
+  const parseDate = (date) => {
+    const parsedDate = new Date(date);
+    return `${parsedDate.getDate()}/${
+      parsedDate.getMonth() + 1
+    }/${parsedDate.getFullYear()}`;
+  };
+
+  const parseTimeInDate = (date) => {
+    const parsedDate = new Date(date);
+    let hours = parsedDate.getHours();
+    let minutes = parsedDate.getMinutes();
+    if (hours < 10) {
+      hours = "0" + hours;
+    }
+    if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
+    return `${hours}:${minutes}`;
+  };
+
+  const parseUserBookings = (bookings) => {
+    const parsedBookings = [];
+    bookings.forEach((booking) => {
+      booking.startDate = new Date(booking.startDate);
+      booking.endDate = new Date(booking.endDate);
+      console.log(booking);
+      const parsedBooking = {
+        id: booking.id,
+        office: booking.officeId,
+        reserved_place: booking.bookingPlace,
+        start_date: parseDate(booking.startDate),
+        start_hour: parseTimeInDate(booking.startDate),
+        end_date: parseDate(booking.endDate),
+        end_hour: parseTimeInDate(booking.endDate),
+      };
+      parsedBookings.push(parsedBooking);
+    });
+    return parsedBookings;
+  };
+
+  const newTableData=parseUserBookings(tableData);
+
   return (
     <tbody>
-      {tableData.map((data) => {
+      {
+      newTableData.map((data) => {
         const differentEndDate = data.start_date !== data.end_date;
         return (
           <tr key={data.id}>
