@@ -45,56 +45,18 @@ const UserBookingTable = () => {
     value: PropTypes.number.isRequired,
   };
 
-  
-  const parseDate = (date) => {
-    const parsedDate = new Date(date);
-    return `${parsedDate.getDate()}/${
-      parsedDate.getMonth() + 1
-    }/${parsedDate.getFullYear()}`;
-  };
-
-  const parseTimeInDate = (date) => {
-    const parsedDate = new Date(date);
-    let hours = parsedDate.getHours();
-    let minutes = parsedDate.getMinutes();
-    if (hours < 10) {
-      hours = "0" + hours;
-    }
-    if (minutes < 10) {
-      minutes = "0" + minutes;
-    }
-    return `${hours}:${minutes}`;
-  };
-
-  const parseUserBookings = (bookings) => {
-    const parsedBookings = [];
-    bookings.forEach((booking) => {
-      booking.startDate = new Date(booking.startDate);
-      booking.endDate = new Date(booking.endDate);
-      console.log(booking);
-      const parsedBooking = {
-        id: booking.id,
-        office: booking.officeId,
-        reserved_place: booking.bookingPlace,
-        start_date: parseDate(booking.startDate),
-        start_hour: parseTimeInDate(booking.startDate),
-        end_date: parseDate(booking.endDate),
-        end_hour: parseTimeInDate(booking.endDate),
-      };
-      parsedBookings.push(parsedBooking);
-    });
-    return parsedBookings;
-  };
-
   useEffect(() => {
     userClient.getUserBookings()
       .then((res) => {
-        console.log('userBookings '+JSON.stringify(res));
-        setUserBookings(parseUserBookings(res));
-        res.forEach(element => { //filter
-          if(element.startDate > Date.now()) {console.log('now bigger'); setUserFutureBookings([...userFutureBookings,element])} 
-          else {console.log('now smaller'); setUserPastBookings([...userPastBookings,element])}
+        setUserBookings((res));
+        const FutureBookings = [];
+        const PastBookings = [];
+        res.forEach(element => {
+          if(new Date(element.startDate) > Date.now()) {FutureBookings.push(element);} 
+          else {PastBookings.push(element);}
         })
+        setUserFutureBookings(FutureBookings);
+        setUserPastBookings(PastBookings);
         setTimeout(() => {
           setIsLoading(false);
         }, 500); //only for better visualization
@@ -148,9 +110,9 @@ const UserBookingTable = () => {
           <TableHead columns={columns} />
           <TableBody
             columns={columns}
-            tableData={parseUserBookings(userFutureBookings)}
-            userBookings={parseUserBookings(userFutureBookings)}
-            setUserBookings={setUserBookings}
+            tableData={userFutureBookings}
+            userBookings={userFutureBookings}
+            setUserBookings={setUserFutureBookings}
           />
         </table>
         </TabPanel>
@@ -159,9 +121,9 @@ const UserBookingTable = () => {
           <TableHead columns={columns} />
           <TableBody
             columns={columns}
-            tableData={parseUserBookings(userPastBookings)}
-            userBookings={parseUserBookings(userPastBookings)}
-            setUserBookings={setUserBookings}
+            tableData={userPastBookings}
+            userBookings={userPastBookings}
+            setUserBookings={setUserPastBookings}
           />
         </table>
         </TabPanel>
