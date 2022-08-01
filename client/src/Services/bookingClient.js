@@ -1,6 +1,6 @@
 class bookingClient {
   constructor() {
-    this.url = "http://localhost:3042";
+    this.url = process.env.REACT_APP_SERVER_URL || "http://localhost:3042";
   }
 
   async getAvailableStartHours(officeId, bookingPlace, startDate, endDate) {
