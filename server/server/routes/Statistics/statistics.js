@@ -5,8 +5,8 @@ const admin = require('../../middleware/admin');
 const { mostBookedPlace, mostBookedOfficeId } = require('./statisticsFunctions');
 const statisticsRouter = express.Router();
 
-statisticsRouter.get("/:officeId/:bookingPlace", [auth, admin], mostBookedPlace);
-statisticsRouter.get("/", mostBookedOfficeId); 
+statisticsRouter.get("/:officeId", [auth, admin], mostBookedPlace);
+statisticsRouter.get("/", [auth, admin], mostBookedOfficeId); 
 // statisticsRouter.delete("/delete-notification", [auth], deleteNotification);
 // statisticsRouter.post("/update-notification", [auth], updateNotification);
 

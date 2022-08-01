@@ -70,9 +70,9 @@ async function updateBooking(req, res) {
   }
 }
 
-async function getBookingOfOfficeByPlaceArea(req, res) {
+async function getBookingOfOffice(req, res) {
   try {
-    const listToReturn = await BookingManager.getBookingOfOfficeByPlaceArea(
+    const listToReturn = await BookingManager.getBookingOfOffice(
       req.body.officeId,
       req.body.bookingPlace
     );
@@ -111,6 +111,6 @@ module.exports = {
   getBookingsOfUser,
   deleteBooking,
   updateBooking,
-  getBookingOfOfficeByPlaceArea,
+  getBookingOfOffice,
   getBookingByDateAndPlace,
 };

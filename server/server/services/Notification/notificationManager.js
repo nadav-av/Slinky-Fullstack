@@ -36,7 +36,7 @@ class NotificationManager {
   }
   _validate(officeId, content, madeBy, category){
     if (
-        this.NotificationManagerValidator.isNotificationValid(
+        this.notificationManagerValidator.isNotificationValid(
           officeId, content, madeBy, category
         ) === false
       ) {

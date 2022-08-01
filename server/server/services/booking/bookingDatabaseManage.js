@@ -3,9 +3,16 @@ const { Op } = require("sequelize");
 const { createNewErrorFromDatabaseError } = require("../General/errorCreator");
 
 class BookingDatabaseManage {
-  getAllBookings = async () => {
+  getAllBookings = async (officeId = null) => {
     try {
-      const data = await Booking.findAll();
+      let data;
+      if(officeId === null){
+        data = await Booking.findAll();
+      } else {
+        console.log("who is officeId", officeId);
+        data = await Booking.findAll({where:{officeId}});
+        console.log(data);
+      }
       return data;
     } catch (error) {
       throw createNewErrorFromDatabaseError(error);
@@ -62,13 +69,6 @@ class BookingDatabaseManage {
         { officeId, bookingPlace, userName, startDate, endDate },
         { where: { id: bookingId } }
       );
-    } catch (error) {
-      throw createNewErrorFromDatabaseError(error);
-    }
-  };
-  getBookingOfOfficeByPlaceArea = async (officeId, bookingPlace) => {
-    try {
-      return await Booking.findAll({ where: { officeId, bookingPlace } });
     } catch (error) {
       throw createNewErrorFromDatabaseError(error);
     }

@@ -6,11 +6,8 @@ class StatisticsManager {
     this.bookingManagerValidator = new BookingManagerValidator();
     this.bookingDatabase = new BookingDatabaseManage();
   }
-  async mostBookedPlace(officeId, bookingPlace) {
-    const allBookings = await this.bookingDatabase.getBookingOfOfficeByPlaceArea(
-      officeId,
-      bookingPlace,
-    );
+  async mostBookedPlace(officeId) {
+    const allBookings = await this.bookingDatabase.getAllBookings(officeId);
     allBookings.sort((firstBookedPlace, secondBookedPlace) => {
         const first = firstBookedPlace.bookingPlace;
         const second = secondBookedPlace.bookingPlace;
@@ -23,8 +20,7 @@ class StatisticsManager {
         }
         return 0;
     });
-    console.log("2", allBookings);
-    return this._maxAppearanceOfPlace(bookingPlace);
+    return this._maxAppearanceOfPlace(allBookings);
   }
 
   _maxAppearanceOfPlace(bookingsArr){
@@ -32,24 +28,25 @@ class StatisticsManager {
     let max = 0;
     const bookedPlaceArrWithCounter = [];
     const bookedPlaceArrToReturn = [];
-    for(let i = 1; i < bookingsArr.length; i++){
-        if(bookingsArr[i] != bookingsArr[i-1]){
+    let i = 1;
+    for(i = 1; i < bookingsArr.length; i++){
+        if(bookingsArr[i].bookingPlace != bookingsArr[i-1].bookingPlace){
             if(max <= counter){
                 max = counter;
             }
-            bookedPlaceArrWithCounter.push({"bookedPlace":bookingsArr[i-1], "counter":counter});
-            counter = 0;
+            bookedPlaceArrWithCounter.push({"bookingPlace":bookingsArr[i-1].bookingPlace, "counter":counter});
+            counter = 1;
         } else{
             counter++;
         }
     }
     if(counter >= max){
         max = counter;
-        bookedPlaceArrWithCounter.push({"bookedPlace":bookingsArr[i-1], "counter":counter});
+        bookedPlaceArrWithCounter.push({"bookingPlace":bookingsArr[i-1].bookingPlace, "counter":counter});
     }
     bookedPlaceArrWithCounter.map(element => {
         if(element.counter === max){
-            bookedPlaceArrToReturn.push(element);
+            bookedPlaceArrToReturn.push({"bookingPlace":element.bookingPlace, "amount":element.counter});
         }
     })
     return bookedPlaceArrToReturn;
@@ -73,8 +70,9 @@ class StatisticsManager {
     let max = 0;
     const bookedOfficeIdArrWithCounter = [];
     const bookedOfficeIdArrToReturn = [];
-    for(let i = 1; i < allBookings.length; i++){
-        if(allBookings[i] != allBookings[i-1]){
+    let i = 1;
+    for(i; i < allBookings.length; i++){
+        if(allBookings[i].officeId !== allBookings[i-1].officeId){
             if(max <= counter){
                 max = counter;
             }
