@@ -18,12 +18,12 @@ const MapForm = () => {
 
   return (
 
-    <>
-    {/* {isOpenModal === true ?  */}
+    <div>
+    {isOpenModal === true ? 
     <GenericModal open ={isOpenModal} onClose ={()=> {setIsOpenModal(false)}} content={
     <BookingForm officeId={officeId} bookingPlace={bookingPlace}/>
     }/>
-    {/* : */}
+    :
     <div className="map-center">
       <h1>Choose your office:</h1>
       <div id="mapBackGround"> 
@@ -32,8 +32,8 @@ const MapForm = () => {
       )}
       </div>
       </div>
-    {/* } */}
-    </>
+    }
+    </div>
   );
 };
 
