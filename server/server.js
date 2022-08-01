@@ -1,6 +1,7 @@
 const express = require("express");
 const users = require("./server/routes/users");
-const notifications = require("./server/routes/notification/notification");
+const notifications = require("./server/routes/Notification/notification");
+const statistics = require("./server/routes/Statistics/statistics");
 const booking = require("./server/routes/Booking/booking");
 const logger = require("./server/middleware/logger.js");
 const cors = require("cors");
@@ -15,6 +16,7 @@ app.use(logger);
 app.use("/booking", booking);
 app.use("/users", users);
 app.use("/notifications", notifications);
+app.use("/statistics", statistics);
 
 app.get("/", (req, res) => {
   res.send("Hello World");

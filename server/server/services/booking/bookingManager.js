@@ -59,8 +59,8 @@ class BookingManager {
       userName
     );
   }
-  async getBookingByPlaceArea(bookingPlace) {
-    return await this.bookingDatabase.getBookingByPlaceArea(bookingPlace);
+  async getBookingOfOfficeByPlaceArea(officeId, bookingPlace) {
+    return await this.bookingDatabase.getBookingOfOfficeByPlaceArea(officeId, bookingPlace);
   }
   async getBookingByDateAndPlace(officeId, bookingPlace, startDate, endDate) {
     return await this.bookingDatabase.getBookingByDateAndPlace(
