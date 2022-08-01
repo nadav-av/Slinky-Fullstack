@@ -72,7 +72,6 @@ const SignUpForm = ({ setLoggedIn }) => {
       alert("Username must be at least 5 characters");
       return false; //when redux is implemented, toggle error message to preset at top of page
     } else {
-      console.log("VALID");
       return true;
     }
   };

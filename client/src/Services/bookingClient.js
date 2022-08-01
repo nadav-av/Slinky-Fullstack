@@ -19,7 +19,6 @@ class bookingClient {
         }
       });
     }
-    console.log("availableHours is : ", availableHours);
     return availableHours;
   }
 
@@ -42,7 +41,6 @@ class bookingClient {
     );
 
     const takenHours = await response.json();
-    console.log(takenHours);
     return takenHours;
   }
 
@@ -67,7 +65,6 @@ class bookingClient {
   }
 
   async deleteBooking(bookId, officeId) {
-    console.log("officeID is : ", officeId);
     const userJWTToken = localStorage.getItem("x-auth-token");
     const response = await fetch(this.url+"/",
       {

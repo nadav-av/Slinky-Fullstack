@@ -36,7 +36,6 @@ const TableBody = ({ tableData, columns, userBookings, setUserBookings }) => {
     bookings.forEach((booking) => {
       booking.startDate = new Date(booking.startDate);
       booking.endDate = new Date(booking.endDate);
-      console.log(booking);
       const parsedBooking = {
         id: booking.id,
         office: booking.officeId,

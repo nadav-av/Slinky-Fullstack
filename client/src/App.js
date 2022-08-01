@@ -47,7 +47,6 @@ const App = () => {
             <Route path="/mybookings" element={<UserBooking />} />
           </Routes>
         </div>
-        {console.log(process.env.REACT_APP_SERVER_URL)}
       </div>
     </React.Fragment>
   );
