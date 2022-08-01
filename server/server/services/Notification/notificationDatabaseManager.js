@@ -3,9 +3,14 @@ const { createNewErrorFromDatabaseError } = require("../General/errorCreator");
 
 class NotificationDatabaseManage {
   getAllNotification = async () => {
+    console.log('in getAllNotification 3');
+
     try {
-      const data = await Notification.findAll();
+      const data = await Notification.findAll({where:{officeId:1}});
+      console.log('in getAllNotification 3'+ data);
+
       return data;
+
     } catch (error) {
       throw createNewErrorFromDatabaseError(error);
     }
