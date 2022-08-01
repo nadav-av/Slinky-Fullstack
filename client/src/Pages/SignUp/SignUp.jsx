@@ -2,10 +2,10 @@ import React from "react";
 import "./signUp.css";
 import SignUpForm from "./../../Components/SignUpForm/SignUpForm";
 
-const SignUp = () => {
+const SignUp = ({ setLoggedIn }) => {
   return (
     <div className="signup-container">
-      <SignUpForm />
+      <SignUpForm setLoggedIn={setLoggedIn} />
     </div>
   );
 };

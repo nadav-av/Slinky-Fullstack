@@ -1,3 +1,4 @@
+const auth = require("../middleware/auth");
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const usersManager = require("../services/usersManager");
@@ -5,7 +6,6 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 
 router.post("/register", async (req, res) => {
-  console.log("HERE");
   const { userName, password, firstName, lastName, email, company, isAdmin } =
     req.body;
   const user = await usersManager.getUser(userName);
@@ -45,7 +45,6 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  console.log("HERE");
   const { userName, password } = req.body;
   console.log(userName, password);
   const user = await usersManager.getUser(userName);
@@ -65,6 +64,16 @@ router.post("/login", async (req, res) => {
         res.status(401).send("Invalid password");
       }
     });
+  } else {
+    res.status(404).send("User not found");
+  }
+});
+
+router.get("/me", [auth], async (req, res) => {
+  console.log(req.tokenData.userName);
+  const user = await usersManager.getUser(req.tokenData.userName);
+  if (user) {
+    res.status(200).send(user);
   } else {
     res.status(404).send("User not found");
   }
