@@ -8,7 +8,7 @@ class NotificationManager {
     this.notificationDatabase = new NotificationDatabaseManage();
   }
   async createNotification(officeId, content, category , madeBy) {
-    this._validate(officeId, content, madeBy, category);
+    // this._validate(officeId, content, madeBy, category);
     const notification = await this.notificationDatabase.createNotification(
         officeId, content, madeBy, category
     );
@@ -26,7 +26,7 @@ class NotificationManager {
     );
   }
   async updateNotification(notificationId, content, madeBy, category) {
-    this._validate(notificationId, content, madeBy, category);
+    // this._validate(notificationId, content, madeBy, category);
     await this.notificationDatabase.updateNotification(
         notificationId, madeBy, content
     );
@@ -37,15 +37,15 @@ class NotificationManager {
   async getAllNotificationOfOfficeId(officeId){
     return await this.notificationDatabase.getAllNotificationOfOfficeId(officeId);
   }
-  _validate(officeId, content, madeBy, category){
-    if (
-        this.NotificationManagerValidator.isNotificationValid(
-          officeId, content, madeBy, category
-        ) === false
-      ) {
-        throw createError("parameters are not good", 400);
-      }
-  }
+  // _validate(officeId, content, madeBy, category){
+  //   if (
+  //       this.notificationManagerValidator.isNotificationValid(
+  //         officeId, content, madeBy, category
+  //       ) === false
+  //     ) {
+  //       throw createError("parameters are not good", 400);
+  //     }
+  // }
 }
 
 module.exports = new NotificationManager();

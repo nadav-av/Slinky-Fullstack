@@ -6,28 +6,35 @@ import GenericModal from "../../Components/GenericModal/genericModal"
 import notificationClient from "../../Services/notificationClient";
 import { INVALID_NOTIFICATIONS } from "../../Services/Consts";
 
-let serverMockData =
-[{idOffice:1,userName:"SHALEV",content:"toilet full of a shit",category:"review"},
-{idOffice:1,userName:"NADAV",content:"if you wand cuddle smile pls",category:"review"},
-{idOffice:1,userName:"ROTEM",content:"rak jin tonic ve moabet",category:"review"},
-{idOffice:1,userName:"VIKO",content:"passport card",category:"review"},
-{idOffice:1,userName:"SHALEV",content:"toilet full of a shit",category:"review"},
-{idOffice:1,userName:"NADAV",content:"if you wand cuddle smile pls",category:"review"},
-{idOffice:1,userName:"ROTEM",content:"rak jin tonic ve moabet",category:"review"},
-{idOffice:1,userName:"VIKO",content:"passport card",category:"review"}
-];
+// let serverMockData =
+// [{idOffice:1,userName:"SHALEV",content:"toilet full of a shit",category:"review"},
+// {idOffice:1,userName:"NADAV",content:"if you wand cuddle smile pls",category:"review"},
+// {idOffice:1,userName:"ROTEM",content:"rak jin tonic ve moabet",category:"review"},
+// {idOffice:1,userName:"VIKO",content:"passport card",category:"review"},
+// {idOffice:1,userName:"SHALEV",content:"toilet full of a shit",category:"review"},
+// {idOffice:1,userName:"NADAV",content:"if you wand cuddle smile pls",category:"review"},
+// {idOffice:1,userName:"ROTEM",content:"rak jin tonic ve moabet",category:"review"},
+// {idOffice:1,userName:"VIKO",content:"passport card",category:"review"}
+// ];
 const Notification = () => {
 const [data, setData] = useState([]);
 const [modal, setModal] = useState(false);
+const [seconds, setSeconds] = useState(0);
 
 useEffect(() => {
   getNotifications();
-},[data]);
+  const delayTimeOneMin=6000;
+  const interval = setInterval(() => {
+    getNotifications();
+    setSeconds(seconds => seconds + 1);
+  }, delayTimeOneMin); 
+  return () => clearInterval(interval);
+ 
+},[]);
 
 
 const getNotifications = async ()=>{
   try {
-        console.log(await notificationClient.getNotifications(),"rotem")
         setData(await notificationClient.getNotifications());
       } catch (err) {
       console.error("err");

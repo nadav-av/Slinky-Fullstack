@@ -15,7 +15,6 @@ class notificationClient {
       );
          if (response.status === 200) {
               const res = await response.json();
-              console.log(res,"shalev")
               return res;
           }
             if (response.status === 400) {

@@ -9,7 +9,6 @@ const CreateTask =({modal,toggle}) =>{
   const [category, setCategory] = useState("idea");
 
   const addNotification = async (e) => {
-    e.preventDefault();
        try {
           await notificationClient.addNotification(
             officeId,
@@ -44,7 +43,7 @@ const CreateTask =({modal,toggle}) =>{
         <InputLabel htmlFor="content-input">Content</InputLabel>
         <Input id= "content-input"  onChange={(e) => setContent(e.target.value)} />
         <br></br>
-        <Button onclick={addNotification()} variant="raised">Submit</Button>
+        <Button onClick={addNotification} variant="raised">Submit</Button>
       </FormControl>
       </div>
       </div>

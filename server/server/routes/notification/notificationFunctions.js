@@ -4,8 +4,9 @@ const { errorHandler } = require("../Generals/errorHandler");
 
 async function createNotification(req, res) {
   try {
+
     const { officeId, content, category } = req.body;
-    const returnedNotification = await NotificationManager.addNotification(
+    const returnedNotification = await NotificationManager.createNotification(
       officeId,
       content,
       category,
@@ -14,6 +15,7 @@ async function createNotification(req, res) {
     res.status(200).send(JSON.stringify(returnedNotification));
     res.end();
   } catch (error) {
+    console.log(error,"i want job at monday.com - (dapulse)")
     errorHandler(error, res);
   }
 }
