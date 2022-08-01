@@ -78,7 +78,7 @@ class UserClient {
   }
 
   async getUserBookings() {
-    const response = await fetch(`${this.url}/booking/get-bookings-of-user`, {
+    const response = await fetch(`${this.url}/booking/user`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
