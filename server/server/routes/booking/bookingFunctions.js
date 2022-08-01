@@ -1,4 +1,5 @@
-const BookingManager = require("../../services/booking/bookingManager");
+const BookingManager = require("../../services/Booking/bookingManager");
+const { errorHandler } = require("../Generals/errorHandler");
 
 async function createBooking(req, res) {
   try {
@@ -15,7 +16,7 @@ async function createBooking(req, res) {
     res.status(200).send(JSON.stringify(returnedBooking));
     res.end();
   } catch (error) {
-    _errorHandler(error, res);
+    errorHandler(error, res);
   }
 }
 
@@ -24,7 +25,7 @@ async function getAllBookings(req, res) {
     const listToReturn = await BookingManager.getAllBookings();
     res.status(200).send(JSON.stringify(listToReturn));
   } catch (error) {
-    _errorHandler(error, res);
+    errorHandler(error, res);
   }
 }
 
@@ -35,7 +36,7 @@ async function getBookingsOfUser(req, res) {
     );
     res.status(200).send(JSON.stringify(listToReturn));
   } catch (error) {
-    _errorHandler(error, res);
+    errorHandler(error, res);
   }
 }
 
@@ -48,7 +49,7 @@ async function deleteBooking(req, res) {
     );
     res.status(200).send(JSON.stringify(listToReturn));
   } catch (error) {
-    _errorHandler(error, res);
+    errorHandler(error, res);
   }
 }
 
@@ -65,7 +66,7 @@ async function updateBooking(req, res) {
     );
     res.status(200).send(JSON.stringify(listToReturn));
   } catch (error) {
-    _errorHandler(error, res);
+    errorHandler(error, res);
   }
 }
 
@@ -76,7 +77,7 @@ async function getBookingByBookingPlace(req, res) {
     );
     res.status(200).send(JSON.stringify(listToReturn));
   } catch (error) {
-    _errorHandler(error, res);
+    errorHandler(error, res);
   }
 }
 
@@ -99,15 +100,7 @@ async function getBookingByDateAndPlace(req, res) {
     });
     res.status(200).send(JSON.stringify(bookedHours));
   } catch (error) {
-    _errorHandler(error, res);
-  }
-}
-
-function _errorHandler(error, res){
-  try{
-    res.status(error.statusCode).send(JSON.stringify(error.message));
-  } catch(error){
-    res.status(500).send(JSON.stringify("Something went wrong"));
+    errorHandler(error, res);
   }
 }
 

@@ -1,4 +1,5 @@
 const NotificationManager = require("../../services/Notification/notificationManager");
+const { errorHandler } = require("../Generals/errorHandler");
 
 async function createNotification(req, res) {
   try {
@@ -12,7 +13,7 @@ async function createNotification(req, res) {
     res.status(200).send(JSON.stringify(returnedNotification));
     res.end();
   } catch (error) {
-    res.status(error.statusCode).send(JSON.stringify(error.message));
+    errorHandler(error, res);
   }
 }
 
@@ -24,7 +25,7 @@ async function getAllNotificationOfOfficeId(req, res) {
     console.log(listToReturn);
     res.status(200).send(JSON.stringify(listToReturn));
   } catch (error) {
-    res.status(error.statusCode).send(JSON.stringify(error.message));
+    errorHandler(error, res);
   }
 }
 
@@ -37,7 +38,7 @@ async function deleteNotification(req, res) {
     );
     res.status(200).send(JSON.stringify(listToReturn));
   } catch (error) {
-    res.status(error.statusCode).send(JSON.stringify(error.message));
+    errorHandler(error, res);
   }
 }
 
@@ -51,7 +52,7 @@ async function updateNotification(req, res) {
     );
     res.status(200).send(JSON.stringify(listToReturn));
   } catch (error) {
-    res.status(error.statusCode).send(JSON.stringify(error.message));
+    errorHandler(error, res);
   }
 }
 
