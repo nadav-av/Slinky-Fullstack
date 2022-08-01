@@ -19,8 +19,6 @@ async function createNotification(req, res) {
 
 async function getAllNotificationOfOfficeId(req, res) {
   try {
-    console.log('123');
-    console.log(req.params.officeId);
     const listToReturn = await NotificationManager.getAllNotificationOfOfficeId(req.params.officeId);
     console.log(listToReturn);
     res.status(200).send(JSON.stringify(listToReturn));

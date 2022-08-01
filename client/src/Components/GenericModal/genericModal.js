@@ -3,38 +3,19 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import {Button} from '@mui/material';
 import Modal from '@mui/material/Modal';
-// import CommonButton from '../CommonButton/CommonButton';
-import { modalStyles } from './genericModalStyles';
+import './genericModal.css';
+import {DialogContentContainer } from "monday-ui-react-core";
 
-const GenericModal = ({ open, onClose, title, subTitle, content, onSubmit }) => {
+const GenericModal = ({ open, onClose, content }) => {
 
     return (
-        <Modal open={open} onClose={onClose}>
-            {/* <Box sx={modalStyles.wrapper}> */}
+        <div>
+        <DialogContentContainer type={DialogContentContainer.types.MODAL}>
             <div>
-                {/* <Typography
-                    variant="h6"
-                    component="h2"
-                >
-                    {title}
-                </Typography> */}
-                    {/* <Button>X</Button>
-                <Typography sx={{ mt: 2 }}>
-                    {subTitle}sdadsad
-                </Typography> */}
                 {content}
-                {/* <Box sx={modalStyles.buttons}> */}
-                    {/* <CommonButton
-                        variant="contained"
-                        onClick={onSubmit}
-                    >
-                        Submit
-                    </CommonButton>
-                    <CommonButton onClick={onClose}>Cancel</CommonButton> */}
-                {/* </Box> */}
-            {/* </Box> */}
             </div>
-        </Modal>
+        </DialogContentContainer >
+        </div>
     )
 }
 
