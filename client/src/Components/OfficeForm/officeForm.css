@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css?family=Exo+2|Yatra+One');
+
+/**{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Exo 2', sans-serif;
+}
+
+body{
+  background: #8c7ae6;
+}
+*/
+.wrapper{
+  text-align: center;
+  border-radius: 10%;
+}
+
+.header h1{
+  font-size: 48px;
+  color: rgb(0, 0, 0);
+  margin-bottom: 25px;
+}
+
+.offices{
+  width: auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.offices .office_option{
+  width: 250px;
+  margin: 5px;
+  background: rgb(253, 248, 252);
+  padding: 20px 10px;
+    border-radius: 8px;
+    box-shadow: 3px 3px 5px lightblue;
+    cursor: pointer;
+}
+
+.offices .office_option .office_img{
+  background: #e9e5fa;  
+  max-width: 190px;
+  width: 100%;
+  height: 190px;
+  margin: 0 auto;
+  border-radius: 50%;
+  padding: 5px;
+  position: relative;
+  cursor: pointer;
+}
+
+.offices .office_option .office_img img{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+
+}
+
+.offices .office_option h3{
+  text-transform: uppercase;
+  font-size: 18px;
+  line-height: 18px;
+  letter-spacing: 2px;
+  margin: 15px 0 0px;
+}
+
+.offices .office_option span{
+  font-size: 10px;
+}
+
+.offices .office_option p{
+  margin-top: 20px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.soon {
+  opacity: 0.6;
+  cursor: none;
+}

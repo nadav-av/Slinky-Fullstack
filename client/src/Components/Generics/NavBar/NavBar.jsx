@@ -102,6 +102,17 @@ function NavBar({ loggedIn }) {
           </NavLink>
         </li>
         <li className="nav-item">
+          <NavLink /***************************************************************************/
+            to="/officeForm"
+            className={({ isActive }) =>
+              "nav-links" + (isActive ? " activated" : "")
+            }
+            onClick={handleClick}
+          >
+            Office Form
+          </NavLink>
+        </li>
+        <li className="nav-item">
           <NavLink
             to="/"
             className={({ isActive }) =>
