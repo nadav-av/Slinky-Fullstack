@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Navigate, NavLink } from "react-router-dom";
 import "./navBar.css";
 
 function NavBar({ loggedIn }) {
@@ -11,6 +11,7 @@ function NavBar({ loggedIn }) {
     localStorage.removeItem("x-auth-token");
     handleClick();
     window.location.reload();
+    Navigate("/");
   };
 
   const showForUnLoggedUser = () => {
