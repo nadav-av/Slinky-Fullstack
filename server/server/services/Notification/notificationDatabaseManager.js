@@ -2,13 +2,16 @@ const { Notification } = require("../../storages/models");
 const { createNewErrorFromDatabaseError } = require("../General/errorCreator");
 
 class NotificationDatabaseManage {
-  getAllNotification = async () => {
+  getAllNotification = async (officeId = null) => {
 
     try {
-      const data = await Notification.findAll({where:{officeId:1}});
-
+      let data;
+      if(officeId === null){
+        data = await Notification.findAll();
+      } else {
+        data = await Notification.findAll({where:{officeId}});
+      }
       return data;
-
     } catch (error) {
       throw createNewErrorFromDatabaseError(error);
     }
@@ -51,13 +54,6 @@ class NotificationDatabaseManage {
         {bookingPlace, madeBy, content},
         { where: { id: notificationId } }
       );
-    } catch (error) {
-      throw createNewErrorFromDatabaseError(error);
-    }
-  };
-  getAllNotificationOfOfficeId = async (officeId) => {
-    try {
-      return await Notification.findAll({ where: { officeId } });
     } catch (error) {
       throw createNewErrorFromDatabaseError(error);
     }
