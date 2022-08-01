@@ -69,7 +69,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get("/me", [auth], async (req, res) => {
+router.get("/me", auth, async (req, res) => {
   console.log(req.tokenData.userName);
   const user = await usersManager.getUser(req.tokenData.userName);
   if (user) {
