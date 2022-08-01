@@ -54,8 +54,8 @@ const toggle = () => setModal(!modal);
       <button className="btn-primary" onClick={() => setModal(true)}> Create Task </button>
 
       <div className="notification-container-array">
-      {data.map((element) =>       
-         <NotificationForm data={element} key={element.userName}></NotificationForm>
+      {data.map((element, index) =>       
+         <NotificationForm data={element} key={index}></NotificationForm>
       )}
       </div>
     </div>
