@@ -1,38 +1,16 @@
 import React from 'react'
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-// import CommonButton from '../CommonButton/CommonButton';
-import { modalStyles } from './genericModalStyles';
+import './genericModal.css';
 
-const GenericModal = ({ open, onClose, title, subTitle, content, onSubmit }) => {
-
+const GenericModal = ({ open, onClose, content }) => {
     return (
-        <Modal open={open} onClose={onClose} >
-            {/* <Box sx={modalStyles.wrapper}> */}
-            <div>
-                <Typography
-                    variant="h6"
-                    component="h2"
-                >
-                    {title}
-                </Typography>
-                <Typography sx={{ mt: 2 }}>
-                    {subTitle}
-                </Typography>
+        <div>
+        <Modal open={open} onClose={onClose}>
+            <div className='content-container'>
                 {content}
-                {/* <Box sx={modalStyles.buttons}> */}
-                    {/* <CommonButton
-                        variant="contained"
-                        onClick={onSubmit}
-                    >
-                        Submit
-                    </CommonButton>
-                    <CommonButton onClick={onClose}>Cancel</CommonButton> */}
-                {/* </Box> */}
-            {/* </Box> */}
             </div>
         </Modal>
+        </div>
     )
 }
 

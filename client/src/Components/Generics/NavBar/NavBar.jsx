@@ -28,17 +28,17 @@ function Navbar() {
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/booking" className={"nav-links"}>
+            <NavLink to="/visualmap" className={"nav-links"}>
               Booking
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/visualmap" className={"nav-links"}>
-              Visual Map
-            </NavLink>
+            <NavLink to="/notification" className={"nav-links"}>
+              Notification
+              </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/mybookings" className={"nav-links"}>
+          <NavLink to="/mybookings" className={"nav-links"}>
               My Bookings
             </NavLink>
           </li>

@@ -1,18 +1,23 @@
 import React, { useState } from "react";
 import "./loginForm.css";
 import userClient from "../../Services/userClient";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginRes, setloginRes] = useState(null);
+  let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(username, password);
     const res = await userClient.login(username, password);
     if (res) {
-      setloginRes(res);
+      if (username === res) {
+        navigate('/mybookings');
+      }
+      else {setloginRes(res)};
     }
   };
 
@@ -20,7 +25,7 @@ const LoginForm = () => {
     <div className="center login-center">
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
-        <div className="txt_field">
+        <div className="login-txt_field">
           <input
             type="text"
             onChange={(e) => setUsername(e.target.value)}
@@ -29,7 +34,7 @@ const LoginForm = () => {
           <span></span>
           <label>Username</label>
         </div>
-        <div className="txt_field">
+        <div className="login-txt_field">
           <input
             type="password"
             onChange={(e) => setPassword(e.target.value)}
@@ -38,7 +43,7 @@ const LoginForm = () => {
           <span></span>
           <label>Password</label>
         </div>
-        <input type="submit" />
+        <input className="login-submit" type="submit" />
       </form>
       <div>
         {loginRes && (

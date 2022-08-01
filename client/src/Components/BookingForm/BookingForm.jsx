@@ -7,7 +7,6 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import "./bookingForm.css";
 import bookingClient from "../../Services/bookingClient";
-import { set } from "date-fns";
 import { useNavigate } from "react-router-dom";
 
 const BookingForm = ({officeId,bookingPlace}) => {
@@ -21,7 +20,6 @@ const BookingForm = ({officeId,bookingPlace}) => {
   let navigate = useNavigate();
   console.log(officeId,"officeId");
   console.log(typeof(bookingPlace),"bookingPlace");
-
   const getAvailableHours = async (
     officeId,
     bookingPlace,
@@ -64,32 +62,28 @@ const BookingForm = ({officeId,bookingPlace}) => {
     if (isStartHour && startHour !== -1) {
       setIsEndHour(false);
       const a = calcAvailableEndHours();
-      console.log("calc av end h" + a);
       setAvailableEndHours(a);
-      console.log("end av hours2" + availableEndHours);
     }
   }, [isStartHour, startHour]);
 
-  const whenSubmit = () => { //need to fix
-    navigate('/');
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      isStartHour && isEndHour
-        ? 
-          await bookingClient.addBooking(
-            officeId,
-            bookingPlace,
-            startDate,
-            endDate
-          )
-        :
-         alert("Booking Failed. You must enter start date and end date");
-    } catch {
-      console.err("err");
+    if (isStartHour && isEndHour) {
+      try {
+            await bookingClient.addBooking(
+              officeId,
+              bookingPlace,
+              startDate,
+              endDate
+            )
+          
+      } catch {
+        console.err("err");
+      }
+      alert('Booking success!');
+      navigate('/mybookings');
     }
+    else { alert("Booking Failed. You must enter start date and end date"); }
   };
 
   const convertToDropdownComp = (hoursArray) => {

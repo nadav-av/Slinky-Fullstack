@@ -1,6 +1,7 @@
 const express = require("express");
 const users = require("./server/routes/users");
-const booking = require("./server/routes/booking/booking");
+const notifications = require("./server/routes/notification/notification");
+const booking = require("./server/routes/Booking/booking");
 const logger = require("./server/middleware/logger.js");
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -13,6 +14,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logger);
 app.use("/booking", booking);
 app.use("/users", users);
+app.use("/notifications", notifications);
+
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
 
 const port = process.env.PORT || "3042";
 
