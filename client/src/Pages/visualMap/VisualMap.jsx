@@ -5,7 +5,9 @@ import VisualMapForm from "../../Components/mapForm/MapForm";
 const VisualMap = () => {
   return (
     <div className="map-container">
-      <VisualMapForm />
+      <div className="map-glass">
+        <VisualMapForm />
+      </div>
     </div>
   );
 };
