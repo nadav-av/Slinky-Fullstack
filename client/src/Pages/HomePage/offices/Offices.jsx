@@ -6,7 +6,7 @@ import office_3 from "../../../Components/OfficeForm/offices-images/gav-yam1.jpg
 
 const Offices = () => {
     return (
-        <div className="wrapper">
+        <div className="office-container">
             <div className="header">
                 <h1>Our Offices</h1>
             </div>
