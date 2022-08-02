@@ -84,10 +84,10 @@ const UserBookingTable = () => {
   const showNoBookings = () => {
     return (
       <>
-        <div className="img-div">
-          <img src={noBooksPhoto} className="img-not-found" alt="no-bookings" />
+        <div className="empty-table-container">
+          <i className="fa-solid fa-hourglass empty-table-icon"></i>
         </div>
-        <h2>You don't have orders yet</h2>
+        <h3>You don`t have any upcoming bookings</h3>
       </>
     );
   };
@@ -99,9 +99,23 @@ const UserBookingTable = () => {
       <div className="user-booking-table">
         <>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-            <Tabs value={value} onChange={handleChange}>
-              <Tab label="Future Orders" />
-              <Tab label="Past Orders" />
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              TabIndicatorProps={{
+                style: {
+                  backgroundColor: "#A77BCA",
+                },
+              }}
+            >
+              <Tab
+                label="Future Orders"
+                style={{ color: "#A77BCA", width: "200px" }}
+              />
+              <Tab
+                label="Past Orders"
+                style={{ color: "#A77BCA", width: "200px" }}
+              />
             </Tabs>
           </Box>
           <TabPanel value={value} index={0}>
