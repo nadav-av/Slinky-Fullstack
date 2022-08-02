@@ -50,7 +50,7 @@ const TableBody = ({ tableData, columns, userBookings, setUserBookings }) => {
     return parsedBookings;
   };
 
-  const newTableData=parseUserBookings(tableData);
+  const newTableData= parseUserBookings(tableData);
 
   return (
     <tbody>

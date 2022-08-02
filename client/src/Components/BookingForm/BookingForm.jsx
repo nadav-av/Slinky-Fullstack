@@ -8,6 +8,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import "./bookingForm.css";
 import bookingClient from "../../Services/bookingClient";
 import { useNavigate } from "react-router-dom";
+import confetti from "canvas-confetti";
 
 const BookingForm = ({officeId,bookingPlace}) => {
   const [startDate, setStartDate] = useState(new Date());
@@ -78,8 +79,10 @@ const BookingForm = ({officeId,bookingPlace}) => {
       } catch {
         console.err("err");
       }
-      alert('Booking success!');
       navigate('/mybookings');
+      setTimeout(() => {
+        confetti();
+      }, 500); 
     }
     else { alert("Booking Failed. You must enter start date and end date"); }
   };
