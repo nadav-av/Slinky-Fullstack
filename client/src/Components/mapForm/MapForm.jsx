@@ -26,8 +26,15 @@ const MapForm = (office) => {
   }
 
   const map2 = () => {
+    console.log('map2')
+    const officePosition = ["o7","o8","o9"];
     return (
-      null /****************/
+      <div id="map2">
+        {officePosition.map((element) =>       
+         <button className="btn" id={element} key={element} onClick={()=> getBooking(officeId,element)}>{element}</button>
+        )}
+      </div> 
+      //null /****************/
     )
   }
 
@@ -42,7 +49,7 @@ const MapForm = (office) => {
       <div className="map-center">
       <h1>Choose your seat:</h1>
         {(officeId === 1)? map1():null}
-        {(officeId === 1)? map2():null}
+        {(officeId === 2)? map2():null}
       </div>
 
     }

@@ -15,11 +15,6 @@ const OfficeForm = () => {
         setIsOpenModal(true);
     };
 
-
-    /*const handleClick = (officeId) => {
-        console.log(officeId); //need to move to bookingMap with office param
-    }*/
-
     return (
         <div>
             {isOpenModal === true ? 
@@ -39,7 +34,7 @@ const OfficeForm = () => {
                     <h3>Rubinshtein Twin Towers</h3>
                     <span>Yitzhak-sadeh 6, Tel Aviv, Floor 35</span>
                     <p>Modern open-space and offices.
-                    includes eight open-space seats, three personal offices, two small rooms and one conference room.</p>
+                    Includes eight open-space seats, three personal offices, two small rooms and one conference room.</p>
                     </div>
                     <div className="office_option" onClick={()=>{getOffice(2)}}>
                     <div className="office_img">
@@ -47,13 +42,15 @@ const OfficeForm = () => {
                     </div>
                     <h3>Azrieli Square Tower</h3>
                     <span>Menahem Begin 132, Tel Aviv, Floor 26</span>
-                    <p>write something about office</p>
+                    <p>Boutiqe offices in Tel-aviv, Nearby Hashalom train station.
+                    Includes two personal offices and one conference room.
+                    </p>
                 </div>
                     <div className="office_option soon">
                     <div className="office_img">
                         <img src={office_3} alt="office"/>
                     </div>
-                    <h3>Gav Yam Center</h3>
+                    <h3>Gav-Yam <div>Center</div></h3>
                     <span>Maskit 12, Herzliya</span>
                     <p>Coming Soon...</p>
                 </div>

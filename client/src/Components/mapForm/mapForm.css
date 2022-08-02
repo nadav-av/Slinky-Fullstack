@@ -137,3 +137,28 @@ width: 660px;
     border-radius: 10px;
     box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
   }
+
+  #map2{
+    background-image:url("./office2.jpg");
+    height: 550px;
+    width: 660px;
+    background-repeat: no-repeat;
+    }
+    #o7{
+        position: absolute;
+        top: 50px;
+        left: 0px;
+        padding: 120px 84px;
+    }
+    #o8{
+        position: absolute;
+        top: 50px;
+        left: 190px;
+        padding: 120px 76px;
+    }
+    #o9{
+        position: absolute;
+        top: 50px;
+        left: 360px;
+        padding: 262px 140px;
+    }
