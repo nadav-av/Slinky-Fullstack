@@ -46,7 +46,7 @@ const App = () => {
             <Route path="/booking" element={<BookingForm />} />
             <Route path="/notification" element={<Notification />} />
             <Route path="/mybookings" element={<UserBooking />} />
-            <Route path="/officeForm" element={<OfficePage />} />
+            <Route path="/book" element={<OfficePage />} />
           </Routes>
         </div>
         {console.log(process.env.REACT_APP_SERVER_URL)}

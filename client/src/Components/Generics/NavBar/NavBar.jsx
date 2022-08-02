@@ -69,8 +69,8 @@ function NavBar({ loggedIn }) {
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink
-            to="/visualmap"
+          <NavLink /***************************************************************************/
+            to="/Book"
             className={({ isActive }) =>
               "nav-links" + (isActive ? " activated" : "")
             }
@@ -99,17 +99,6 @@ function NavBar({ loggedIn }) {
             onClick={handleClick}
           >
             My Bookings
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink /***************************************************************************/
-            to="/officeForm"
-            className={({ isActive }) =>
-              "nav-links" + (isActive ? " activated" : "")
-            }
-            onClick={handleClick}
-          >
-            Office Form
           </NavLink>
         </li>
         <li className="nav-item">
@@ -145,3 +134,17 @@ function NavBar({ loggedIn }) {
 }
 
 export default NavBar;
+
+/*
+<li className="nav-item">
+          <NavLink
+            to="/visualmap"
+            className={({ isActive }) =>
+              "nav-links" + (isActive ? " activated" : "")
+            }
+            onClick={handleClick}
+          >
+            Book
+          </NavLink>
+        </li>
+        */
