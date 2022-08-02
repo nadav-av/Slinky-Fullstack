@@ -12,7 +12,7 @@ import UserBooking from "./Pages/UserBookings/UserBookings";
 import HomePage from "./Pages/HomePage/HomePage";
 import Notification from "./Pages/NotificationPage/Notification";
 import userClient from "./Services/userClient";
-import OfficePage from "./Pages/OfficePage/OfficePage"; /*********************************** */
+import OfficePage from "./Pages/OfficePage/OfficePage";
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 

@@ -69,7 +69,7 @@ function NavBar({ loggedIn }) {
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink /***************************************************************************/
+          <NavLink
             to="/Book"
             className={({ isActive }) =>
               "nav-links" + (isActive ? " activated" : "")
