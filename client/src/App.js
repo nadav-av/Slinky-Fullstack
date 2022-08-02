@@ -12,7 +12,7 @@ import UserBooking from "./Pages/UserBookings/UserBookings";
 import HomePage from "./Pages/HomePage/HomePage";
 import Notification from "./Pages/NotificationPage/Notification";
 import userClient from "./Services/userClient";
-import OfficeForm from "./Components/OfficeForm/OfficeForm"; /**************************************/
+import OfficePage from "./Pages/OfficePage/OfficePage"; /*********************************** */
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -46,7 +46,7 @@ const App = () => {
             <Route path="/booking" element={<BookingForm />} />
             <Route path="/notification" element={<Notification />} />
             <Route path="/mybookings" element={<UserBooking />} />
-            <Route path="/officeForm" element={<OfficeForm />} />
+            <Route path="/officeForm" element={<OfficePage />} />
           </Routes>
         </div>
         {console.log(process.env.REACT_APP_SERVER_URL)}
