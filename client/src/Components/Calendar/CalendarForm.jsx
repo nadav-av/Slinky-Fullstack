@@ -1,4 +1,4 @@
-import React,{ useState,useEffect } from "react";
+import React,{ useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -7,12 +7,14 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import "@fullcalendar/daygrid/main.css";
 //import "@fullcalendar/timegrid/main.css";
 import "./calendarForm.css";
+import { previousDay } from "date-fns/esm";
 
 
 const CalendarForm = () => {
     const [bookingsByDate,setBookingsByDate] = useState([]);
 
     const getDayEvents = (/*date*/) => { //mock
+        console.log('in get day events');
         setBookingsByDate ([
             {
                 title  : 'event1',
@@ -30,10 +32,6 @@ const CalendarForm = () => {
         return array;
     }
 
-    useEffect(() => {
-        getDayEvents();
-    }, []);
-
     return (
         <div className="calendar-container">
         <div className="calendar-glass">
@@ -50,6 +48,9 @@ const CalendarForm = () => {
                 height={'80%'}
                 allDaySlot={false}
                 events={pharseToFullCalendarView(bookingsByDate)}
+                datesSet={ function() {
+                    getDayEvents()
+                    }}
           />
         </div>
         </div>
