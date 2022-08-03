@@ -13,6 +13,8 @@ import HomePage from "./Pages/HomePage/HomePage";
 import Notification from "./Pages/NotificationPage/Notification";
 import userClient from "./Services/userClient";
 import OfficePage from "./Pages/OfficePage/OfficePage";
+import StatisticsPage from "./Pages/StatisticsPage/statistics";
+
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -47,6 +49,7 @@ const App = () => {
             <Route path="/notification" element={<Notification />} />
             <Route path="/mybookings" element={<UserBooking />} />
             <Route path="/book" element={<OfficePage />} />
+            <Route path="/statistics" element = { <StatisticsPage/>}/>
           </Routes>
         </div>
       </div>
