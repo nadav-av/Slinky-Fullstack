@@ -16,26 +16,26 @@ const CalendarForm = () => {
         setBookingsByDate (dayEvents)
     };
 
-    const parseToFullCalendarView = (array) => { //mock
+    const parseToFullCalendarView = (array) => {
         return array.map((obj) => {
             const newObj = {};
             newObj.title = obj.userName + ' - office ' + obj.officeId + ' - seat ' + obj.bookingPlace;
             newObj.start = obj.start;
             newObj.end = obj.end;
-            newObj.color = getColor(obj.userName);
+            newObj.color = getColor(obj.bookingPlace);
             return newObj;
         })
     }
 
-    const getColor = (userName) => {
-        const index = colorsTable.findIndex((val) => {return val.userName === userName})
+    const getColor = (bookingPlace) => {
+        const index = colorsTable.findIndex((val) => {return val.bookingPlace === bookingPlace})
         if (index !== -1) {
             return colorsTable[index].color
         }
         else {
             if (listOfColors !== undefined) {
                 const color = listOfColors.pop();
-                colorsTable.push({userName: userName, color: color})
+                colorsTable.push({bookingPlace: bookingPlace, color: color})
                 return color;
             }
         }
