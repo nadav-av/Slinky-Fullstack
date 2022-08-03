@@ -12,6 +12,8 @@ import UserBooking from "./Pages/UserBookings/UserBookings";
 import HomePage from "./Pages/HomePage/HomePage";
 import Notification from "./Pages/NotificationPage/Notification";
 import userClient from "./Services/userClient";
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
