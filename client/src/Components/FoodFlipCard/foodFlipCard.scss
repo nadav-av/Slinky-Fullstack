@@ -35,7 +35,7 @@
     
         &.front {
           transform: rotateY(0);
-            background: rgba(167, 123, 202, 0.26);
+          background:linear-gradient(135deg, #f65599 0%,#4d0316 100%);
             border-radius: 16px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(20px);

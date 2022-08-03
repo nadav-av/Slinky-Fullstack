@@ -1,11 +1,27 @@
-//food order form includes text to elaborate the food order form
-const FoodOrderForm = (props) => {
+import React, { useState } from "react";
+import "./foodOrderForm.css";
+
+const FoodOrderForm = ({ submitOrder }) => {
+  const [foodOrder, setFoodOrder] = useState();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("foodOrder", foodOrder);
+  };
+
   return (
-    <div className="food-order-form">
-      <div className="food-order-form-header">
-        <h3>What you want to eat</h3>
-        <textarea name="" id="" cols="30" rows="10"></textarea>
-      </div>
+    <div className="center food-order-center">
+      <h1 className="food-order-header">What do you want to eat</h1>
+      <form onSubmit={handleSubmit}>
+        <textarea
+          className="food-order-text-area"
+          type="text"
+          onChange={(e) => setFoodOrder(e.target.value)}
+          required
+        />
+        <span></span>
+        <input className="food-order-submit" type="submit" />
+      </form>
     </div>
   );
 };

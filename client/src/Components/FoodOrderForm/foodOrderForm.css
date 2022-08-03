@@ -1,0 +1,39 @@
+.food-order-center
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+
+.food-order-text-area
+{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 340px;
+    height: 200px;
+    background-color: #d9e4f5;
+    backdrop-filter: blur(5px);
+    margin-bottom: 30px;
+    resize: none;
+}
+
+.food-order-header
+{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    padding: 20px;
+}
