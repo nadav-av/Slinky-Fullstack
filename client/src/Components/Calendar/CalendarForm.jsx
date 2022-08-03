@@ -2,10 +2,7 @@ import React,{ useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
-//import interactionPlugin from "@fullcalendar/interaction";
-//import "@fullcalendar/core/main.css";
 import "@fullcalendar/daygrid/main.css";
-//import "@fullcalendar/timegrid/main.css";
 import "./calendarForm.css";
 import bookingClient from "../../Services/bookingClient";
 
@@ -18,8 +15,14 @@ const CalendarForm = () => {
         setBookingsByDate (dayEvents)
     };
 
-    const pharseToFullCalendarView = (array) => { //mock
-        return array;
+    const parseToFullCalendarView = (array) => { //mock
+        return array.map((obj) => {
+            const newObj = {};
+            newObj.title = obj.userName + ' - office ' + obj.officeId + ' - seat ' + obj.bookingPlace;
+            newObj.start = obj.start;
+            newObj.end = obj.end;
+            return newObj;
+        })
     }
 
     return (
@@ -37,7 +40,7 @@ const CalendarForm = () => {
                 initialView= 'timeGridDay'
                 height={'80%'}
                 allDaySlot={false}
-                events={pharseToFullCalendarView(bookingsByDate)}
+                events={parseToFullCalendarView(bookingsByDate)}
                 datesSet={ function() {
                     getDayEvents(this.getDate())
                     }}
