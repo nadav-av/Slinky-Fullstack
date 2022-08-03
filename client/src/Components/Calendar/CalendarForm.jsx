@@ -7,25 +7,15 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import "@fullcalendar/daygrid/main.css";
 //import "@fullcalendar/timegrid/main.css";
 import "./calendarForm.css";
-import { previousDay } from "date-fns/esm";
-
+import bookingClient from "../../Services/bookingClient";
 
 const CalendarForm = () => {
     const [bookingsByDate,setBookingsByDate] = useState([]);
 
-    const getDayEvents = (/*date*/) => { //mock
-        console.log('in get day events');
-        setBookingsByDate ([
-            {
-                title  : 'event1',
-                date    : new Date()
-            },
-            {
-                title  : 'event2',
-                start  : new Date(),
-                /*end    : '2022-03-08T06:30:00',*/
-            },
-        ])
+    const getDayEvents =async (date) => {
+        const dayEvents = await bookingClient.getDayBookings(date);
+        console.log('calendar form '+JSON.stringify(dayEvents))
+        setBookingsByDate (dayEvents)
     };
 
     const pharseToFullCalendarView = (array) => { //mock
@@ -39,9 +29,9 @@ const CalendarForm = () => {
             
             <FullCalendar
                 headerToolbar={{
-                    start: 'today', 
+                    start: 'prev,next', 
                     center: 'title',
-                    end: 'prev,next'
+                    end: 'today'
                   }}
                 plugins={[timeGridPlugin]}
                 initialView= 'timeGridDay'
@@ -49,7 +39,7 @@ const CalendarForm = () => {
                 allDaySlot={false}
                 events={pharseToFullCalendarView(bookingsByDate)}
                 datesSet={ function() {
-                    getDayEvents()
+                    getDayEvents(this.getDate())
                     }}
           />
         </div>
@@ -59,15 +49,3 @@ const CalendarForm = () => {
 };
 
 export default CalendarForm;
-
-/*
-FullCalendar
-                plugins={[ dayGridPlugin ]}
-                initialView="dayGridMonth"
-            />
-
-            ref={this.calendarComponentRef}
-            weekends={this.state.calendarWeekends}
-            events={this.state.calendarEvents}
-            dateClick={this.handleDateClick}
-            */

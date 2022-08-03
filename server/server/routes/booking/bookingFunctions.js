@@ -105,6 +105,28 @@ async function getBookingByDateAndPlace(req, res) {
   }
 }
 
+async function getBookingByDate(req, res) {
+  try {
+    const { date } = req.body;
+    const newDate = new Date(date);
+    const listOfBookings = await BookingManager.getBookingByDate(
+      newDate
+    );
+    const bookedHours = listOfBookings.map((bookingOrder) => {
+      return {
+        officeId: bookingOrder.officeId,
+        bookingPlace: bookingOrder.bookingPlace,
+        userName: bookingOrder.userName,
+        start: bookingOrder.startDate,
+        end: bookingOrder.endDate,
+      };
+    });
+    res.status(200).send(JSON.stringify(bookedHours));
+  } catch (error) {
+    errorHandler(error, res);
+  }
+}
+
 module.exports = {
   createBooking,
   getAllBookings,
@@ -113,4 +135,5 @@ module.exports = {
   updateBooking,
   getBookingOfOfficeByPlaceArea,
   getBookingByDateAndPlace,
+  getBookingByDate,
 };
