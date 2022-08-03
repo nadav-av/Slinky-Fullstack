@@ -70,7 +70,7 @@ function NavBar({ loggedIn }) {
         </li>
         <li className="nav-item">
           <NavLink
-            to="/visualmap"
+            to="/Book"
             className={({ isActive }) =>
               "nav-links" + (isActive ? " activated" : "")
             }
@@ -146,3 +146,17 @@ function NavBar({ loggedIn }) {
 }
 
 export default NavBar;
+
+/*
+<li className="nav-item">
+          <NavLink
+            to="/visualmap"
+            className={({ isActive }) =>
+              "nav-links" + (isActive ? " activated" : "")
+            }
+            onClick={handleClick}
+          >
+            Book
+          </NavLink>
+        </li>
+        */

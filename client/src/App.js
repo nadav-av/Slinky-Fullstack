@@ -12,7 +12,11 @@ import UserBooking from "./Pages/UserBookings/UserBookings";
 import HomePage from "./Pages/HomePage/HomePage";
 import Notification from "./Pages/NotificationPage/Notification";
 import userClient from "./Services/userClient";
+<<<<<<< HEAD
 import FoodOrder from "./Pages/FoodOrder/FoodOrder";
+=======
+import OfficePage from "./Pages/OfficePage/OfficePage";
+>>>>>>> 20e4c362aa4ba72d826f8c32964b978f149b2838
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -47,6 +51,7 @@ const App = () => {
             <Route path="/notification" element={<Notification />} />
             <Route path="/mybookings" element={<UserBooking />} />
             <Route path="/orderfood" element={<FoodOrder />} />
+            <Route path="/book" element={<OfficePage />} />
           </Routes>
         </div>
         {console.log(process.env.REACT_APP_SERVER_URL)}
