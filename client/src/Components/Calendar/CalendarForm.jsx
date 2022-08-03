@@ -8,10 +8,11 @@ import bookingClient from "../../Services/bookingClient";
 
 const CalendarForm = () => {
     const [bookingsByDate,setBookingsByDate] = useState([]);
+    const colorsTable =[];
+    const listOfColors = ['red','yellow','blue','pink','navy','purple','orange','green']
 
     const getDayEvents =async (date) => {
         const dayEvents = await bookingClient.getDayBookings(date);
-        console.log('calendar form '+JSON.stringify(dayEvents))
         setBookingsByDate (dayEvents)
     };
 
@@ -21,8 +22,23 @@ const CalendarForm = () => {
             newObj.title = obj.userName + ' - office ' + obj.officeId + ' - seat ' + obj.bookingPlace;
             newObj.start = obj.start;
             newObj.end = obj.end;
+            newObj.color = getColor(obj.userName);
             return newObj;
         })
+    }
+
+    const getColor = (userName) => {
+        const index = colorsTable.findIndex((val) => {return val.userName === userName})
+        if (index !== -1) {
+            return colorsTable[index].color
+        }
+        else {
+            if (listOfColors !== undefined) {
+                const color = listOfColors.pop();
+                colorsTable.push({userName: userName, color: color})
+                return color;
+            }
+        }
     }
 
     return (
