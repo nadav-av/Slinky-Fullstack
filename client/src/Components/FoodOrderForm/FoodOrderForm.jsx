@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./foodOrderForm.css";
-import userClient from "../../Services/userClient";
 import foodOrderClient from "../../Services/foodOrderClient";
 import { useNavigate } from "react-router-dom";
 import confetti from "canvas-confetti";
@@ -9,6 +8,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
+import { useSelector } from "react-redux";
 
 const FoodOrderForm = ({
   resturant,
@@ -16,6 +16,8 @@ const FoodOrderForm = ({
   setNamesAndOrders,
   setIsModalShown,
 }) => {
+  const myUser = useSelector((state) => state.user.user);
+
   let navigate = useNavigate();
   const [foodOrder, setFoodOrder] = useState();
   const [orderOffice, setOrderOffice] = useState();
@@ -26,7 +28,6 @@ const FoodOrderForm = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const myUser = await userClient.getUser();
     const newFoodOrder = {
       firstName: myUser.firstName,
       lastName: myUser.lastName,
