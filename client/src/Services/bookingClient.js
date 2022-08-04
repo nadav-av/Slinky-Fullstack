@@ -4,9 +4,11 @@ class bookingClient {
   }
 
   async getAvailableStartHours(officeId, bookingPlace, startDate, endDate) {
-    let availableHours = new Array(24);
-    for (let i = 0; i < 24; i++) {
-      availableHours[i] = i;
+    const officeStartHour = 0;
+    const officeEndHour = 24;
+    let availableHours = new Array(officeEndHour-officeStartHour);
+    for (let i = 0; i < officeEndHour-officeStartHour; i++) {
+      availableHours[i] = i+officeStartHour;
     }
 
     const takenHours = await this.getTakenHours(officeId, bookingPlace, startDate, endDate);
@@ -19,7 +21,6 @@ class bookingClient {
         }
       });
     }
-    console.log("availableHours is : ", availableHours);
     return availableHours;
   }
 
