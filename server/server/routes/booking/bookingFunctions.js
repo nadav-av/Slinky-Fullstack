@@ -87,18 +87,12 @@ async function getBookingByDateAndPlace(req, res) {
     const { officeId, bookingPlace, startDate, endDate } = req.body;
     const newStartDate = new Date(startDate);
     const newEndDate = new Date(endDate);
-    const listOfBookings = await BookingManager.getBookingByDateAndPlace(
+    const bookedHours = await BookingManager.getBookingByDateAndPlace(
       officeId,
       bookingPlace,
       newStartDate,
       newEndDate
     );
-    const bookedHours = listOfBookings.map((bookingOrder) => {
-      return {
-        startHour: bookingOrder.startDate.getHours(),
-        endHour: bookingOrder.endDate.getHours(),
-      };
-    });
     res.status(200).send(JSON.stringify(bookedHours));
   } catch (error) {
     errorHandler(error, res);

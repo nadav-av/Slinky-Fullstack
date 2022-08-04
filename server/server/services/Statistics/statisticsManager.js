@@ -1,9 +1,7 @@
-const BookingManagerValidator = require("../booking/bookingManagerValidation");
 const BookingDatabaseManage = require("../booking/bookingDatabaseManage");
 
 class StatisticsManager {
   constructor() {
-    this.bookingManagerValidator = new BookingManagerValidator();
     this.bookingDatabase = new BookingDatabaseManage();
   }
   async mostBookedPlace(officeId) {
@@ -12,19 +10,25 @@ class StatisticsManager {
         console.log("did??");
         return "There is no bookings yet for this office";
     }
-    allBookings.sort((firstBookedPlace, secondBookedPlace) => {
-      const first = firstBookedPlace.bookingPlace;
-      const second = secondBookedPlace.bookingPlace;
+    const newAllBookings = this._sortBookingByBookingPlace(allBookings);
+    return this._maxAppearanceOfPlace(newAllBookings);
+  }
 
-      if (first < second) {
-        return -1;
-      }
-      if (first > second) {
-        return 1;
-      }
-      return 0;
-    });
-    return this._maxAppearanceOfPlace(allBookings);
+  _sortBookingByBookingPlace(allBookings){
+    const newAllBookings = [...allBookings];
+    newAllBookings.sort((firstBookedPlace, secondBookedPlace) => {
+        const first = firstBookedPlace.bookingPlace;
+        const second = secondBookedPlace.bookingPlace;
+  
+        if (first < second) {
+          return -1;
+        }
+        if (first > second) {
+          return 1;
+        }
+        return 0;
+      });
+      return newAllBookings;
   }
 
   _maxAppearanceOfPlace(bookingsArr) {
@@ -78,6 +82,17 @@ class StatisticsManager {
         bookedOfficeIdArrWithCounter.push({"officeId":allBookings[i-1].officeId, "booked":counter});
     }
     return bookedOfficeIdArrWithCounter;
+  }
+
+  async compareTwoDates(officeId, date1, date2){
+    const allBookingsOfDate1 = await this.bookingDatabase.getBookingByDateAndOfficeId(officeId, date1);
+    const allBookingsOfDate2 = await this.bookingDatabase.getBookingByDateAndOfficeId(officeId, date2);
+    const newAllBookingsOfDate1 = this._sortBookingByBookingPlace(allBookingsOfDate1);
+    const newAllBookingsOfDate2 = this._sortBookingByBookingPlace(allBookingsOfDate2);
+    const bookedDate1 = this._maxAppearanceOfPlace(newAllBookingsOfDate1);
+    const bookedDate2 = this._maxAppearanceOfPlace(newAllBookingsOfDate2);
+    const returnedObject = {"firstDate": bookedDate1, "secondDate": bookedDate2};
+    return returnedObject;
   }
 }
 

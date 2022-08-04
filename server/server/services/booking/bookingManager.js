@@ -63,12 +63,19 @@ class BookingManager {
     return await this.bookingDatabase.getAllBookings(officeId);
   }
   async getBookingByDateAndPlace(officeId, bookingPlace, startDate, endDate) {
-    return await this.bookingDatabase.getBookingByDateAndPlace(
+    const allBookings = await this.bookingDatabase.getBookingByDateAndPlace(
       officeId,
       bookingPlace,
       startDate,
       endDate
     );
+    const bookedHours = allBookings.map((bookingOrder) => {
+      return {
+        startHour: bookingOrder.startDate.getHours(),
+        endHour: bookingOrder.endDate.getHours(),
+      };
+    });
+    return bookedHours;
   }
 }
 

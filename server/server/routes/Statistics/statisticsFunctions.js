@@ -24,7 +24,21 @@ async function mostBookedOfficeId(req, res){
       }
 }
 
+async function compareTwoDatesOfOffice(req, res){
+    try {
+        const { officeId, date1, date2 } = req.params;
+        const newDate1 = new Date(date1);
+        const newDate2 = new Date(date2);
+        const returnedStatistics = await StatisticsManager.compareTwoDates(officeId, newDate1, newDate2);
+        res.status(200).send(JSON.stringify(returnedStatistics));
+        res.end();
+      } catch (error) {
+        errorHandler(error, res);
+      }
+}
+
 module.exports = {
     mostBookedPlace,
-    mostBookedOfficeId
+    mostBookedOfficeId,
+    compareTwoDatesOfOffice
 };

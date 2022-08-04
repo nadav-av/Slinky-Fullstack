@@ -1,6 +1,6 @@
 class bookingClient {
   constructor() {
-    this.url = process.env.REACT_APP_SERVER_URL || "http://localhost:3042/booking";
+    this.url = process.env.REACT_APP_SERVER_URL || "http://localhost:3042";
   }
 
   async getAvailableStartHours(officeId, bookingPlace, startDate, endDate) {
@@ -24,7 +24,7 @@ class bookingClient {
 
   async getTakenHours(officeId, bookingPlace, startDate, endDate) {
     const userJWTToken = localStorage.getItem("x-auth-token");
-    const response = await fetch((this.url+"/all-booking-by-date-and-place"),
+    const response = await fetch((this.url+"/booking/all-booking-by-date-and-place"),
       {
         method: "POST",
         headers: {
@@ -46,7 +46,7 @@ class bookingClient {
 
   async addBooking(officeId, bookingPlace, startDate, endDate) {
     const userJWTToken = localStorage.getItem("x-auth-token");
-    const response = await fetch(this.url+"/",
+    const response = await fetch(this.url+"/booking/",
       {
         method: "POST",
         headers: {
@@ -66,7 +66,7 @@ class bookingClient {
 
   async deleteBooking(bookId, officeId) {
     const userJWTToken = localStorage.getItem("x-auth-token");
-    const response = await fetch(this.url+"/",
+    const response = await fetch(this.url+"/booking/",
       {
         method: "DELETE",
         headers: {

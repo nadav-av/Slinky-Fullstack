@@ -109,6 +109,38 @@ class BookingDatabaseManage {
       throw createNewErrorFromDatabaseError(error);
     }
   };
+  getBookingByDateAndOfficeId = async(officeId, date) => {
+    try {
+      const startDateLimit = new Date(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate(),
+        0,
+        0,
+        0,
+        0
+      );
+      const endDateLimist = new Date(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate() + 1,
+        0,
+        0,
+        0,
+        0
+      );
+      const bookingByDateAndOfficeId = Booking.findAll({
+        where: {
+          officeId,
+          startDate: { [Op.gt]: startDateLimit },
+          endDate: { [Op.lt]: endDateLimist },
+        },
+      });
+      return bookingByDateAndOfficeId;
+    } catch(error){
+      throw createNewErrorFromDatabaseError(error);
+    }
+  }
 }
 
 module.exports = BookingDatabaseManage;
