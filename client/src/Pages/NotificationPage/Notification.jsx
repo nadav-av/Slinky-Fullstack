@@ -40,15 +40,21 @@ const toggle = () => setModal(!modal);
      {modal === true ? 
     <GenericModal open ={modal} onClose ={()=> {setModal(false)}} content={<CreateTask toggle ={toggle} modal ={modal}/>}/>
     :
+    <>
+    <div className = "header text-center">
+    <h1 id="board-title-txt">Notification board</h1>
+    <br></br>
+    <button className="btn btn-primary mt-2" id="create-btn" onClick={() => setModal(true)}> Create notification</button>
+    </div>
     <div className="notification-container">
-      <button className="btn btn-primary mt-2" onClick={() => setModal(true)}> Create Task </button>
 
       <div className="notification-container-array">
-      {data.map((element) =>       
-         <NotificationForm data={element} key={element.userName}></NotificationForm>
+      {data.map((element,index) =>       
+         <NotificationForm data={element} index = {index} key={element.userName} ></NotificationForm>
       )}
       </div>
     </div>
+    </>
       }
     </>
   );

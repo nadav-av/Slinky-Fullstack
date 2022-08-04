@@ -7,7 +7,6 @@ class NotificationDatabaseManage {
 
     try {
       const data = await Notification.findAll();
-      console.log('in getAllNotification 3'+ data);
 
       return data;
 
@@ -28,13 +27,16 @@ class NotificationDatabaseManage {
       throw createNewErrorFromDatabaseError(error);
     }
   };
-  deleteNotification = async (notificationId, officeId, madeBy) => {
+  deleteNotification = async (notificationId, madeBy) => {
+    console.log('in db man', notificationId);
     try {
       const del = await Notification.destroy({
-        where: { id: notificationId, officeId, madeBy },
+        where: { id: notificationId, madeBy },
       });
+      console.log("IWAS DELETED:",del);
       return del;
     } catch (error) {
+      console.log("THERE WAS ERROR =====> ",error);
       throw createNewErrorFromDatabaseError(error);
     }
   };

@@ -10,7 +10,7 @@ const CreateTask =({modal,toggle}) =>{
   const [officeId, setOfficeId] = useState(1);
   const [category, setCategory] = useState("idea");
   let offices = [{value:1,label:"1"},{value:2,label:"2"},{value:3,label:"3"}]
-  let categories = [{value:"idea",label:"idea"},{value:"note",label:"note"},{value:"announcment",label:"announcment"}]
+  let categories = [{value:"problem",label:"problem"},{value:"idea",label:"idea"},{value:"note",label:"note"},{value:"announcment",label:"announcment"},{value:"emergancy",label:"emergancy"}]
 
   const addNotification = async (e) => {
        try {
@@ -24,7 +24,6 @@ const CreateTask =({modal,toggle}) =>{
       console.err("err");
       alert("Notification Failed.");
     }
-    
   }
     return(
         <>
@@ -64,11 +63,11 @@ const CreateTask =({modal,toggle}) =>{
         <br></br>
         <FormControl>
         <TextareaAutosize
-            minRows={3}
-            maxRows={6}
+            minRows={2}
+            maxRows={4}
             aria-label="maximum height"
             placeholder="Content"
-            style={{ width: 190 }}
+            style={{ width: 250 }}
             onChange={(e) => setContent(e.target.value)}
         />
       </FormControl>

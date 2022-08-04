@@ -16,13 +16,13 @@ class NotificationManager {
   }
   async getAllNotification() {
     console.log('in getAllNotification 2');
-    console.log('in getAllNotification 2'+ await this.notificationDatabase.getAllNotification());
 
     return await this.notificationDatabase.getAllNotification();
   }
-  async deleteNotification(notificationId, officeId, madeBy) {
+  async deleteNotification(notificationId, madeBy) {
+    console.log('not manager id', notificationId);
     return await this.notificationDatabase.deleteNotification(
-        notificationId, officeId, madeBy
+        notificationId, madeBy
     );
   }
   async updateNotification(notificationId, content, madeBy, category) {
