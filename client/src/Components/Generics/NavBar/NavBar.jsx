@@ -115,6 +115,17 @@ function NavBar({ loggedIn }) {
         </li>
         <li className="nav-item">
           <NavLink
+            to="/calendar"
+            className={({ isActive }) =>
+              "nav-links" + (isActive ? " activated" : "")
+            }
+            onClick={handleClick}
+          >
+            Calendar
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink
             to="/"
             className={({ isActive }) =>
               "nav-links" + (isActive ? " activated" : "")

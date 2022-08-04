@@ -32,10 +32,10 @@ class BookingDatabaseManage {
       throw createNewErrorFromDatabaseError(error);
     }
   };
-  deleteBooking = async (bookingId, officeId, userName) => {
+  deleteBooking = async (bookingId, userName) => {
     try {
       const del = await Booking.destroy({
-        where: { id: bookingId, officeId, userName },
+        where: { id: bookingId, userName },
       });
       return del;
     } catch (error) {
@@ -107,6 +107,31 @@ class BookingDatabaseManage {
         },
       });
       return bookingByChairAndDate;
+    } catch (error) {
+      throw createNewErrorFromDatabaseError(error);
+    }
+  };
+  getBookingByDate = async (date) => {
+    try {
+      const startDateLimit = new Date(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate(),
+        0,0,0,0
+      );
+      const endDateLimist = new Date(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate() + 1,
+        0,0,0,0
+      );
+      const bookingByDate = Booking.findAll({
+        where: {
+          startDate: { [Op.gt]: startDateLimit },
+          endDate: { [Op.lt]: endDateLimist },
+        },
+      });
+      return bookingByDate;
     } catch (error) {
       throw createNewErrorFromDatabaseError(error);
     }

@@ -14,6 +14,8 @@ import Notification from "./Pages/NotificationPage/Notification";
 import userClient from "./Services/userClient";
 import FoodOrder from "./Pages/FoodOrder/FoodOrder";
 import OfficePage from "./Pages/OfficePage/OfficePage";
+import CalendarForm from "./Components/Calendar/CalendarForm"; /*************************** */
+
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -49,6 +51,7 @@ const App = () => {
             <Route path="/mybookings" element={<UserBooking />} />
             <Route path="/orderfood" element={<FoodOrder />} />
             <Route path="/book" element={<OfficePage />} />
+            <Route path="/calendar" element={<CalendarForm />} /> 
           </Routes>
         </div>
         {console.log(process.env.REACT_APP_SERVER_URL)}

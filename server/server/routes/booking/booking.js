@@ -1,6 +1,6 @@
 const express = require("express");
 const auth = require('../../middleware/auth');
-const { createBooking, getAllBookings, getBookingsOfUser, deleteBooking, updateBooking, getBookingOfOfficeByPlaceArea, getBookingByDateAndPlace } = require('./bookingFunctions');
+const { createBooking, getAllBookings, getBookingsOfUser, deleteBooking, updateBooking, getBookingOfOfficeByPlaceArea, getBookingByDateAndPlace, getBookingByDate } = require('./bookingFunctions');
 const bookingRouter = express.Router();
 
 bookingRouter.post("/", [auth], createBooking);
@@ -13,4 +13,5 @@ bookingRouter.post(
   "/all-booking-by-date-and-place",
   getBookingByDateAndPlace
 );
+bookingRouter.post("/all-booking-by-date",getBookingByDate);
 module.exports = bookingRouter;
