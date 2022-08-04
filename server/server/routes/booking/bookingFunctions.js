@@ -69,9 +69,9 @@ async function updateBooking(req, res) {
   }
 }
 
-async function getBookingOfOfficeByPlaceArea(req, res) {
+async function getBookingOfOffice(req, res) {
   try {
-    const listToReturn = await BookingManager.getBookingOfOfficeByPlaceArea(
+    const listToReturn = await BookingManager.getBookingOfOffice(
       req.body.officeId,
       req.body.bookingPlace
     );
@@ -86,16 +86,54 @@ async function getBookingByDateAndPlace(req, res) {
     const { officeId, bookingPlace, startDate, endDate } = req.body;
     const newStartDate = new Date(startDate);
     const newEndDate = new Date(endDate);
-    const listOfBookings = await BookingManager.getBookingByDateAndPlace(
+    const bookedHours = await BookingManager.getBookingByDateAndPlace(
       officeId,
       bookingPlace,
       newStartDate,
       newEndDate
     );
+    res.status(200).send(JSON.stringify(bookedHours));
+  } catch (error) {
+    errorHandler(error, res);
+  }
+}
+
+async function getBookingByDate(req, res) {
+  try {
+    const { date } = req.body;
+    const newDate = new Date(date);
+    const listOfBookings = await BookingManager.getBookingByDate(
+      newDate
+    );
     const bookedHours = listOfBookings.map((bookingOrder) => {
       return {
-        startHour: bookingOrder.startDate.getHours(),
-        endHour: bookingOrder.endDate.getHours(),
+        officeId: bookingOrder.officeId,
+        bookingPlace: bookingOrder.bookingPlace,
+        userName: bookingOrder.userName,
+        start: bookingOrder.startDate,
+        end: bookingOrder.endDate,
+      };
+    });
+    res.status(200).send(JSON.stringify(bookedHours));
+  } catch (error) {
+    errorHandler(error, res);
+  }
+}
+
+async function getBookingByDate(req, res) {
+  try {
+    const { date } = req.body;
+    const newDate = new Date(date);
+    const listOfBookings = await BookingManager.getBookingByDate(
+      newDate
+    );
+    const bookedHours = listOfBookings.map((bookingOrder) => {
+      return {
+        officeId: bookingOrder.officeId,
+        bookingPlace: bookingOrder.bookingPlace,
+        userName: bookingOrder.userName,
+        start: bookingOrder.startDate,
+        end: bookingOrder.endDate,
       };
     });
     res.status(200).send(JSON.stringify(bookedHours));
@@ -132,7 +170,7 @@ module.exports = {
   getBookingsOfUser,
   deleteBooking,
   updateBooking,
-  getBookingOfOfficeByPlaceArea,
+  getBookingOfOffice,
   getBookingByDateAndPlace,
   getBookingByDate,
 };

@@ -13,7 +13,6 @@ const LoginForm = ({ setLoggedIn }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(username, password);
     const res = await userClient.login(username, password);
     if (res !== INVALID_PASSWORD && res !== USER_NOT_FOUND) {
       setLoggedIn(true);

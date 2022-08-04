@@ -1,69 +1,60 @@
-const BookingManagerValidator = require("../booking/bookingManagerValidation");
 const BookingDatabaseManage = require("../booking/bookingDatabaseManage");
 
 class StatisticsManager {
   constructor() {
-    this.bookingManagerValidator = new BookingManagerValidator();
     this.bookingDatabase = new BookingDatabaseManage();
   }
-  async mostBookedPlace(officeId, bookingPlace) {
-    const allBookings =
-      await this.bookingDatabase.getBookingOfOfficeByPlaceArea(
-        officeId,
-        bookingPlace
-      );
-    allBookings.sort((firstBookedPlace, secondBookedPlace) => {
-      const first = firstBookedPlace.bookingPlace;
-      const second = secondBookedPlace.bookingPlace;
+  async mostBookedPlace(officeId) {
+    const allBookings = await this.bookingDatabase.getAllBookings(officeId);
+    if(allBookings.length === 0){
+        console.log("did??");
+        return "There is no bookings yet for this office";
+    }
+    const newAllBookings = this._sortBookingByBookingPlace(allBookings);
+    return this._maxAppearanceOfPlace(newAllBookings);
+  }
 
-      if (first < second) {
-        return -1;
-      }
-      if (first > second) {
-        return 1;
-      }
-      return 0;
-    });
-    console.log("2", allBookings);
-    return this._maxAppearanceOfPlace(bookingPlace);
+  _sortBookingByBookingPlace(allBookings){
+    const newAllBookings = [...allBookings];
+    newAllBookings.sort((firstBookedPlace, secondBookedPlace) => {
+        const first = firstBookedPlace.bookingPlace;
+        const second = secondBookedPlace.bookingPlace;
+  
+        if (first < second) {
+          return -1;
+        }
+        if (first > second) {
+          return 1;
+        }
+        return 0;
+      });
+      return newAllBookings;
   }
 
   _maxAppearanceOfPlace(bookingsArr) {
     let counter = 1;
-    let max = 0;
     const bookedPlaceArrWithCounter = [];
-    const bookedPlaceArrToReturn = [];
-    for (let i = 1; i < bookingsArr.length; i++) {
-      if (bookingsArr[i] != bookingsArr[i - 1]) {
-        if (max <= counter) {
-          max = counter;
+    let i = 1;
+    for(i = 1; i < bookingsArr.length; i++){
+        if(bookingsArr[i].bookingPlace !== bookingsArr[i-1].bookingPlace){
+            bookedPlaceArrWithCounter.push({"bookingPlace":bookingsArr[i-1].bookingPlace, "booked":counter});
+            counter = 1;
+        } else{
+            counter++;
         }
-        bookedPlaceArrWithCounter.push({
-          bookedPlace: bookingsArr[i - 1],
-          counter: counter,
-        });
-        counter = 0;
-      } else {
-        counter++;
       }
+    if(bookingsArr[i-1].bookingPlace === bookingsArr[i-2].bookingPlace){
+        bookedPlaceArrWithCounter.push({"bookingPlace":bookingsArr[i-1].bookingPlace, "booked":counter});
     }
-    if (counter >= max) {
-      max = counter;
-      bookedPlaceArrWithCounter.push({
-        bookedPlace: bookingsArr[i - 1],
-        counter: counter,
-      });
-    }
-    bookedPlaceArrWithCounter.map((element) => {
-      if (element.counter === max) {
-        bookedPlaceArrToReturn.push(element);
-      }
-    });
-    return bookedPlaceArrToReturn;
+    return bookedPlaceArrWithCounter;
   }
 
   async mostBookedOffice() {
     const allBookings = await this.bookingDatabase.getAllBookings();
+    if(allBookings.length === 0){
+        console.log("did??");
+        return "There is no bookings yet for all offices";
+    }
     allBookings.sort((first, second) => {
       const first1 = first.officeId;
       const second2 = second.officeId;
@@ -77,36 +68,31 @@ class StatisticsManager {
       return 0;
     });
     let counter = 1;
-    let max = 0;
     const bookedOfficeIdArrWithCounter = [];
-    const bookedOfficeIdArrToReturn = [];
-    for (let i = 1; i < allBookings.length; i++) {
-      if (allBookings[i] != allBookings[i - 1]) {
-        if (max <= counter) {
-          max = counter;
+    let i = 1;
+    for(i; i < allBookings.length; i++){
+        if(allBookings[i].officeId !== allBookings[i-1].officeId){
+            bookedOfficeIdArrWithCounter.push({"officeId":allBookings[i-1].officeId, "booked":counter});
+            counter = 1;
+        } else{
+            counter++;
         }
-        bookedOfficeIdArrWithCounter.push({
-          officeId: allBookings[i - 1].officeId,
-          counter: counter,
-        });
-        counter = 0;
-      } else {
-        counter++;
       }
+    if (allBookings[i-1].officeId === allBookings[i-2].officeId) {
+        bookedOfficeIdArrWithCounter.push({"officeId":allBookings[i-1].officeId, "booked":counter});
     }
-    if (counter >= max) {
-      max = counter;
-      bookedOfficeIdArrWithCounter.push({
-        officeId: allBookings[i - 1].officeId,
-        counter: counter,
-      });
-    }
-    bookedOfficeIdArrWithCounter.map((element) => {
-      if (element.counter === max) {
-        bookedOfficeIdArrToReturn.push(element);
-      }
-    });
-    return bookedOfficeIdArrToReturn;
+    return bookedOfficeIdArrWithCounter;
+  }
+
+  async compareTwoDates(officeId, date1, date2){
+    const allBookingsOfDate1 = await this.bookingDatabase.getBookingByDateAndOfficeId(officeId, date1);
+    const allBookingsOfDate2 = await this.bookingDatabase.getBookingByDateAndOfficeId(officeId, date2);
+    const newAllBookingsOfDate1 = this._sortBookingByBookingPlace(allBookingsOfDate1);
+    const newAllBookingsOfDate2 = this._sortBookingByBookingPlace(allBookingsOfDate2);
+    const bookedDate1 = this._maxAppearanceOfPlace(newAllBookingsOfDate1);
+    const bookedDate2 = this._maxAppearanceOfPlace(newAllBookingsOfDate2);
+    const returnedObject = {"firstDate": bookedDate1, "secondDate": bookedDate2};
+    return returnedObject;
   }
 }
 

@@ -1,0 +1,19 @@
+.form-date{
+    text-align: center;
+    position: relative;
+  }
+
+
+.booking-form-body{
+  margin-top: 20px;
+}
+
+.chart-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chart-container-try{
+    top:50%;
+}

@@ -15,7 +15,6 @@ async function createNotification(req, res) {
     res.status(200).send(JSON.stringify(returnedNotification));
     res.end();
   } catch (error) {
-    console.log(error,"i want job at monday.com - (dapulse)")
     errorHandler(error, res);
   }
 }
@@ -23,7 +22,6 @@ async function createNotification(req, res) {
 async function getAllNotification(req, res) {
   try {
     const listToReturn = await NotificationManager.getAllNotification();
-    console.log(listToReturn);
     res.status(200).send(JSON.stringify(listToReturn));
   } catch (error) {
     errorHandler(error, res);

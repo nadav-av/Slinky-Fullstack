@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./mapForm.css";
 import GenericModal from "../GenericModal/genericModal";
 import BookingForm from "../BookingForm/BookingForm";
+import { officePositions } from "../../Services/Consts";
 
 const MapForm = (office) => {
   const [officeId, setofficeId] = useState(office.officeId || 1);
@@ -15,7 +16,7 @@ const MapForm = (office) => {
 
   console.log(officeId);
   const map1 = () => {
-    const officePosition = ["c1","c2","c3","c4","c5","c6","c7","c8","o1","o2","o3","o4","o5","o6"];
+    const officePosition = officePositions["1"];
     return (
     <div id="mapBackGround"> 
       {officePosition.map((element) =>       
@@ -27,7 +28,7 @@ const MapForm = (office) => {
 
   const map2 = () => {
     console.log('map2')
-    const officePosition = ["o7","o8","o9"];
+    const officePosition = officePositions["2"];
     return (
       <div id="map2">
         {officePosition.map((element) =>       
