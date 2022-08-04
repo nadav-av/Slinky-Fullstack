@@ -5,7 +5,7 @@ import notificationClient from "../Services/notificationClient";
 import { Dropdown } from "monday-ui-react-core/";
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 
-const CreateTask =({modal,toggle}) =>{
+const CreateTask =({onSubmit}) =>{
   const [content, setContent] = useState("");
   const [officeId, setOfficeId] = useState(1);
   const [category, setCategory] = useState("idea");
@@ -14,12 +14,12 @@ const CreateTask =({modal,toggle}) =>{
 
   const addNotification = async (e) => {
        try {
+        onSubmit();
           await notificationClient.addNotification(
             officeId,
             content,
             category,
           )
-          alert('Notification success!');
     } catch {
       console.err("err");
       alert("Notification Failed.");
@@ -55,8 +55,6 @@ const CreateTask =({modal,toggle}) =>{
         }}
         onClear={() => {}}
         />
-
-
         </FormControl>
         <br></br>
         <br></br>
@@ -73,8 +71,7 @@ const CreateTask =({modal,toggle}) =>{
       </FormControl>
       <br></br>
       <br></br>
-      <Button onClick={addNotification} variant="raised">Submit</Button>
-
+      <Button id = "submit-notification" onClick={addNotification} variant="raised">Submit</Button>
       </div>
       </div>
       </>
