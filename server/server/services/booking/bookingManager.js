@@ -34,10 +34,9 @@ class BookingManager {
   async getAllBookings() {
     return await this.bookingDatabase.getAllBookings();
   }
-  async deleteBooking(bookingId, officeId, userName) {
+  async deleteBooking(bookingId, userName) {
     return await this.bookingDatabase.deleteBooking(
       bookingId,
-      officeId,
       userName
     );
   }
@@ -76,6 +75,11 @@ class BookingManager {
       };
     });
     return bookedHours;
+  }
+  async getBookingByDate(date) {
+    return await this.bookingDatabase.getBookingByDate(
+      date,
+    );
   }
 }
 

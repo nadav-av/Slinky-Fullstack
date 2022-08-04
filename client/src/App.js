@@ -12,14 +12,16 @@ import UserBooking from "./Pages/UserBookings/UserBookings";
 import HomePage from "./Pages/HomePage/HomePage";
 import Notification from "./Pages/NotificationPage/Notification";
 import userClient from "./Services/userClient";
+import FoodOrder from "./Pages/FoodOrder/FoodOrder";
 import OfficePage from "./Pages/OfficePage/OfficePage";
 import StatisticsPage from "./Pages/StatisticsPage/statistics";
+import CalendarForm from "./Components/Calendar/CalendarForm"; /*************************** */
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    userClient.checkIfUserLoggedIn().then((res) => {
+    userClient.getUser().then((res) => {
       if (res === INVALID_TOKEN) {
         setIsLoggedIn(false);
       } else {
@@ -48,8 +50,10 @@ const App = () => {
             <Route path="/booking" element={<BookingForm />} />
             <Route path="/notification" element={<Notification />} />
             <Route path="/mybookings" element={<UserBooking />} />
+            <Route path="/orderfood" element={<FoodOrder />} />
             <Route path="/book" element={<OfficePage />} />
             <Route path="/statistics" element = { <StatisticsPage/>}/>
+            <Route path="/calendar" element={<CalendarForm />} /> 
           </Routes>
         </div>
       </div>

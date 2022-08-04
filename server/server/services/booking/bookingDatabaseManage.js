@@ -37,10 +37,10 @@ class BookingDatabaseManage {
       throw createNewErrorFromDatabaseError(error);
     }
   };
-  deleteBooking = async (bookingId, officeId, userName) => {
+  deleteBooking = async (bookingId, userName) => {
     try {
       const del = await Booking.destroy({
-        where: { id: bookingId, officeId, userName },
+        where: { id: bookingId, userName },
       });
       return del;
     } catch (error) {

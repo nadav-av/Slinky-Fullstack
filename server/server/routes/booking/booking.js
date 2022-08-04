@@ -13,4 +13,5 @@ bookingRouter.post(
   "/all-booking-by-date-and-place",
   getBookingByDateAndPlace
 );
+bookingRouter.post("/all-booking-by-date",getBookingByDate);
 module.exports = bookingRouter;

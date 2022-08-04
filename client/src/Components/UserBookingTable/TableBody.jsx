@@ -1,34 +1,16 @@
 import bookingClient from "../../Services/bookingClient";
+import { parseOffices,parseToStringHour,parseDate } from "../Generics/Parses/Parses"
+
 
 const TableBody = ({ tableData, columns, userBookings, setUserBookings }) => {
   const handleDelete = async (bookID, officeId) => {
-    const res = await bookingClient.deleteBooking(bookID, officeId);
+    const res = await bookingClient.deleteBooking(bookID);
     if (res) {
       const newBookings = userBookings.filter(
         (booking) => booking.id !== bookID
       );
       setUserBookings(newBookings);
     }
-  };
-
-  const parseDate = (date) => {
-    const parsedDate = new Date(date);
-    return `${parsedDate.getDate()}/${
-      parsedDate.getMonth() + 1
-    }/${parsedDate.getFullYear()}`;
-  };
-
-  const parseTimeInDate = (date) => {
-    const parsedDate = new Date(date);
-    let hours = parsedDate.getHours();
-    let minutes = parsedDate.getMinutes();
-    if (hours < 10) {
-      hours = "0" + hours;
-    }
-    if (minutes < 10) {
-      minutes = "0" + minutes;
-    }
-    return `${hours}:${minutes}`;
   };
 
   const parseUserBookings = (bookings) => {
@@ -38,12 +20,12 @@ const TableBody = ({ tableData, columns, userBookings, setUserBookings }) => {
       booking.endDate = new Date(booking.endDate);
       const parsedBooking = {
         id: booking.id,
-        office: booking.officeId,
+        office: parseOffices(booking.officeId),
         reserved_place: booking.bookingPlace,
         start_date: parseDate(booking.startDate),
-        start_hour: parseTimeInDate(booking.startDate),
+        start_hour: parseToStringHour(booking.startDate),
         end_date: parseDate(booking.endDate),
-        end_hour: parseTimeInDate(booking.endDate),
+        end_hour: parseToStringHour(booking.endDate),
       };
       parsedBookings.push(parsedBooking);
     });
