@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 import { Navigate, NavLink } from "react-router-dom";
 import "./navBar.css";
+import { useSelector, useDispatch } from "react-redux";
+import { setIsLoggedIn } from "../../../Redux/Slices/userSlice";
 
-function NavBar({ loggedIn }) {
+const NavBar = () => {
+  const loggedIn = useSelector((state) => state.user.isLoggedIn);
+  const dispatch = useDispatch();
+
   const [click, setClick] = useState(false);
 
   const handleClick = () => setClick(!click);
 
   const handleLogout = () => {
     localStorage.removeItem("x-auth-token");
+    dispatch(setIsLoggedIn(false));
     handleClick();
     window.location.reload();
     Navigate("/");
@@ -109,7 +115,7 @@ function NavBar({ loggedIn }) {
             }
             onClick={handleClick}
           >
-            Order Food  
+            Order Food
           </NavLink>
         </li>
         <li className="nav-item">
@@ -164,20 +170,6 @@ function NavBar({ loggedIn }) {
       </div>
     </nav>
   );
-}
+};
 
 export default NavBar;
-
-/*
-<li className="nav-item">
-          <NavLink
-            to="/visualmap"
-            className={({ isActive }) =>
-              "nav-links" + (isActive ? " activated" : "")
-            }
-            onClick={handleClick}
-          >
-            Book
-          </NavLink>
-        </li>
-        */
