@@ -23,7 +23,7 @@ class UserClient {
       //get x-auth-token from response
       const res = await response.json();
       localStorage.setItem("x-auth-token", res.token);
-      return res.user.userName;
+      return res.user;
     } else if (response.status === 401) {
       return INVALID_PASSWORD;
     } else if (response.status === 404) {
@@ -50,7 +50,7 @@ class UserClient {
     if (response.status === 200) {
       const res = await response.json();
       localStorage.setItem("x-auth-token", res.token);
-      return true; //Temporary - need to implement a login after register and pass to landing page
+      return res.user; //Temporary - need to implement a login after register and pass to landing page
     } else if (response.status === 400) {
       return USER_EXISTS;
     }

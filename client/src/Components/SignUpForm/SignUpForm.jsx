@@ -4,9 +4,13 @@ import { USER_EXISTS } from "../../Services/Consts";
 import { useNavigate } from "react-router-dom";
 import "./signUpForm.css";
 import confetti from "canvas-confetti";
+import { useSelector, useDispatch } from "react-redux";
+import { setUser, setIsLoggedIn } from "../../Redux/Slices/userSlice";
 const emailValidator = require("email-validator");
 
-const SignUpForm = ({ setLoggedIn }) => {
+const SignUpForm = () => {
+  const dispatch = useDispatch();
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -37,7 +41,8 @@ const SignUpForm = ({ setLoggedIn }) => {
       };
       const res = await userClient.register(newUser);
       if (res !== USER_EXISTS) {
-        setLoggedIn(true);
+        dispatch(setUser(newUser));
+        dispatch(setIsLoggedIn(true));
         confetti();
         navigate("/");
       } else {
