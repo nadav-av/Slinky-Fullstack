@@ -9,6 +9,7 @@ import "./bookingForm.css";
 import bookingClient from "../../Services/bookingClient";
 import { useNavigate } from "react-router-dom";
 import confetti from "canvas-confetti";
+import { parseToStringHour } from "../Generics/Parses/Parses"
 
 const BookingForm = ({officeId,bookingPlace}) => {
   const [startDate, setStartDate] = useState(new Date());
@@ -20,8 +21,6 @@ const BookingForm = ({officeId,bookingPlace}) => {
   const [availableEndHours, setAvailableEndHours] = useState([]);
   let navigate = useNavigate();
 
-  console.log(officeId,"officeId");
-  console.log(typeof(bookingPlace),"bookingPlace");
   const getAvailableHours = async (
     officeId,
     bookingPlace,
@@ -62,6 +61,7 @@ const BookingForm = ({officeId,bookingPlace}) => {
 
   useEffect(() => {
     if (isStartHour && startHour !== -1) {
+      console.log('start hour' +startHour);
       setIsEndHour(false);
       const a = calcAvailableEndHours();
       setAvailableEndHours(a);
@@ -94,22 +94,16 @@ const BookingForm = ({officeId,bookingPlace}) => {
     return hoursArray.map((value) => {
       const obj = {};
       obj.value = value.toString();
-      obj.label = numHourToString(value);
+      obj.label = parseToStringHour(value);
       return obj;
     });
   };
 
-  const numHourToString = (value) => {
-    return value > 9
-      ? value.toString() + ":00"
-      : "0" + value.toString() + ":00";
-  };
-
   const showStartValue = () => {
-    if (startHour === -1) {
+    if (startHour === -1 || !isStartHour) {
        return null;
     }
-    return convertToDropdownComp([startHour])[0]
+    return convertToDropdownComp([startDate.getHours()])[0]
   }
 
   const showEndValue = () => {
