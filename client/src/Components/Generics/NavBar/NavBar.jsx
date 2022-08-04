@@ -81,17 +81,6 @@ function NavBar({ loggedIn }) {
         </li>
         <li className="nav-item">
           <NavLink
-            to="/notification"
-            className={({ isActive }) =>
-              "nav-links" + (isActive ? " activated" : "")
-            }
-            onClick={handleClick}
-          >
-            Notifications
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink
             to="/mybookings"
             className={({ isActive }) =>
               "nav-links" + (isActive ? " activated" : "")
@@ -101,7 +90,17 @@ function NavBar({ loggedIn }) {
             My Bookings
           </NavLink>
         </li>
-
+        <li className="nav-item">
+          <NavLink
+            to="/notification"
+            className={({ isActive }) =>
+              "nav-links" + (isActive ? " activated" : "")
+            }
+            onClick={handleClick}
+          >
+            Notifications
+          </NavLink>
+        </li>
         <li className="nav-item">
           <NavLink
             to="/orderfood"
