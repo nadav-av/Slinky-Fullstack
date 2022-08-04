@@ -1,18 +1,19 @@
 .form-date{
     text-align: center;
     position: relative;
-    margin-bottom: 15px;
   }
 
 
 .booking-form-body{
   margin-top: 20px;
-  position: absolute;
-  top: 20%;
-  margin-left: 150px;
-  transform: translate(-50%, -50%);
-  width: 400px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
+}
+
+.chart-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chart-container-try{
+    top:50%;
 }

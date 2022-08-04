@@ -1,11 +1,10 @@
-const labels = ["c1","c2","c3","c4","c5","c6","c7","c8","o1","o2","o3","o4","o5","o6"];
+import { officePositions } from "./Consts";
+
 class statisticsClient {
     constructor() {
       this.url = process.env.REACT_APP_SERVER_URL || "http://localhost:3042";
     }
     async getChairsStatistics(officeId){
-        const labelColumn = "bookingPlace";
-        const dataColumn = "booked";
         const dataSetLabel = "Chairs"
         const response = await fetch(`http://localhost:3042/statistics/${officeId}`,
         {
@@ -15,11 +14,9 @@ class statisticsClient {
           },
         })
         const responseAsJson = await response.json();
-        return this._getInformation(responseAsJson, dataSetLabel);
+        return this._getInformation(responseAsJson, dataSetLabel, officeId);
     }
     async getOfficesStatistics(){
-        const labelColumn = "officeId";
-        const dataColumn = "booked";
         const dataSetLabel = "Offices"
         const response = await fetch(`http://localhost:3042/statistics`,
         {
@@ -30,7 +27,7 @@ class statisticsClient {
         })
         const responseAsJson = await response.json();
         const data = {
-            labels: [1, 2],
+            labels: Object.keys(officePositions).map((key) => key),
     datasets: [
       {
         label: dataSetLabel,
@@ -53,21 +50,21 @@ return data;
           },
         })
         const responseAsJson = await response.json();
-        const dataForDataset1 = this._createDataForDatasetsOfChairs(responseAsJson.firstDate);
-        const dataForDataset2 = this._createDataForDatasetsOfChairs(responseAsJson.secondDate);
+        const dataForDataset1 = this._createDataForDatasetsOfChairs(responseAsJson.firstDate, officeId);
+        const dataForDataset2 = this._createDataForDatasetsOfChairs(responseAsJson.secondDate, officeId);
             const data = {
-                labels: labels,
+                labels: officePositions[officeId],
         datasets: [
           {
             label: date1,
-            data: dataForDataset1,
+            data: Object.keys(dataForDataset1).map((key) => dataForDataset1[key]),
             fill: true,
             backgroundColor: "rgba(75,20,20,0.2)",
             borderColor: "rgba(75,192,192,1)",
           },
           {
             label: date2,
-            data: dataForDataset2,
+            data: Object.keys(dataForDataset2).map((key) => dataForDataset2[key]),
             fill: true,
             backgroundColor: "#742774",
           },
@@ -75,29 +72,26 @@ return data;
     }
     return data;
             }
-    _createDataForDatasetsOfChairs(dataArr){
-        const objectToReturn = {
-            "c1":0,"c2":0,"c3":0,"c4":0,"c5":0,"c6":0,"c7":0,"c8":0,"o1":0,"o2":0,"o3":0,"o4":0,"o5":0,"o6":0
-        };
+    _createDataForDatasetsOfChairs(dataArr, officeId){
+        const objectToReturn = [];
+        Object.keys(officePositions[officeId]).forEach(function(key){
+            const x = officePositions[officeId][key];
+            objectToReturn[x] = 0;
+        })
         dataArr.filter((element) => {
             objectToReturn[element.bookingPlace] = element.booked;
         })
-        console.log("object", Object.keys(objectToReturn).length);
-        const newObjectToReturn = [];
-        Object.keys(objectToReturn).forEach(function(key){
-            newObjectToReturn.push(objectToReturn[key]);
-        })
-        return newObjectToReturn;
+        return objectToReturn;
     }
-    async _getInformation(responseAsJson, dataSetLabel){
+    async _getInformation(responseAsJson, dataSetLabel, officeId){
         if(Array.isArray(responseAsJson)){
-            const datasetsAfter = this._createDataForDatasetsOfChairs(responseAsJson);
+            const datasetsAfter = this._createDataForDatasetsOfChairs(responseAsJson, officeId);
         const data = {
-            labels: labels,
+            labels: officePositions[officeId],
     datasets: [
       {
         label: dataSetLabel,
-        data: datasetsAfter,
+        data: Object.keys(datasetsAfter).map((key) => datasetsAfter[key]),
         fill: true,
         backgroundColor: "rgba(75,192,192,0.2)",
         borderColor: "rgba(75,192,192,1)",
