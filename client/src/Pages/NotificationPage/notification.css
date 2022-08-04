@@ -11,3 +11,14 @@
         /* justify-content: space-between; */
         margin-left: 20px;
     }
+#create-btn-not{
+
+}
+#board-title-txt{
+}
+.header-not{
+    height: 200px;
+    width: 100%;
+    background-color : #E9EEF6;
+    padding-top: 50px;
+  }

@@ -20,7 +20,7 @@ const MapForm = (office) => {
     return (
     <div id="mapBackGround"> 
       {officePosition.map((element) =>       
-         <button className="btn" id={element} key={element} onClick={()=> getBooking(officeId,element)}>{element}</button>
+         <button className="btn-map" id={element} key={element} onClick={()=> getBooking(officeId,element)}>{element}</button>
       )}
       </div>
     )
@@ -32,7 +32,7 @@ const MapForm = (office) => {
     return (
       <div id="map2">
         {officePosition.map((element) =>       
-         <button className="btn" id={element} key={element} onClick={()=> getBooking(officeId,element)}>{element}</button>
+         <button className="btn-map" id={element} key={element} onClick={()=> getBooking(officeId,element)}>{element}</button>
         )}
       </div> 
       //null /****************/

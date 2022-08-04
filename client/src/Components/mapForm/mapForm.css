@@ -111,7 +111,7 @@ width: 660px;
     padding: 70px 75px;
 
 }
-    .btn {
+    .btn-map {
     background-color: transparent;
     background-repeat: no-repeat;
     border: none;
@@ -121,7 +121,7 @@ width: 660px;
     color: transparent;
   }
   
-   .btn:hover {
+   .btn-map:hover {
     background-color: yellow;
     opacity: 0.2;
     border-color: rgb(43, 48, 12);

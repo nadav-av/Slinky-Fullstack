@@ -40,9 +40,9 @@ async function getAllNotificationOfOfficeId(req, res) {
 
 async function deleteNotification(req, res) {
   try {
+    console.log('server notifFunction in rout: ', req.body.notificationId)
     const listToReturn = await NotificationManager.deleteNotification(
       req.body.notificationId,
-      req.body.officeId,
       req.tokenData.userName
     );
     res.status(200).send(JSON.stringify(listToReturn));
