@@ -7,7 +7,6 @@ class StatisticsManager {
   async mostBookedPlace(officeId) {
     const allBookings = await this.bookingDatabase.getAllBookings(officeId);
     if(allBookings.length === 0){
-        console.log("did??");
         return "There is no bookings yet for this office";
     }
     const newAllBookings = this._sortBookingByBookingPlace(allBookings);
@@ -34,7 +33,7 @@ class StatisticsManager {
   _maxAppearanceOfPlace(bookingsArr) {
     let counter = 1;
     const bookedPlaceArrWithCounter = [];
-    let i = 1;
+    let i;
     for(i = 1; i < bookingsArr.length; i++){
         if(bookingsArr[i].bookingPlace !== bookingsArr[i-1].bookingPlace){
             bookedPlaceArrWithCounter.push({"bookingPlace":bookingsArr[i-1].bookingPlace, "booked":counter});
@@ -43,16 +42,19 @@ class StatisticsManager {
             counter++;
         }
       }
-    if(bookingsArr[i-1].bookingPlace === bookingsArr[i-2].bookingPlace){
-        bookedPlaceArrWithCounter.push({"bookingPlace":bookingsArr[i-1].bookingPlace, "booked":counter});
-    }
+      if(bookingsArr.length >= 2){
+        if(bookingsArr[i-1].bookingPlace === bookingsArr[i-2].bookingPlace){
+            bookedPlaceArrWithCounter.push({"bookingPlace":bookingsArr[i-1].bookingPlace, "booked":counter});
+        }
+      } else{
+        bookedPlaceArrWithCounter.push({"bookingPlace":bookingsArr[0].bookingPlace, "booked":counter});
+      }
     return bookedPlaceArrWithCounter;
   }
 
   async mostBookedOffice() {
     const allBookings = await this.bookingDatabase.getAllBookings();
     if(allBookings.length === 0){
-        console.log("did??");
         return "There is no bookings yet for all offices";
     }
     allBookings.sort((first, second) => {
@@ -78,9 +80,13 @@ class StatisticsManager {
             counter++;
         }
       }
-    if (allBookings[i-1].officeId === allBookings[i-2].officeId) {
-        bookedOfficeIdArrWithCounter.push({"officeId":allBookings[i-1].officeId, "booked":counter});
-    }
+      if(allBookings.length >= 2){
+        if (allBookings[i-1].officeId === allBookings[i-2].officeId) {
+            bookedOfficeIdArrWithCounter.push({"officeId":allBookings[i-1].officeId, "booked":counter});
+        }
+      } else{
+        bookedOfficeIdArrWithCounter.push({"officeId":allBookings[0].officeId, "booked":counter});
+      }
     return bookedOfficeIdArrWithCounter;
   }
 
