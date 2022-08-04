@@ -1,5 +1,1 @@
-{
-    "mcdonalds": [],
-    "pandaexpress": [],
-    "tacobell": []
-}
+{"mcdonalds":[{"firstName":"nadav","lastName":"avraham","office":"Rubinshtein Twin Towers","order":"ads asd asd awd\nasd awd "},{"firstName":"nadav","lastName":"avraham","office":"Azrieli Square Tower","order":"so sf osje fpoj"}],"pandaexpress":[{"firstName":"nadav","lastName":"avraham","office":"Azrieli Square Tower","order":"dfdbfgbfhn"}],"tacobell":[{"firstName":"nadav","lastName":"avraham","office":"Azrieli Square Tower","order":"slajsfapod apo"}]}

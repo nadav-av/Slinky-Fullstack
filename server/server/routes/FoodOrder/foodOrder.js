@@ -27,10 +27,12 @@ router.post("/", auth, (req, res) => {
       const firstName = req.body.firstName;
       const lastName = req.body.lastName;
       const order = req.body.order;
+      const office = req.body.office;
       const resturant = req.body.resturant;
       orders[resturant].push({
         firstName: firstName,
         lastName: lastName,
+        office: office,
         order: order,
       });
       fs.writeFile(

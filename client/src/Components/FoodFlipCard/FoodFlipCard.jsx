@@ -5,12 +5,26 @@ import FoodOrderList from "./../FoodOrderList/FoodOrderList";
 import GenericModal from "../GenericModal/genericModal";
 import FoodOrderForm from "./../FoodOrderForm/FoodOrderForm";
 import foodOrderClient from "../../Services/foodOrderClient";
+import { CSVLink } from "react-csv";
 
 function FoodFlipCard({ card }) {
   const [showBack, setShowBack] = useState(false);
   const [isModalShown, setIsModalShown] = useState(false);
   const [namesAndOrders, setNamesAndOrders] = useState([]);
   const [names, setNames] = useState([]);
+
+  const headers = [
+    { label: "First Name", key: "firstName" },
+    { label: "Last Name", key: "lastName" },
+    { label: "Order", key: "order" },
+    { label: "Office", key: "office" },
+  ];
+
+  const csvReport = {
+    data: namesAndOrders,
+    headers: headers,
+    filename: `orders_${card.resturant}.csv`,
+  };
 
   function handleClick() {
     if (card.variant === "click") {
@@ -94,6 +108,13 @@ function FoodFlipCard({ card }) {
                   +
                 </button>
               </div>
+            </div>
+          </div>
+          <div className="food-form-csvLink-container">
+            <div className="food-form-csvLink">
+              <CSVLink className="csv-link" {...csvReport}>
+                Export order to CSV
+              </CSVLink>
             </div>
           </div>
         </div>
