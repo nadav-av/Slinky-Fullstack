@@ -3,9 +3,14 @@ const { Op } = require("sequelize");
 const { createNewErrorFromDatabaseError } = require("../General/errorCreator");
 
 class BookingDatabaseManage {
-  getAllBookings = async () => {
+  getAllBookings = async (officeId = null) => {
     try {
-      const data = await Booking.findAll();
+      let data;
+      if(officeId === null){
+        data = await Booking.findAll();
+      } else {
+        data = await Booking.findAll({where:{officeId}});
+      }
       return data;
     } catch (error) {
       throw createNewErrorFromDatabaseError(error);
@@ -66,13 +71,6 @@ class BookingDatabaseManage {
       throw createNewErrorFromDatabaseError(error);
     }
   };
-  getBookingOfOfficeByPlaceArea = async (officeId, bookingPlace) => {
-    try {
-      return await Booking.findAll({ where: { officeId, bookingPlace } });
-    } catch (error) {
-      throw createNewErrorFromDatabaseError(error);
-    }
-  };
   getBookingByDateAndPlace = async (
     officeId,
     bookingPlace,
@@ -111,6 +109,36 @@ class BookingDatabaseManage {
       throw createNewErrorFromDatabaseError(error);
     }
   };
+  getBookingByDateAndOfficeId = async(officeId, date) => {
+    try {
+      const startDateLimit = new Date(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate(),
+        0,0,0,0
+      );
+      const endDateLimist = new Date(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate() + 1,
+        0,
+        0,
+        0,
+        0
+      );
+      const bookingByDateAndOfficeId = Booking.findAll({
+        where: {
+          officeId,
+          startDate: { [Op.gt]: startDateLimit },
+          endDate: { [Op.lt]: endDateLimist },
+        },
+      });
+      return bookingByDateAndOfficeId;
+    } catch(error){
+      throw createNewErrorFromDatabaseError(error);
+    }
+  }
+
   getBookingByDate = async (date) => {
     try {
       const startDateLimit = new Date(

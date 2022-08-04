@@ -49,8 +49,8 @@ const toggle = () => setModal(!modal);
     <div className="notification-container">
 
       <div className="notification-container-array">
-      {data.map((element,index) =>       
-         <NotificationForm data={element} index = {index} key={element.userName} ></NotificationForm>
+      {data.map((element, index) =>       
+         <NotificationForm data={element} key={index}></NotificationForm>
       )}
       </div>
     </div>

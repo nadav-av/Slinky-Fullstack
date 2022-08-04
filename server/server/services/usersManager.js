@@ -18,7 +18,6 @@ class UserManager {
     company,
     isAdmin
   ) {
-    console.log("Creating a user");
     try {
       const user = await User.create({
         userName,
@@ -29,10 +28,8 @@ class UserManager {
         company,
         isAdmin,
       });
-      console.log("Success a user");
       return user;
     } catch (err) {
-      console.log(err);
       return { err: err };
     }
   }
@@ -54,7 +51,6 @@ class UserManager {
         }
       );
     } catch (err) {
-      console.log(err);
       return { err: err };
     }
   }

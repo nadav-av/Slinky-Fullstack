@@ -15,7 +15,6 @@ async function createNotification(req, res) {
     res.status(200).send(JSON.stringify(returnedNotification));
     res.end();
   } catch (error) {
-    console.log(error,"i want job at monday.com - (dapulse)")
     errorHandler(error, res);
   }
 }

@@ -15,6 +15,7 @@ import userClient from "./Services/userClient";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import FoodOrder from "./Pages/FoodOrder/FoodOrder";
 import OfficePage from "./Pages/OfficePage/OfficePage";
+import StatisticsPage from "./Pages/StatisticsPage/statistics";
 import CalendarForm from "./Components/Calendar/CalendarForm"; /*************************** */
 
 const App = () => {
@@ -52,10 +53,10 @@ const App = () => {
             <Route path="/mybookings" element={<UserBooking />} />
             <Route path="/orderfood" element={<FoodOrder />} />
             <Route path="/book" element={<OfficePage />} />
+            <Route path="/statistics" element = { <StatisticsPage/>}/>
             <Route path="/calendar" element={<CalendarForm />} /> 
           </Routes>
         </div>
-        {console.log(process.env.REACT_APP_SERVER_URL)}
       </div>
     </React.Fragment>
   );

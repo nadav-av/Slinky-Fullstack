@@ -15,8 +15,6 @@ class NotificationManager {
     return notification;
   }
   async getAllNotification() {
-    console.log('in getAllNotification 2');
-
     return await this.notificationDatabase.getAllNotification();
   }
   async deleteNotification(notificationId, madeBy) {
@@ -35,7 +33,7 @@ class NotificationManager {
     await this.notificationDatabase.deleteAllNotification();
   }
   async getAllNotificationOfOfficeId(officeId){
-    return await this.notificationDatabase.getAllNotificationOfOfficeId(officeId);
+    return await this.notificationDatabase.getAllNotification(officeId);
   }
   _validate(officeId, content, madeBy, category){
     if (

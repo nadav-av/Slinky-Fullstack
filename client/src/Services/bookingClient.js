@@ -1,6 +1,6 @@
 class bookingClient {
   constructor() {
-    this.url = process.env.REACT_APP_SERVER_URL || "http://localhost:3042/booking";
+    this.url = process.env.REACT_APP_SERVER_URL || "http://localhost:3042";
   }
 
   async getAvailableStartHours(officeId, bookingPlace, startDate, endDate) {
@@ -19,13 +19,12 @@ class bookingClient {
         }
       });
     }
-    console.log("availableHours is : ", availableHours);
     return availableHours;
   }
 
   async getTakenHours(officeId, bookingPlace, startDate, endDate) {
     const userJWTToken = localStorage.getItem("x-auth-token");
-    const response = await fetch((this.url+"/all-booking-by-date-and-place"),
+    const response = await fetch((this.url+"/booking/all-booking-by-date-and-place"),
       {
         method: "POST",
         headers: {
@@ -42,12 +41,11 @@ class bookingClient {
     );
 
     const takenHours = await response.json();
-    console.log(takenHours);
     return takenHours;
   }
 
   async getDayBookings(date) {
-    const response = await fetch((this.url+"/all-booking-by-date"),
+    const response = await fetch((this.url+"/booking/all-booking-by-date"),
       {
         method: "POST",
         headers: {
@@ -64,7 +62,7 @@ class bookingClient {
 
   async addBooking(officeId, bookingPlace, startDate, endDate) {
     const userJWTToken = localStorage.getItem("x-auth-token");
-    const response = await fetch(this.url+"/",
+    const response = await fetch(this.url+"/booking/",
       {
         method: "POST",
         headers: {
@@ -84,7 +82,7 @@ class bookingClient {
 
   async deleteBooking(bookId) {
     const userJWTToken = localStorage.getItem("x-auth-token");
-    const response = await fetch(this.url+"/",
+    const response = await fetch(this.url+"/booking/",
       {
         method: "DELETE",
         headers: {

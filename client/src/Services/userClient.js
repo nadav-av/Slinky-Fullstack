@@ -32,7 +32,6 @@ class UserClient {
   }
 
   async register(user) {
-    console.log("register");
     const response = await fetch(`${this.url}/users/register`, {
       method: "POST",
       headers: {
@@ -85,7 +84,6 @@ class UserClient {
         "x-auth-token": localStorage.getItem("x-auth-token"),
       },
     });
-    console.log(response);
     if (response.status === 200) {
       const res = await response.json();
       //const parsedRes = this.parseUserBookings(res);
