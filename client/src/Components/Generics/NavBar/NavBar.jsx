@@ -101,6 +101,18 @@ function NavBar({ loggedIn }) {
             My Bookings
           </NavLink>
         </li>
+
+        <li className="nav-item">
+          <NavLink
+            to="/orderfood"
+            className={({ isActive }) =>
+              "nav-links" + (isActive ? " activated" : "")
+            }
+            onClick={handleClick}
+          >
+            Order Food  
+          </NavLink>
+        </li>
         <li className="nav-item">
           <NavLink
             to="/calendar"
