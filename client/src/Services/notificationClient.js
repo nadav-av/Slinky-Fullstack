@@ -40,6 +40,28 @@ class notificationClient {
       );
       return response.ok;
     }
+
+    async deleteNotification(notificationId) {
+      console.log("in notClient: ", notificationId);
+      const userJWTToken = localStorage.getItem("x-auth-token");
+      const response = await fetch(this.url+"/notifications",
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            "x-auth-token": userJWTToken,
+          },
+          body: JSON.stringify({
+            notificationId: notificationId,
+          }),
+        }
+      );
+      if (response.status === 200) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   }
   
   export default new notificationClient();
