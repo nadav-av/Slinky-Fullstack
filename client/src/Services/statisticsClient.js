@@ -50,8 +50,11 @@ return data;
           },
         })
         const responseAsJson = await response.json();
+        console.log(responseAsJson);
         const dataForDataset1 = this._createDataForDatasetsOfChairs(responseAsJson.firstDate, officeId);
         const dataForDataset2 = this._createDataForDatasetsOfChairs(responseAsJson.secondDate, officeId);
+        console.log("first data : ", dataForDataset1);
+        console.log("second data : ", dataForDataset2);
             const data = {
                 labels: officePositions[officeId],
         datasets: [
@@ -74,6 +77,9 @@ return data;
             }
     _createDataForDatasetsOfChairs(dataArr, officeId){
         const objectToReturn = [];
+        if(dataArr === undefined || dataArr.length === 0){
+          return objectToReturn;
+        }
         Object.keys(officePositions[officeId]).forEach(function(key){
             const x = officePositions[officeId][key];
             objectToReturn[x] = 0;

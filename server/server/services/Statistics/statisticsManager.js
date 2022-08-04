@@ -31,6 +31,9 @@ class StatisticsManager {
   }
 
   _maxAppearanceOfPlace(bookingsArr) {
+    if(bookingsArr === undefined || bookingsArr.length === 0){
+      return [];
+    }
     let counter = 1;
     const bookedPlaceArrWithCounter = [];
     let i;
@@ -91,13 +94,14 @@ class StatisticsManager {
   }
 
   async compareTwoDates(officeId, date1, date2){
+    let returnedObject = [];
     const allBookingsOfDate1 = await this.bookingDatabase.getBookingByDateAndOfficeId(officeId, date1);
     const allBookingsOfDate2 = await this.bookingDatabase.getBookingByDateAndOfficeId(officeId, date2);
     const newAllBookingsOfDate1 = this._sortBookingByBookingPlace(allBookingsOfDate1);
     const newAllBookingsOfDate2 = this._sortBookingByBookingPlace(allBookingsOfDate2);
     const bookedDate1 = this._maxAppearanceOfPlace(newAllBookingsOfDate1);
     const bookedDate2 = this._maxAppearanceOfPlace(newAllBookingsOfDate2);
-    const returnedObject = {"firstDate": bookedDate1, "secondDate": bookedDate2};
+    returnedObject = {"firstDate": bookedDate1, "secondDate": bookedDate2};
     return returnedObject;
   }
 }
