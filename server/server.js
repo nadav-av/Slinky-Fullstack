@@ -3,6 +3,7 @@ const users = require("./server/routes/users");
 const notifications = require("./server/routes/notification/notification");
 const statistics = require("./server/routes/Statistics/statistics");
 const booking = require("./server/routes/booking/booking");
+const orders = require("./server/routes/FoodOrder/foodOrder");
 const logger = require("./server/middleware/logger.js");
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -17,6 +18,7 @@ app.use("/booking", booking);
 app.use("/users", users);
 app.use("/notifications", notifications);
 app.use("/statistics", statistics);
+app.use("/orders", orders);
 
 app.get("/", (req, res) => {
   res.send("Hello World");

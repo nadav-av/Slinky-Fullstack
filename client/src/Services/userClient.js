@@ -60,7 +60,7 @@ class UserClient {
     }
   }
 
-  async checkIfUserLoggedIn() {
+  async getUser() {
     const response = await fetch(`${this.url}/users/me`, {
       method: "GET",
       headers: {
@@ -70,7 +70,7 @@ class UserClient {
     });
     if (response.status === 200) {
       const res = await response.json();
-      return res.userName;
+      return res;
     }
     if (response.status === 400 || response.status === 401) {
       return INVALID_TOKEN;
@@ -95,7 +95,6 @@ class UserClient {
       return INVALID_TOKEN;
     }
   }
-
 }
 
 export default new UserClient();

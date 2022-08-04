@@ -1,12 +1,42 @@
 import React, { useState } from "react";
 import "./foodOrderForm.css";
+import userClient from "../../Services/userClient";
+import foodOrderClient from "../../Services/foodOrderClient";
+import { useNavigate } from "react-router-dom";
+import confetti from "canvas-confetti";
+import { SERVER_ERROR, INVALID_TOKEN } from "../../Services/Consts";
 
-const FoodOrderForm = ({ submitOrder }) => {
+const FoodOrderForm = ({
+  resturant,
+  namesAndOrders,
+  setNamesAndOrders,
+  setIsModalShown,
+}) => {
+  let navigate = useNavigate();
   const [foodOrder, setFoodOrder] = useState();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("foodOrder", foodOrder);
+    const myUser = await userClient.getUser();
+    const newFoodOrder = {
+      firstName: myUser.firstName,
+      lastName: myUser.lastName,
+      order: foodOrder,
+      resturant: resturant,
+    };
+    const res = await foodOrderClient.addOrder(newFoodOrder);
+    if (res === INVALID_TOKEN) {
+      navigate("/login");
+    }
+    if (res === SERVER_ERROR) {
+      alert("Server Error");
+    } else {
+      setNamesAndOrders([...namesAndOrders, newFoodOrder]);
+      setIsModalShown(false);
+      setTimeout(() => {
+        confetti();
+      }, 200);
+    }
   };
 
   return (

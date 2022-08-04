@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import cn from "classnames";
 import "./foodFlipCard.scss";
 import FoodOrderList from "./../FoodOrderList/FoodOrderList";
 import GenericModal from "../GenericModal/genericModal";
 import FoodOrderForm from "./../FoodOrderForm/FoodOrderForm";
+import foodOrderClient from "../../Services/foodOrderClient";
 
 function FoodFlipCard({ card }) {
   const [showBack, setShowBack] = useState(false);
   const [isModalShown, setIsModalShown] = useState(false);
   const [namesAndOrders, setNamesAndOrders] = useState([]);
+  const [names, setNames] = useState([]);
 
   function handleClick() {
     if (card.variant === "click") {
@@ -28,6 +30,21 @@ function FoodFlipCard({ card }) {
     }
   }
 
+  useEffect(() => {
+    foodOrderClient.getOrders(card.resturant).then((orders) => {
+      setNamesAndOrders(orders);
+      setNames(orders.map((order) => `${order.firstName} ${order.lastName}`));
+    });
+  }, []);
+
+  useEffect(() => {
+    setNames(
+      namesAndOrders.map((order) => {
+        return `${order.firstName} ${order.lastName}`;
+      })
+    );
+  }, [namesAndOrders]);
+
   return (
     <div>
       {isModalShown === true ? (
@@ -36,7 +53,14 @@ function FoodFlipCard({ card }) {
           onClose={() => {
             setIsModalShown(false);
           }}
-          content={<FoodOrderForm submitOrder = {setNamesAndOrders} />}
+          content={
+            <FoodOrderForm
+              resturant={card.resturant}
+              namesAndOrders={namesAndOrders}
+              setNamesAndOrders={setNamesAndOrders}
+              setIsModalShown={setIsModalShown}
+            />
+          }
         />
       ) : (
         <div
@@ -62,7 +86,7 @@ function FoodFlipCard({ card }) {
             <div className="card back">
               <div className="card-body d-flex justify-content-center align-items-center">
                 <div className="foodList"></div>
-                <FoodOrderList></FoodOrderList>
+                <FoodOrderList names={names}></FoodOrderList>
                 <button
                   className="add-order-btn"
                   onClick={() => setIsModalShown(true)}

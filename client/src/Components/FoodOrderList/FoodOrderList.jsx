@@ -2,12 +2,13 @@ import "./foodOrderList.css";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 
-const FoodOrderList = (props) => {
+const FoodOrderList = ({ names }) => {
   return (
     <div className="food-order-list-container">
       <List>
-        <ListItem>Nadav Avraham</ListItem>
-        <ListItem>Dana Cohen</ListItem>
+        {names.map((name, index) => (
+          <ListItem key={index}>{name}</ListItem>
+        ))}
       </List>
     </div>
   );

@@ -18,7 +18,7 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    userClient.checkIfUserLoggedIn().then((res) => {
+    userClient.getUser().then((res) => {
       if (res === INVALID_TOKEN) {
         setIsLoggedIn(false);
       } else {
