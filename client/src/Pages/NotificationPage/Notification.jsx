@@ -38,10 +38,10 @@ const toggle = () => setModal(!modal);
   return (
     <>
      {modal === true ? 
-    <GenericModal open ={modal} onClose ={()=> {setModal(false)}} content={<CreateTask toggle ={toggle} modal ={modal}/>}/>
+    <GenericModal open ={modal} onClose ={()=> {setModal(false)}} content={<CreateTask onSubmit={() => setModal(false)} toggle ={toggle} modal ={modal}/>}/>
     :
     <>
-    <div className = "header-not text-center">
+    <div className = "header-not">
     <h1 id="board-title-txt">Notification board</h1>
     <br></br>
     <button className="btn btn-primary mt-2" id="create-btn-not" onClick={() => setModal(true)}> Create notification</button>
