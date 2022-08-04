@@ -61,6 +61,7 @@ const BookingForm = ({officeId,bookingPlace}) => {
 
   useEffect(() => {
     if (isStartHour && startHour !== -1) {
+      console.log('start hour' +startHour);
       setIsEndHour(false);
       const a = calcAvailableEndHours();
       setAvailableEndHours(a);
@@ -99,10 +100,10 @@ const BookingForm = ({officeId,bookingPlace}) => {
   };
 
   const showStartValue = () => {
-    if (startHour === -1) {
+    if (startHour === -1 || !isStartHour) {
        return null;
     }
-    return convertToDropdownComp([startHour])[0]
+    return convertToDropdownComp([startDate.getHours()])[0]
   }
 
   const showEndValue = () => {
