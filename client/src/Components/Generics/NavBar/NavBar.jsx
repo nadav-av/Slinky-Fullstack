@@ -125,6 +125,17 @@ function NavBar({ loggedIn }) {
         </li>
         <li className="nav-item">
           <NavLink
+            to="/statistics"
+            className={({ isActive }) =>
+              "nav-links" + (isActive ? " activated" : "")
+            }
+            onClick={handleClick}
+          >
+            Statistics
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink
             to="/"
             className={({ isActive }) =>
               "nav-links" + (isActive ? " activated" : "")
