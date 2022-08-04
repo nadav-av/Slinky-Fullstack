@@ -7,6 +7,8 @@ const orders = require("./server/routes/FoodOrder/foodOrder");
 const logger = require("./server/middleware/logger.js");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const cron = require("node-cron");
+const clarOrders = require("./server/services/clearOrders");
 
 const app = express();
 app.use(express.json());
@@ -28,4 +30,8 @@ const port = process.env.PORT || "3042";
 
 app.listen(port, () => {
   console.log("Server started on port", port);
+});
+
+cron.schedule("0 0 0 * * *", () => {
+  clarOrders();
 });
