@@ -4,7 +4,7 @@ import { parseOffices,parseToStringHour,parseDate } from "../Generics/Parses/Par
 
 const TableBody = ({ tableData, columns, userBookings, setUserBookings }) => {
   const handleDelete = async (bookID, officeId) => {
-    const res = await bookingClient.deleteBooking(bookID, officeId);
+    const res = await bookingClient.deleteBooking(bookID);
     if (res) {
       const newBookings = userBookings.filter(
         (booking) => booking.id !== bookID

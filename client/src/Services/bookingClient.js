@@ -82,8 +82,7 @@ class bookingClient {
     return response.ok;
   }
 
-  async deleteBooking(bookId, officeId) {
-    console.log("officeID is : ", officeId);
+  async deleteBooking(bookId) {
     const userJWTToken = localStorage.getItem("x-auth-token");
     const response = await fetch(this.url+"/",
       {
@@ -94,7 +93,6 @@ class bookingClient {
         },
         body: JSON.stringify({
           bookingId: bookId,
-          officeId: officeId,
         }),
       }
     );

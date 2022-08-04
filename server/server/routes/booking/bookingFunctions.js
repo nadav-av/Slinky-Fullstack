@@ -44,7 +44,6 @@ async function deleteBooking(req, res) {
   try {
     const listToReturn = await BookingManager.deleteBooking(
       req.body.bookingId,
-      req.body.officeId,
       req.tokenData.userName
     );
     res.status(200).send(JSON.stringify(listToReturn));
