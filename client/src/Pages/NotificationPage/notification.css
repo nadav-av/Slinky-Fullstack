@@ -12,9 +12,21 @@
         margin-left: 20px;
     }
 #create-btn-not{
+margin-left: 42%;
+background-color: #4c56af; /* Green */
+border: none;
+border-radius: 10px;
+color: white;
+padding: 6px 12px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
 
 }
 #board-title-txt{
+margin-top: 1%;
+margin-left: 38%;
 }
 .header-not{
     height: 200px;
