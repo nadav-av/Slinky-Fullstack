@@ -5,11 +5,12 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import "@fullcalendar/daygrid/main.css";
 import "./calendarForm.css";
 import bookingClient from "../../Services/bookingClient";
+import {parseOffices} from "../Generics/Parses/Parses"
 
 const CalendarForm = () => {
     const [bookingsByDate,setBookingsByDate] = useState([]);
     const colorsTable =[];
-    const listOfColors = ['red','yellow','blue','pink','navy','purple','orange','green']
+    const listOfColors = ['red','brown','yellow','blue','pink','navy','purple','orange','green']
 
     const getDayEvents =async (date) => {
         const dayEvents = await bookingClient.getDayBookings(date);
@@ -19,7 +20,7 @@ const CalendarForm = () => {
     const parseToFullCalendarView = (array) => {
         return array.map((obj) => {
             const newObj = {};
-            newObj.title = obj.userName + ' - office ' + obj.officeId + ' - seat ' + obj.bookingPlace;
+            newObj.title = obj.userName + ' - ' + parseOffices(obj.officeId) + ' - seat ' + obj.bookingPlace;
             newObj.start = obj.start;
             newObj.end = obj.end;
             newObj.color = getColor(obj.bookingPlace);

@@ -9,6 +9,7 @@ import "./bookingForm.css";
 import bookingClient from "../../Services/bookingClient";
 import { useNavigate } from "react-router-dom";
 import confetti from "canvas-confetti";
+import { parseToStringHour } from "../Generics/Parses/Parses"
 
 const BookingForm = ({officeId,bookingPlace}) => {
   const [startDate, setStartDate] = useState(new Date());
@@ -92,15 +93,9 @@ const BookingForm = ({officeId,bookingPlace}) => {
     return hoursArray.map((value) => {
       const obj = {};
       obj.value = value.toString();
-      obj.label = numHourToString(value);
+      obj.label = parseToStringHour(value);
       return obj;
     });
-  };
-
-  const numHourToString = (value) => {
-    return value > 9
-      ? value.toString() + ":00"
-      : "0" + value.toString() + ":00";
   };
 
   const showStartValue = () => {
