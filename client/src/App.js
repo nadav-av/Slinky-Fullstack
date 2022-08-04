@@ -14,7 +14,10 @@ import Notification from "./Pages/NotificationPage/Notification";
 import userClient from "./Services/userClient";
 import FoodOrder from "./Pages/FoodOrder/FoodOrder";
 import OfficePage from "./Pages/OfficePage/OfficePage";
+<<<<<<< HEAD
 import StatisticsPage from "./Pages/StatisticsPage/statistics";
+=======
+>>>>>>> 4d35cb75b9e96e8b97c4b0f466710413da7c03e0
 import CalendarForm from "./Components/Calendar/CalendarForm"; /*************************** */
 
 const App = () => {
@@ -52,7 +55,10 @@ const App = () => {
             <Route path="/mybookings" element={<UserBooking />} />
             <Route path="/orderfood" element={<FoodOrder />} />
             <Route path="/book" element={<OfficePage />} />
+<<<<<<< HEAD
             <Route path="/statistics" element = { <StatisticsPage/>}/>
+=======
+>>>>>>> 4d35cb75b9e96e8b97c4b0f466710413da7c03e0
             <Route path="/calendar" element={<CalendarForm />} /> 
           </Routes>
         </div>
