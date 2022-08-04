@@ -45,7 +45,7 @@ class bookingClient {
   }
 
   async getDayBookings(date) {
-    const response = await fetch((this.url+"/all-booking-by-date"),
+    const response = await fetch((this.url+"/booking/all-booking-by-date"),
       {
         method: "POST",
         headers: {
@@ -80,7 +80,7 @@ class bookingClient {
     return response.ok;
   }
 
-  async deleteBooking(bookId, officeId) {
+  async deleteBooking(bookId) {
     const userJWTToken = localStorage.getItem("x-auth-token");
     const response = await fetch(this.url+"/booking/",
       {

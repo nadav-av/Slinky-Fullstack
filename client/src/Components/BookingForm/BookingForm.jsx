@@ -20,10 +20,6 @@ const BookingForm = ({officeId,bookingPlace}) => {
   const [availableHours, setAvailableHours] = useState([]);
   const [availableEndHours, setAvailableEndHours] = useState([]);
   let navigate = useNavigate();
-<<<<<<< HEAD
-=======
-
->>>>>>> 4d35cb75b9e96e8b97c4b0f466710413da7c03e0
   const getAvailableHours = async (
     officeId,
     bookingPlace,

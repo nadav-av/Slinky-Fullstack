@@ -16,20 +16,14 @@
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
     "canvas-confetti": "^1.5.1",
-<<<<<<< HEAD
     "chart.js": "^3.9.0",
-=======
->>>>>>> 4d35cb75b9e96e8b97c4b0f466710413da7c03e0
     "classnames": "2.3.1",
     "date-fns": "^2.29.1",
     "email-validator": "^2.0.4",
     "fullcalendar": "^5.11.2",
     "monday-ui-react-core": "^1.50.0",
     "react": "^18.2.0",
-<<<<<<< HEAD
     "react-chartjs-2": "^4.3.1",
-=======
->>>>>>> 4d35cb75b9e96e8b97c4b0f466710413da7c03e0
     "react-csv": "^2.2.2",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",

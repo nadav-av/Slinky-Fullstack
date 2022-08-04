@@ -86,6 +86,11 @@ class BookingManager {
       date,
     );
   }
+  async getBookingByDate(date) {
+    return await this.bookingDatabase.getBookingByDate(
+      date,
+    );
+  }
 }
 
 module.exports = new BookingManager();
