@@ -1,8 +1,25 @@
 import "./notificationForm.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import notificationClient from "../../Services/notificationClient";
 import userClient from "../../Services/userClient"
 const NotificationForm = ({data,index}) => {
+
+  const [displayAtt, setDisplayAtt] = useState(false);
+
+  
+
+
+  useEffect(() => {
+    userClient
+      .getUser()
+      .then((myUser) => {
+        if(myUser.userName === data.madeBy)
+        {
+          setDisplayAtt(true);
+        }
+      });
+  }, []);
+
 
   const colors = [
     {
@@ -45,6 +62,8 @@ const renderSwitch = (category) =>{
 }
 
 
+
+
 const deleteNotification = async (notificationId) => {
   try {
     console.log('Form delete function: '+notificationId)
@@ -57,7 +76,7 @@ const deleteNotification = async (notificationId) => {
  alert("Notification Failed.");
 }
 }
-console.log(data,"data");
+console.log(displayAtt);
 return (
   <div class = "card-wrapper mr-5">
   <div class = "card-top" style={{"background-color": colors[renderSwitch(data.category)].primaryColor}}></div>
@@ -67,16 +86,19 @@ return (
       <h5>{data.category}</h5>  
       <br></br>
       <br></br>
-      <h5>{data.content}</h5>  
-      <div style={{"position": "absolute", "right" : "20px", "bottom" : "20px"}}>
-                    <i class="fas fa-trash-alt"  style = {{"color" : colors[renderSwitch(data.category)].primaryColor, "cursor" : "pointer"}} onClick = {()=>{deleteNotification(data.id)}}></i>
-      </div>
-      </div>
+      <h5>{data.content}</h5>
+      {
+        displayAtt ?       <div style={{"position": "absolute", "right" : "20px", "bottom" : "20px"}}>
+        <i className="fas fa-trash-alt"   style = {{"color" : colors[renderSwitch(data.category)].primaryColor, "cursor" : "pointer"}} onClick = {()=>{deleteNotification(data.id)}}></i>
+</div> : <></>
+      }  
+
+      </div>  
       </div>   
   );
 };
 
 
 
-// disabled = {me === data.madeBy? true:false}
+// 
 export default NotificationForm;
