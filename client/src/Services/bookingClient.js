@@ -46,6 +46,22 @@ class bookingClient {
     return takenHours;
   }
 
+  async getDayBookings(date) {
+    const response = await fetch((this.url+"/all-booking-by-date"),
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          date: date,
+        }),
+      }
+    );
+    const dayBookings = await response.json();
+    return dayBookings;
+  }
+
   async addBooking(officeId, bookingPlace, startDate, endDate) {
     const userJWTToken = localStorage.getItem("x-auth-token");
     const response = await fetch(this.url+"/",
@@ -66,8 +82,7 @@ class bookingClient {
     return response.ok;
   }
 
-  async deleteBooking(bookId, officeId) {
-    console.log("officeID is : ", officeId);
+  async deleteBooking(bookId) {
     const userJWTToken = localStorage.getItem("x-auth-token");
     const response = await fetch(this.url+"/",
       {
@@ -78,7 +93,6 @@ class bookingClient {
         },
         body: JSON.stringify({
           bookingId: bookId,
-          officeId: officeId,
         }),
       }
     );
