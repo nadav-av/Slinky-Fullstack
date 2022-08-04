@@ -43,7 +43,6 @@
   .card-header{
     margin-top: 10px;
     margin-bottom: 10px;
-    max-width: 80px;
     height: 30px;
     padding: 1px 1px !important;
     text-align: center;
@@ -56,4 +55,9 @@
     flex-wrap: wrap;
     background-color: #F6F7F8;
     padding : 40px 100px;
+  }
+  #made-by {
+    border-bottom: 0.1px solid #353838;
+    max-width: fit-content;
+    margin-left: 40%;
   }

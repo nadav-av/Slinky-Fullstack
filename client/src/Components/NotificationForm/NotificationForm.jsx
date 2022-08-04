@@ -3,11 +3,8 @@ import React, { useEffect, useState } from "react";
 import notificationClient from "../../Services/notificationClient";
 import userClient from "../../Services/userClient"
 const NotificationForm = ({data,index}) => {
-
-  const [displayAtt, setDisplayAtt] = useState(false);
-
+const [displayAtt, setDisplayAtt] = useState(false);
   
-
 
   useEffect(() => {
     userClient
@@ -78,27 +75,26 @@ const deleteNotification = async (notificationId) => {
 }
 console.log(displayAtt);
 return (
-  <div class = "card-wrapper mr-5">
-  <div class = "card-top" style={{"background-color": colors[renderSwitch(data.category)].primaryColor}}></div>
-  <div class = "task-holder">
-      <span class = "card-header" style={{"background-color": colors[renderSwitch(data.category)].secondaryColor, "border-radius": "10px"}}>{data.madeBy}</span>
+  <div className = "card-wrapper mr-5">
+  <div className = "card-top" style={{"background-color": colors[renderSwitch(data.category)].primaryColor}}></div>
+  <div className = "task-holder">
+      <span className = "card-header" style={{"background-color": colors[renderSwitch(data.category)].primaryColor, "border-radius": "10px"}}>{data.category}</span>
+      <h6 id="made-by">{data.madeBy}</h6>  
       <br></br>
-      <h5>{data.category}</h5>  
       <br></br>
-      <br></br>
+      <div className = "content-holder" style={{"background-color": colors[renderSwitch(data.category)].secondaryColor, "border-radius": "10px"}}>
       <h5>{data.content}</h5>
+      </div>
       {
-        displayAtt ?       <div style={{"position": "absolute", "right" : "20px", "bottom" : "20px"}}>
+        displayAtt ?     
+        <div style={{"position": "absolute", "right" : "20px", "bottom" : "20px"}}>
         <i className="fas fa-trash-alt"   style = {{"color" : colors[renderSwitch(data.category)].primaryColor, "cursor" : "pointer"}} onClick = {()=>{deleteNotification(data.id)}}></i>
-</div> : <></>
+        </div>
+        : <></>
       }  
-
       </div>  
       </div>   
   );
 };
 
-
-
-// 
 export default NotificationForm;
