@@ -15,35 +15,38 @@ import userClient from "./Services/userClient";
 import FoodOrder from "./Pages/FoodOrder/FoodOrder";
 import OfficePage from "./Pages/OfficePage/OfficePage";
 import StatisticsPage from "./Pages/StatisticsPage/statistics";
-import CalendarForm from "./Components/Calendar/CalendarForm"; /*************************** */
+import CalendarForm from "./Components/Calendar/CalendarForm";
+import { useSelector, useDispatch } from "react-redux";
+import { setUser, setIsLoggedIn } from "./Redux/Slices/userSlice";
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     userClient.getUser().then((res) => {
       if (res === INVALID_TOKEN) {
-        setIsLoggedIn(false);
+        dispatch(setIsLoggedIn(false));
       } else {
-        setIsLoggedIn(true);
+        dispatch(setUser(res));
+        dispatch(setIsLoggedIn(true));
       }
     });
-  });
+  }, []);
 
   return (
     <React.Fragment>
       <div className="App">
         <div className="contaier">
-          <Navbar loggedIn={isLoggedIn} />
+          <Navbar />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route
               path="/signup"
-              element={<SignUp setLoggedIn={setIsLoggedIn} />}
+              element={<SignUp/>}
             />
             <Route
               path="/login"
-              element={<Login setLoggedIn={setIsLoggedIn} />}
+              element={<Login/>}
             />
             <Route path="/visualmap" element={<VisualMap />} />
             <Route path="*" element={<NotFound />} />
@@ -52,8 +55,8 @@ const App = () => {
             <Route path="/mybookings" element={<UserBooking />} />
             <Route path="/orderfood" element={<FoodOrder />} />
             <Route path="/book" element={<OfficePage />} />
-            <Route path="/statistics" element = { <StatisticsPage/>}/>
-            <Route path="/calendar" element={<CalendarForm />} /> 
+            <Route path="/statistics" element={<StatisticsPage />} />
+            <Route path="/calendar" element={<CalendarForm />} />
           </Routes>
         </div>
       </div>
