@@ -8,6 +8,7 @@ class BookingManagerValidator{
         if(this.isDateTimeNotValid(startDate)) return false;
         if(this.isDateTimeNotValid(endDate)) return false;
         if(this.isStartDateIsNotBeforeEndDate(startDate, endDate)) return false;
+        if(this.isDateInRange(startDate, endDate) === false) return false;
         return true;
     }
     isBookingPlaceNotValid(bookingPlace){
@@ -19,6 +20,12 @@ class BookingManagerValidator{
     isDateTimeNotValid(date){
         if (!(date instanceof Date) || isNaN(date)) return true;
         return false;
+    }
+    isDateInRange(startingDate, endingDate){
+        const diffTime = Math.abs(endingDate - startingDate);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        if(diffDays > 1 || diffDays <= 0) return false
+        return true;
     }
     isStartDateIsNotBeforeEndDate(startDate, endDate){
         return !(startDate < endDate);

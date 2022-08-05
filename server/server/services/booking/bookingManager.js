@@ -26,7 +26,14 @@ class BookingManager {
       startDate,
       endDate
     );
-    return bookOrder;
+    const bookToReturn = {
+        id:bookOrder.id,
+        officeId:bookOrder.officeId,
+        bookingPlace:bookOrder.bookingPlace,
+        startDate:bookOrder.startDate,
+        endDate:bookOrder.endDate
+      }
+    return bookToReturn;
   }
   async getBookingsOfUser(userName) {
     return await this.bookingDatabase.getBookingsOfUser(userName);

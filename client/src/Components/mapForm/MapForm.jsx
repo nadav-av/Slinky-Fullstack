@@ -13,8 +13,6 @@ const MapForm = (office) => {
     setIsOpenModal(true);
     setofficeId(officeId);
   };
-
-  console.log(officeId);
   const map1 = () => {
     const officePosition = officePositions["1"];
     return (
@@ -27,7 +25,6 @@ const MapForm = (office) => {
   }
 
   const map2 = () => {
-    console.log('map2')
     const officePosition = officePositions["2"];
     return (
       <div id="map2">
