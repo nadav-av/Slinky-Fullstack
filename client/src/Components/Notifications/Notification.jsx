@@ -1,8 +1,8 @@
 import React, { useState,useEffect } from "react";
 import "./notification.css";
-import NotificationForm from "../../Components/NotificationForm/NotificationForm";
+import NotificationForm from "../NotificationForm/NotificationForm";
 import CreateTask from "../../Modals/CreateTask";
-import GenericModal from "../../Components/GenericModal/genericModal"
+import GenericModal from "../GenericModal/genericModal"
 import notificationClient from "../../Services/notificationClient";
 import { INVALID_NOTIFICATIONS } from "../../Services/Consts";
 

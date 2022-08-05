@@ -10,7 +10,7 @@ import SignUp from "./Pages/SignUp/SignUp";
 import VisualMap from "./Pages/visualMap/VisualMap";
 import UserBooking from "./Pages/UserBookings/UserBookings";
 import HomePage from "./Pages/HomePage/HomePage";
-import Notification from "./Pages/NotificationPage/Notification";
+import NotificationPage from "./Pages/NotificationPage/NotificationPage";
 import userClient from "./Services/userClient";
 import FoodOrder from "./Pages/FoodOrder/FoodOrder";
 import OfficePage from "./Pages/OfficePage/OfficePage";
@@ -47,7 +47,7 @@ const App = () => {
             <Route path="/visualmap" element={<VisualMap />} />
             <Route path="*" element={<NotFound />} />
             <Route path="/booking" element={<BookingForm />} />
-            <Route path="/notification" element={<Notification />} />
+            <Route path="/notification" element={<NotificationPage />} />
             <Route path="/mybookings" element={<UserBooking />} />
             <Route path="/orderfood" element={<FoodOrder />} />
             <Route path="/book" element={<OfficePage />} />

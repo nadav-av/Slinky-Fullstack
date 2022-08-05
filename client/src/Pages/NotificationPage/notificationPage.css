@@ -1,4 +1,4 @@
-.food-order-container {
+.notification-container {
     position: absolute;
     padding: 33px 30px;
     width: 100%;
@@ -6,7 +6,7 @@
 
 }
 
-.food-order-glass {
+.notification-glass {
     left: 50%;
     top: 54%;
     transform: translate(-50%, -50%);
