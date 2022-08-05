@@ -98,10 +98,12 @@ const UserBookingTable = () => {
     return (
       <div className="user-booking-table">
         <>
-          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+          <Box sx={{ borderBottom: 0, borderColor: "divider" }}>
             <Tabs
+              id="option-tabs"
               value={value}
               onChange={handleChange}
+              centered
               TabIndicatorProps={{
                 style: {
                   backgroundColor: "#A77BCA",
@@ -120,30 +122,34 @@ const UserBookingTable = () => {
           </Box>
           <TabPanel value={value} index={0}>
             {userFutureBookings.length > 0 ? (
-              <table className="content-table">
-                <TableHead columns={futureColumns} />
-                <TableBody
-                  columns={futureColumns}
-                  tableData={userFutureBookings}
-                  userBookings={userFutureBookings}
-                  setUserBookings={setUserFutureBookings}
-                />
-              </table>
+              <div className="booking-table">
+                <table className="content-table">
+                  <TableHead columns={futureColumns} />
+                  <TableBody
+                    columns={futureColumns}
+                    tableData={userFutureBookings}
+                    userBookings={userFutureBookings}
+                    setUserBookings={setUserFutureBookings}
+                  />
+                </table>
+              </div>
             ) : (
               showNoBookings()
             )}
           </TabPanel>
           <TabPanel value={value} index={1}>
             {userPastBookings.length > 0 ? (
-              <table className="content-table">
-                <TableHead columns={pastColumns} />
-                <TableBody
-                  columns={pastColumns}
-                  tableData={userPastBookings}
-                  userBookings={userPastBookings}
-                  setUserBookings={setUserPastBookings}
-                />
-              </table>
+              <div className="booking-table">
+                <table className="content-table">
+                  <TableHead columns={pastColumns} />
+                  <TableBody
+                    columns={pastColumns}
+                    tableData={userPastBookings}
+                    userBookings={userPastBookings}
+                    setUserBookings={setUserPastBookings}
+                  />
+                </table>
+              </div>
             ) : (
               showNoBookings()
             )}

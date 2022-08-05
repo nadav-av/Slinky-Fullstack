@@ -1,34 +1,22 @@
 .user-booking-container {
     position: absolute;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
     padding: 33px 30px;
-    background-color: #d9e4f5;
-    background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
     width: 100%;
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    height: 100%;
+
 }
 
 .user-bookong-header
 {
     position: absolute;
-    top: 100px;
+    top: 10%;
+    align-items: center;
 }
 
+
 .user-booking-glass {
-    position: absolute;
     left: 50%;
-    top: 53%;
+    top: 54%;
     transform: translate(-50%, -50%);
     height: 97%;
     width: 99%;

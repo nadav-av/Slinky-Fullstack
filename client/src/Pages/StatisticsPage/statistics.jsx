@@ -4,9 +4,11 @@ import Statistics from "../../Components/Statistics/statistics";
 
 const StatisticsPage = () => {
   return (
-   <div className="notification-container">
-     <Statistics/>
-   </div>
+    <div className="statistics-container">
+      <div className="statistics-glass">
+        <Statistics />
+      </div>
+    </div>
   );
 };
 

@@ -38,7 +38,7 @@ const MapForm = (office) => {
 
   return (
 
-    <div>
+    <div className="map-modal">
     {isOpenModal === true ? 
     <GenericModal open ={isOpenModal} onClose ={()=> {setIsOpenModal(false)}} content={
       <BookingForm officeId={officeId} bookingPlace={bookingPlace}/>
