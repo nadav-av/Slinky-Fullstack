@@ -6,6 +6,7 @@
     width: 100%;
     height: 100%;
     transition: all 0.3s ease-in-out;
+
 }
 
 
@@ -17,7 +18,8 @@
         flex-wrap: wrap;
         /* justify-content: space-between; */
         margin-left: 20px;
-        overflow: scroll;
+        overflow-y: scroll;
+        height: 450px;
     }
 #create-btn-not{
 margin-left: 42%;
