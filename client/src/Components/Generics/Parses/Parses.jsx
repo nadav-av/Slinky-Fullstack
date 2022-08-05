@@ -8,7 +8,6 @@ export function parseOffices (officeId) {
 }
 
 export function parseToStringHour (data) {
-    console.log(typeof(data));
     if (typeof(data) === 'number') {
         return data > 9 ?
          data.toString() + ":00"

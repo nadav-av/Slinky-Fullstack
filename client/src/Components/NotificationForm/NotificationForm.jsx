@@ -63,7 +63,6 @@ const renderSwitch = (category) =>{
 
 const deleteNotification = async (notificationId) => {
   try {
-    console.log('Form delete function: '+notificationId)
      await notificationClient.deleteNotification(
       notificationId,
      )
@@ -73,7 +72,6 @@ const deleteNotification = async (notificationId) => {
  alert("Notification Failed.");
 }
 }
-console.log(displayAtt);
 return (
   <div className = "card-wrapper mr-5">
   <div className = "card-top" style={{"background-color": colors[renderSwitch(data.category)].primaryColor}}></div>
