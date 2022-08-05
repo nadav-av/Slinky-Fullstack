@@ -1,10 +1,10 @@
 
 .content-container {
-  height: 97%;
-  width: 50%;
+  height: 100%;
   border: none;
   position: relative;
-  top: 50%;
+  margin-top:60px;
+  top: 42%;
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
