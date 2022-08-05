@@ -36,6 +36,7 @@ const FoodOrder = () => {
   return (
     <div className="food-order-container">
       <div className="food-order-glass">
+        <h1 className="order-food-header"> Order Food </h1>
         {cards.map((card) => (
           <FoodFlipCard key={card.id} card={card} />
         ))}
