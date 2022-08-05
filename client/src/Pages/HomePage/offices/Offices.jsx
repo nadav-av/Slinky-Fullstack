@@ -12,7 +12,7 @@ const Offices = () => {
   return (
     <div className="office-container" style={backgroundOffice}>
       <div className="header">
-        <h1>Our Offices</h1>
+        <h2>Our Offices</h2>
       </div>
       <div className="offices">
         <div className="office_option">
