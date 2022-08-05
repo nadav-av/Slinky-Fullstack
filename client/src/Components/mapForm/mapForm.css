@@ -1,9 +1,18 @@
-
+.map-modal
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
 
 #mapBackGround{
 background-image:url("./large-regular-office-floor-plan.png");
 height: 635px;
 width: 660px;
+
 }
 #c1{
     position: absolute;
@@ -108,7 +117,6 @@ width: 660px;
 
 }
     .btn-map {
-    position: relative;
     background-color: transparent;
     background-repeat: no-repeat;
     border: none;
@@ -126,6 +134,7 @@ width: 660px;
   }
 
   .map-center{
+    position: relative;
     border-radius: 10px;
     box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
   }
