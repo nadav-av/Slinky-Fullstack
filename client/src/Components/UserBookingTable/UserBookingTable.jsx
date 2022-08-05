@@ -137,15 +137,17 @@ const UserBookingTable = () => {
           </TabPanel>
           <TabPanel value={value} index={1}>
             {userPastBookings.length > 0 ? (
-              <table className="content-table">
-                <TableHead columns={pastColumns} />
-                <TableBody
-                  columns={pastColumns}
-                  tableData={userPastBookings}
-                  userBookings={userPastBookings}
-                  setUserBookings={setUserPastBookings}
-                />
-              </table>
+              <div className="booking-table">
+                <table className="content-table">
+                  <TableHead columns={pastColumns} />
+                  <TableBody
+                    columns={pastColumns}
+                    tableData={userPastBookings}
+                    userBookings={userPastBookings}
+                    setUserBookings={setUserPastBookings}
+                  />
+                </table>
+              </div>
             ) : (
               showNoBookings()
             )}
