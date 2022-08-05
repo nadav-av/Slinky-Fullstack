@@ -9,7 +9,7 @@ return (
     <Container>
     <Grid container>
       <Grid item xs={12} justifyContent={"center"}>
-  <div style={{width:700, margin:20}}>
+  <div style={{width:500, margin:20}}>
       <Line data={chartData}/>
   </div>
       </Grid>

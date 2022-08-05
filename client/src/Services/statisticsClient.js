@@ -5,24 +5,28 @@ class statisticsClient {
       this.url = process.env.REACT_APP_SERVER_URL || "http://localhost:3042";
     }
     async getChairsStatistics(officeId){
+      const userJWTToken = localStorage.getItem("x-auth-token");
         const dataSetLabel = "Chairs"
         const response = await fetch(`http://localhost:3042/statistics/${officeId}`,
         {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+            "x-auth-token": userJWTToken,
           },
         })
         const responseAsJson = await response.json();
         return this._getInformation(responseAsJson, dataSetLabel, officeId);
     }
     async getOfficesStatistics(){
+      const userJWTToken = localStorage.getItem("x-auth-token");
         const dataSetLabel = "Offices"
         const response = await fetch(`http://localhost:3042/statistics`,
         {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+            "x-auth-token": userJWTToken,
           },
         })
         const responseAsJson = await response.json();
@@ -42,16 +46,21 @@ class statisticsClient {
 return data;
     }
     async compareTwoDatesOfOffice(officeId, date1, date2){
+      const userJWTToken = localStorage.getItem("x-auth-token");
         const response = await fetch(`http://localhost:3042/statistics/compare-days/${officeId}/${date1}/${date2}`,
         {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+            "x-auth-token": userJWTToken,
           },
         })
         const responseAsJson = await response.json();
+        console.log(responseAsJson);
         const dataForDataset1 = this._createDataForDatasetsOfChairs(responseAsJson.firstDate, officeId);
         const dataForDataset2 = this._createDataForDatasetsOfChairs(responseAsJson.secondDate, officeId);
+        console.log("first data : ", dataForDataset1);
+        console.log("second data : ", dataForDataset2);
             const data = {
                 labels: officePositions[officeId],
         datasets: [
@@ -74,6 +83,9 @@ return data;
             }
     _createDataForDatasetsOfChairs(dataArr, officeId){
         const objectToReturn = [];
+        if(dataArr === undefined || dataArr.length === 0){
+          return objectToReturn;
+        }
         Object.keys(officePositions[officeId]).forEach(function(key){
             const x = officePositions[officeId][key];
             objectToReturn[x] = 0;
