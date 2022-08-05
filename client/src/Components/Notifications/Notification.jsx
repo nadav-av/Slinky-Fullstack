@@ -32,7 +32,7 @@ const Notification = () => {
   const toggle = () => setModal(!modal);
 
   return (
-    <div>
+    <div className="notifications-feature">
       {modal === true ? (
         <GenericModal
           open={modal}
