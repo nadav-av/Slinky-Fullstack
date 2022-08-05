@@ -6,6 +6,12 @@
 
 }
 
+.user-bookong-header
+{
+    position: absolute;
+    top: 10%;
+    align-items: center;
+}
 
 
 .user-booking-glass {

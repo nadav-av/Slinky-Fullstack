@@ -1,3 +1,14 @@
+.notifications-feature
+{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s ease-in-out;
+}
+
+
 
 
 .notification-container-array{
@@ -6,6 +17,7 @@
         flex-wrap: wrap;
         /* justify-content: space-between; */
         margin-left: 20px;
+        overflow: scroll;
     }
 #create-btn-not{
 margin-left: 42%;
