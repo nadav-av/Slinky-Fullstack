@@ -10,17 +10,25 @@
 }
 
 
+.notification-data {
+    position: relative;
+    margin-top: 20px;
+    max-height: 68%;
+    overflow-y: auto;
+    margin-left: 20px;
+    margin-right: 20px;
 
+
+}
 
 .notification-container-array{
         display: flex;
         flex-direction:row;
         flex-wrap: wrap;
         /* justify-content: space-between; */
-        margin-left: 20px;
-        overflow-y: scroll;
-        height: 450px;
+        /*height: 450px;*/
     }
+
 #create-btn-not{
 margin-left: 42%;
 background-color: #4c56af; /* Green */

@@ -61,7 +61,7 @@ const Notification = () => {
               Create notification
             </button>
           </div>
-          <div className="notification-container">
+          <div className="notification-data">
             <div className="notification-container-array">
               {data.map((element, index) => (
                 <NotificationForm data={element} key={index}></NotificationForm>
