@@ -63,8 +63,6 @@ async function updateNotification(req, res) {
   }
 }
 
-//ADD GET ALL (GENERAL)
-
 module.exports = {
     createNotification,
     getAllNotification,
