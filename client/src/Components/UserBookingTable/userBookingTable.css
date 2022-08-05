@@ -4,6 +4,13 @@
   top:20%;
 }
 
+.booking-table
+{
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+
 
 .content-table {
   border-collapse: collapse;
