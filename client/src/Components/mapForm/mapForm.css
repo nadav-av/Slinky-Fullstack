@@ -125,7 +125,9 @@ width: 660px;
   }
 
   .map-center{
-    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 400px;
     height: 400px;
     border-radius: 10px;
