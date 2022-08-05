@@ -36,18 +36,14 @@ const App = () => {
   return (
     <React.Fragment>
       <div className="App">
-        <div className="contaier">
+        <div className="nav-bar">
           <Navbar />
+        </div>
+        <div className="contaier">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route
-              path="/signup"
-              element={<SignUp/>}
-            />
-            <Route
-              path="/login"
-              element={<Login/>}
-            />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/visualmap" element={<VisualMap />} />
             <Route path="*" element={<NotFound />} />
             <Route path="/booking" element={<BookingForm />} />
