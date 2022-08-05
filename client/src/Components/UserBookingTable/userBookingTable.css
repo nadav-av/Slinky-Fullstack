@@ -6,7 +6,7 @@
 
 .booking-table
 {
-  max-height: 500px;
+  max-height: 50%;
   overflow-y: auto;
 }
 
