@@ -1,12 +1,12 @@
 .user-booking-table
 {
   position: absolute;
-  top: 25%;
+  top: 20%;
 }
 
 .booking-table
 {
-  max-height: 50%;
+  max-height: 450px;
   overflow-y: auto;
 }
 
