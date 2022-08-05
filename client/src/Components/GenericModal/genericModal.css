@@ -11,8 +11,7 @@
   justify-content: center;
   flex-wrap: wrap;
   background-color: red;
-  overflow-y: scroll;
-
+  overflow-y: auto;
 }
 
 .content-container:focus
