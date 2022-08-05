@@ -1,8 +1,5 @@
 .content-container {
     position: absolute;
-    top: 40%;
-    left: 40%;
-    transform: translate(-50%, -50%);
     /* width: 200px; */
     background: white;
     border-radius: 10px;
