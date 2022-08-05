@@ -67,7 +67,6 @@ router.post("/login", async (req, res) => {
 });
 
 router.get("/me", auth, async (req, res) => {
-  console.log(req.tokenData.userName);
   const user = await usersManager.getUser(req.tokenData.userName);
   if (user) {
     res.status(200).send(user);

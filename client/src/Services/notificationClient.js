@@ -42,7 +42,6 @@ class notificationClient {
     }
 
     async deleteNotification(notificationId) {
-      console.log("in notClient: ", notificationId);
       const userJWTToken = localStorage.getItem("x-auth-token");
       const response = await fetch(this.url+"/notifications",
         {
