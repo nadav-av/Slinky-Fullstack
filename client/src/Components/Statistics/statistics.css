@@ -1,13 +1,42 @@
-.form-date{
+/*.form-date{
     text-align: center;
     position: relative;
     display: inline;
     margin:5px;
+  }*/
+
+  .form-control {
+    position: relative;
+    text-align: center;
   }
 
+.statstic-form-options{
+  position: relative;
+  width: 600px;
+  text-align: center;
+  margin-bottom: 15px;
+  overflow-y: auto;
+}
 
-.booking-form-body{
+.statitcs-form-date{
+  position: relative;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.statistic-statistic-body{
+  margin-top: 5px;
+}
+
+.statistic-offices-body{
+  margin-top: 15px;
+}
+
+.statistics-data{
+  position: relative;
   margin-top: 20px;
+  height: 50%;
+  overflow-y: auto;
 }
 
 .chart-container{
@@ -16,6 +45,7 @@
     justify-content: center;
 }
 
-.chart-container-try{
+/*.chart-container-try{
     top:50%;
-}
+}*/
+
