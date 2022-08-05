@@ -3,6 +3,9 @@ function isInputBlank(str) {
     return (!str || isWhiteSpacesOnlyRegex.test(str));
 }
 function isNotNumber(value){
+    if(value === null){
+        return true;
+    }
     return isNaN(Number(value))
 }
 
