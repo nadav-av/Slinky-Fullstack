@@ -126,7 +126,7 @@ class BookingDatabaseManage {
         0,
         0
       );
-      const bookingByDateAndOfficeId = Booking.findAll({
+      const bookingByDateAndOfficeId = await Booking.findAll({
         where: {
           officeId,
           startDate: { [Op.gt]: startDateLimit },

@@ -60,7 +60,6 @@ const BookingForm = ({officeId,bookingPlace}) => {
 
   useEffect(() => {
     if (isStartHour && startHour !== -1) {
-      console.log('start hour' +startHour);
       setIsEndHour(false);
       const a = calcAvailableEndHours();
       setAvailableEndHours(a);

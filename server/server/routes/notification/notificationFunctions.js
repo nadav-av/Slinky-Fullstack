@@ -31,7 +31,6 @@ async function getAllNotification(req, res) {
 async function getAllNotificationOfOfficeId(req, res) {
   try {
     const listToReturn = await NotificationManager.getAllNotificationOfOfficeId(req.params.officeId);
-    console.log(listToReturn);
     res.status(200).send(JSON.stringify(listToReturn));
   } catch (error) {
     errorHandler(error, res);
@@ -40,7 +39,6 @@ async function getAllNotificationOfOfficeId(req, res) {
 
 async function deleteNotification(req, res) {
   try {
-    console.log('server notifFunction in rout: ', req.body.notificationId)
     const listToReturn = await NotificationManager.deleteNotification(
       req.body.notificationId,
       req.tokenData.userName

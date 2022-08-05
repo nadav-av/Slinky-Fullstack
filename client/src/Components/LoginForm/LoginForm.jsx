@@ -3,19 +3,22 @@ import "./loginForm.css";
 import userClient from "../../Services/userClient";
 import { useNavigate } from "react-router-dom";
 import { INVALID_PASSWORD, USER_NOT_FOUND } from "../../Services/Consts";
+import { useSelector, useDispatch } from "react-redux";
+import { setUser, setIsLoggedIn } from "../../Redux/Slices/userSlice";
 
-
-const LoginForm = ({ setLoggedIn }) => {
+const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginRes, setloginRes] = useState(null);
   let navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await userClient.login(username, password);
     if (res !== INVALID_PASSWORD && res !== USER_NOT_FOUND) {
-      setLoggedIn(true);
+      dispatch(setUser(res));
+      dispatch(setIsLoggedIn(true));
       navigate("/");
     } else {
       setloginRes(res);

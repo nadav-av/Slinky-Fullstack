@@ -32,7 +32,7 @@ const Statistics = () => {
         setSecondDateOfCompareDates(null);
         setWhichInfo("Chairs information");
         setShowDates(false);
-        setOfficeId(null);
+        setOfficeId("");
         break;
       case "Offices information":
         setWhichChart("BarChart");
@@ -40,7 +40,7 @@ const Statistics = () => {
         setSecondDateOfCompareDates(null);
         setIsShowOfficeIdRadioList(false);
         setShowDates(false);
-        setOfficeId(null);
+        setOfficeId("");
         setUserData(await statisticsClient.getOfficesStatistics());
         break;
       case "Compare dates":
@@ -51,7 +51,7 @@ const Statistics = () => {
         if (officeId !== null) {
           setShowDates(true);
         }
-        setOfficeId(null);
+        setOfficeId("");
     }
   };
 
@@ -62,6 +62,15 @@ const Statistics = () => {
         await statisticsClient.getChairsStatistics(event.target.value)
       );
     } else {
+      if(firstDateOfCompareDates !== null && secondDateOfCompareDates !== null){
+        setUserData(
+          await statisticsClient.compareTwoDatesOfOffice(
+            event.target.value,
+            firstDateOfCompareDates,
+            secondDateOfCompareDates
+          )
+        );
+      }
       setShowDates(true);
     }
     setWhichChart("LineChart");
@@ -87,9 +96,9 @@ const Statistics = () => {
   }, [userData]);
   return (
     <div className="chart-container">
-      <div>
-        <FormControl fullWidth>
-          <InputLabel id="Statistics-select-label">Statistics</InputLabel>
+      <div className="form-control">
+        <FormControl fullWidth margin="dense">
+          <InputLabel id="Statistics-select-label" margin="dense">Statistics</InputLabel>
           <Select
             labelId="Statistics-select-label"
             id="Statistics-select"
@@ -107,11 +116,10 @@ const Statistics = () => {
         {isShowOfficeIdRadioList === true ? (
           <div>
             <FormControl fullWidth spacing={2}>
-              <InputLabel id="Office-id-select-label">Office id</InputLabel>
+              <InputLabel id="Office-id-select-label">Offices</InputLabel>
               <Select
                 labelId="office-id-select"
                 id="office-id-select"
-                // defaultValue={""}
                 value={officeId}
                 label="Office"
                 onChange={handleChangeOfficeId}
@@ -166,7 +174,6 @@ const Statistics = () => {
                               )
                             );
                           }
-                          console.log("hey");
                         }}
                         renderInput={(params) => (
                           <TextField size="small" {...params} />

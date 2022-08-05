@@ -23,7 +23,6 @@ router.post("/", auth, (req, res) => {
       res.status(500).send(err);
     } else {
       const orders = JSON.parse(data);
-      console.log(orders);
       const firstName = req.body.firstName;
       const lastName = req.body.lastName;
       const order = req.body.order;
