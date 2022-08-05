@@ -98,10 +98,12 @@ const UserBookingTable = () => {
     return (
       <div className="user-booking-table">
         <>
-          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+          <Box sx={{ borderBottom: 0, borderColor: "divider" }}>
             <Tabs
+              id="option-tabs"
               value={value}
               onChange={handleChange}
+              centered
               TabIndicatorProps={{
                 style: {
                   backgroundColor: "#A77BCA",
