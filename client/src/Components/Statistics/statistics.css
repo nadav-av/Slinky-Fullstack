@@ -1,6 +1,8 @@
 .form-date{
     text-align: center;
     position: relative;
+    display: inline;
+    margin:5px;
   }
 
 

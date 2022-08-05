@@ -65,7 +65,7 @@ const Statistics = () => {
       if(firstDateOfCompareDates !== null && secondDateOfCompareDates !== null){
         setUserData(
           await statisticsClient.compareTwoDatesOfOffice(
-            officeId,
+            event.target.value,
             firstDateOfCompareDates,
             secondDateOfCompareDates
           )
@@ -96,7 +96,7 @@ const Statistics = () => {
   }, [userData]);
   return (
     <div className="chart-container">
-      <div>
+      <div className="form-control">
         <FormControl fullWidth margin="dense">
           <InputLabel id="Statistics-select-label" margin="dense">Statistics</InputLabel>
           <Select
