@@ -120,15 +120,17 @@ const UserBookingTable = () => {
           </Box>
           <TabPanel value={value} index={0}>
             {userFutureBookings.length > 0 ? (
-              <table className="content-table">
-                <TableHead columns={futureColumns} />
-                <TableBody
-                  columns={futureColumns}
-                  tableData={userFutureBookings}
-                  userBookings={userFutureBookings}
-                  setUserBookings={setUserFutureBookings}
-                />
-              </table>
+              <div className="booking-table">
+                <table className="content-table">
+                  <TableHead columns={futureColumns} />
+                  <TableBody
+                    columns={futureColumns}
+                    tableData={userFutureBookings}
+                    userBookings={userFutureBookings}
+                    setUserBookings={setUserFutureBookings}
+                  />
+                </table>
+              </div>
             ) : (
               showNoBookings()
             )}
