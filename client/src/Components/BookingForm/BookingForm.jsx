@@ -120,6 +120,7 @@ const BookingForm = ({officeId,bookingPlace}) => {
           </div>
           <div className="booking-form-body">
             <form onSubmit={handleSubmit}>
+              <div className="booking-form-options">
               <div className="form-date">
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <DatePicker
@@ -183,6 +184,7 @@ const BookingForm = ({officeId,bookingPlace}) => {
                     disabled={isStartHour ? false : true}
                   />
                 </div>
+              </div>
               </div>
               <input type="Submit" className="booking-submit" />
             </form>
