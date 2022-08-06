@@ -111,7 +111,8 @@ const Statistics = () => {
       <div className="form-control">
         <div className="statstic-form-options">
           <div className="statistic-statistic-body">
-            <FormControl>
+            <div  className="formcontrol-style">
+            <FormControl fullWidth spacing={2}>
               <InputLabel id="Statistics-select-label" margin="dense">
                 Statistics
               </InputLabel>
@@ -131,10 +132,12 @@ const Statistics = () => {
                 <MenuItem value={"Compare dates"}>Compare dates</MenuItem>
               </Select>
             </FormControl>
+            </div>
           </div>
           {isShowOfficeIdRadioList === true ? (
-            <div className="statistic-offices-body">
-              <FormControl spacing={2}>
+            <div className="statistic-officesanddates-body">
+              <div className="formcontrol-style">
+              <FormControl fullWidth spacing={2}>
                 <InputLabel id="Office-id-select-label">Offices</InputLabel>
                 <Select
                   labelId="office-id-select"
@@ -147,6 +150,7 @@ const Statistics = () => {
                   <MenuItem value={"2"}>Azrieli Square Tower</MenuItem>
                 </Select>
               </FormControl>
+              </div>
               {showDates === true ? (
                 <div className="statistic-dates-body">
                   <form>
