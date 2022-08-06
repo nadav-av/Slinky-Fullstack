@@ -4,11 +4,14 @@ import NotificationForm from "../NotificationForm/NotificationForm";
 import CreateTask from "../../Modals/CreateTask";
 import GenericModal from "../GenericModal/genericModal";
 import notificationClient from "../../Services/notificationClient";
+import { Loader } from "monday-ui-react-core";
 
 const Notification = () => {
   const [data, setData] = useState([]);
   const [modal, setModal] = useState(false);
   const [seconds, setSeconds] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+
 
   useEffect(() => {
     getNotifications();
@@ -22,13 +25,48 @@ const Notification = () => {
 
   const getNotifications = async () => {
     try {
-      setData(await notificationClient.getNotifications());
+      notificationClient.getNotifications()
+        .then ((res) => {
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 300) //only for better visualization
+          setData(res);
+        });
     } catch (err) {
+      setIsLoading(true);
       console.error("err");
     }
   };
 
+  useEffect(() => {
+  }, [data]);
+
   const toggle = () => setModal(!modal);
+
+  const showData = () => {
+    if (isLoading) {
+      return (
+        <div className="notifi-loader">
+        <Loader size={40} />
+        </div>
+      )
+    }
+    else {
+      return (
+        <div className="notification-data">
+              <div className="notification-container-array">
+                {data.map((element, index) => (
+                  <NotificationForm
+                    data={element}
+                    key={index}
+                    reRender={getNotifications}
+                  ></NotificationForm>
+                ))}
+              </div>
+            </div>
+      )
+    }
+  }
 
   return (
     <div className="notifications-feature">
@@ -61,17 +99,7 @@ const Notification = () => {
               Create notification
             </button>
           </div>
-          <div className="notification-data">
-            <div className="notification-container-array">
-              {data.map((element, index) => (
-                <NotificationForm
-                  data={element}
-                  key={index}
-                  reRender={getNotifications}
-                ></NotificationForm>
-              ))}
-            </div>
-          </div>
+          {showData()}
         </>
       )}
     </div>

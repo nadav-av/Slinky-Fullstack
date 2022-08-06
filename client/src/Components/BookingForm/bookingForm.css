@@ -19,6 +19,14 @@
   .booking-form-body{
     margin-top: 20px;
   }
+  .booking-form-options{
+    width: 220px;
+    margin: auto;
+  }
+  .dropdown-stories-styles_big-spacing{
+    width: 100%;
+  }
+
   .booking-form-container h1{
     text-align: center;
     padding: 20px 0;
@@ -36,8 +44,6 @@
   form .form-hours{
     margin: auto;
     display: block;
-    width: 80%;
-    /*height: 40px;*/
     font-size: 16px;
     margin-bottom: 15px;
   }
