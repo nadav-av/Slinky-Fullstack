@@ -26,7 +26,7 @@ const OfficeForm = () => {
                 <div className="header">
                     <h1>Choose Office</h1>
                 </div>
-                <div className="offices">
+                <div className="offices offices-choose">
                     <div className="office_option" onClick={()=>{getOffice(1);}}>
                     <div className="office_img">
                         <img src={office_1} alt="office" />

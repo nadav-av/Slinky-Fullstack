@@ -26,6 +26,11 @@
   margin-top: 50px;
 }
 
+.offices-choose{
+  max-height: 500px;
+  overflow-y: auto;
+}
+
 .offices .office_option{
   width: 250px;
   margin: 5px;

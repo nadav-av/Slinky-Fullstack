@@ -141,7 +141,7 @@ const SignUpForm = () => {
           <span></span>
           <label>Company</label>
         </div>
-        <input type="submit" value="Sign Up" />
+        <input className="signup-submit" type="submit" value="Sign Up" />
       </form>
     </div>
   );

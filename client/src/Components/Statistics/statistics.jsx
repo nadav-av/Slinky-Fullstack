@@ -1,5 +1,5 @@
 import "./statistics.css";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import BarChart from "./Charts/barChart";
 import statisticsClient from "../../Services/statisticsClient";
@@ -8,7 +8,6 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import TextField from "@mui/material/TextField";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import GenericModal from "../GenericModal/genericModal";
 
 const Statistics = () => {
   const [userData, setUserData] = useState([]);
@@ -20,7 +19,6 @@ const Statistics = () => {
     useState(null);
   const [officeId, setOfficeId] = useState(null);
   const [showDates, setShowDates] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleChangeStatisticsChoose = async (event) => {
     switch (event.target.value) {
@@ -52,6 +50,9 @@ const Statistics = () => {
           setShowDates(true);
         }
         setOfficeId("");
+        break;
+      default:
+        break;
     }
   };
 
@@ -62,7 +63,10 @@ const Statistics = () => {
         await statisticsClient.getChairsStatistics(event.target.value)
       );
     } else {
-      if(firstDateOfCompareDates !== null && secondDateOfCompareDates !== null){
+      if (
+        firstDateOfCompareDates !== null &&
+        secondDateOfCompareDates !== null
+      ) {
         setUserData(
           await statisticsClient.compareTwoDatesOfOffice(
             event.target.value,
@@ -82,115 +86,133 @@ const Statistics = () => {
         case "BarChart":
           return (
             <div className="chart-container-try">
-          <BarChart chartData={userData} />
-          </div>);
+              <BarChart chartData={userData} />
+            </div>
+          );
         case "LineChart":
           return (
             <div className="chart-container-try">
-          <LineChart chartData={userData} />
-          </div>);
+              <LineChart chartData={userData} />
+            </div>
+          );
+        default:
+          return null;
       }
     } else {
-      return <div>No Data yet</div>;
+      return (
+        <>
+          <div>No Data yet</div>
+        </>
+      );
     }
   }, [userData]);
   return (
     <div className="chart-container">
       <div className="form-control">
-        <FormControl fullWidth margin="dense">
-          <InputLabel id="Statistics-select-label" margin="dense">Statistics</InputLabel>
-          <Select
-            labelId="Statistics-select-label"
-            id="Statistics-select"
-            defaultValue={""}
-            label="Statistics"
-            onChange={handleChangeStatisticsChoose}
-          >
-            <MenuItem value={"Chairs information"}>Chairs information</MenuItem>
-            <MenuItem value={"Offices information"}>
-              Offices information
-            </MenuItem>
-            <MenuItem value={"Compare dates"}>Compare dates</MenuItem>
-          </Select>
-        </FormControl>
-        {isShowOfficeIdRadioList === true ? (
-          <div>
-            <FormControl fullWidth spacing={2}>
-              <InputLabel id="Office-id-select-label">Offices</InputLabel>
+        <div className="statstic-form-options">
+          <div className="statistic-statistic-body">
+            <FormControl>
+              <InputLabel id="Statistics-select-label" margin="dense">
+                Statistics
+              </InputLabel>
               <Select
-                labelId="office-id-select"
-                id="office-id-select"
-                value={officeId}
-                label="Office"
-                onChange={handleChangeOfficeId}
+                labelId="Statistics-select-label"
+                id="Statistics-select"
+                defaultValue={""}
+                label="Statistics"
+                onChange={handleChangeStatisticsChoose}
               >
-                <MenuItem value={"1"}>Rubinshtein Twin Towers</MenuItem>
-                <MenuItem value={"2"}>Azrieli Square Tower</MenuItem>
+                <MenuItem value={"Chairs information"}>
+                  Chairs information
+                </MenuItem>
+                <MenuItem value={"Offices information"}>
+                  Offices information
+                </MenuItem>
+                <MenuItem value={"Compare dates"}>Compare dates</MenuItem>
               </Select>
             </FormControl>
-            {showDates === true ? (
-              <div className="booking-form-body">
-                <form>
-                  <div className="form-date">
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                      <DatePicker
-                        class="ui-datepicker"
-                        label="Date"
-                        inputFormat="dd/MM/yyyy"
-                        value={firstDateOfCompareDates}
-                        onChange={async (date) => {
-                          setFirstDateOfCompareDates(new Date(date));
-                          if (secondDateOfCompareDates !== null) {
-                            setUserData(
-                              await statisticsClient.compareTwoDatesOfOffice(
-                                officeId,
-                                new Date(date),
-                                secondDateOfCompareDates
-                              )
-                            );
-                          }
-                        }}
-                        renderInput={(params) => (
-                          <TextField size="small" {...params} />
-                        )}
-                      />
-                    </LocalizationProvider>
-                  </div>
-                  <div className="form-date">
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                      <DatePicker
-                        class="ui-datepicker"
-                        label="Date"
-                        inputFormat="dd/MM/yyyy"
-                        value={secondDateOfCompareDates}
-                        onChange={async (date) => {
-                          setSecondDateOfCompareDates(new Date(date));
-                          if (firstDateOfCompareDates !== null) {
-                            setUserData(
-                              await statisticsClient.compareTwoDatesOfOffice(
-                                officeId,
-                                firstDateOfCompareDates,
-                                new Date(date)
-                              )
-                            );
-                          }
-                        }}
-                        renderInput={(params) => (
-                          <TextField size="small" {...params} />
-                        )}
-                      />
-                    </LocalizationProvider>
-                  </div>
-                </form>
-              </div>
-            ) : (
-              <></>
-            )}
           </div>
-        ) : (
-          <></>
-        )}
-        <div className="chart-container-try">{chooseWhichChart}</div>
+          {isShowOfficeIdRadioList === true ? (
+            <div className="statistic-offices-body">
+              <FormControl spacing={2}>
+                <InputLabel id="Office-id-select-label">Offices</InputLabel>
+                <Select
+                  labelId="office-id-select"
+                  id="office-id-select"
+                  value={officeId}
+                  label="Office"
+                  onChange={handleChangeOfficeId}
+                >
+                  <MenuItem value={"1"}>Rubinshtein Twin Towers</MenuItem>
+                  <MenuItem value={"2"}>Azrieli Square Tower</MenuItem>
+                </Select>
+              </FormControl>
+              {showDates === true ? (
+                <div className="statistic-dates-body">
+                  <form>
+                    <div className="statitcs-form-date">
+                      <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <DatePicker
+                          class="ui-datepicker"
+                          label="Date"
+                          inputFormat="dd/MM/yyyy"
+                          value={firstDateOfCompareDates}
+                          onChange={async (date) => {
+                            setFirstDateOfCompareDates(new Date(date));
+                            if (secondDateOfCompareDates !== null) {
+                              setUserData(
+                                await statisticsClient.compareTwoDatesOfOffice(
+                                  officeId,
+                                  new Date(date),
+                                  secondDateOfCompareDates
+                                )
+                              );
+                            }
+                          }}
+                          renderInput={(params) => (
+                            <TextField size="small" {...params} />
+                          )}
+                        />
+                      </LocalizationProvider>
+                    </div>
+                    <div className="statitcs-form-date">
+                      <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <DatePicker
+                          class="ui-datepicker"
+                          label="Date"
+                          inputFormat="dd/MM/yyyy"
+                          value={secondDateOfCompareDates}
+                          onChange={async (date) => {
+                            setSecondDateOfCompareDates(new Date(date));
+                            if (firstDateOfCompareDates !== null) {
+                              setUserData(
+                                await statisticsClient.compareTwoDatesOfOffice(
+                                  officeId,
+                                  firstDateOfCompareDates,
+                                  new Date(date)
+                                )
+                              );
+                            }
+                          }}
+                          renderInput={(params) => (
+                            <TextField size="small" {...params} />
+                          )}
+                        />
+                      </LocalizationProvider>
+                    </div>
+                  </form>
+                </div>
+              ) : (
+                <></>
+              )}
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
+        <div className="statistics-data">
+          <div className="chart-container-try">{chooseWhichChart}</div>
+        </div>
       </div>
     </div>
   );
