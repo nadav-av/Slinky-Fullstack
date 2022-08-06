@@ -12,7 +12,6 @@ const Notification = () => {
   const [modal, setModal] = useState(false);
   const [seconds, setSeconds] = useState(0);
   const [officeId,setOfficeId]=useState(1);
-  const [numOfOffices,setNumOfOffices]=useState(2);
   const [isLoading, setIsLoading] = useState(true);
 
 
@@ -60,16 +59,16 @@ const Notification = () => {
     else {
       return (
         <div className="notification-data">
-              <div className="notification-container-array">
-                {data.map((element, index) => (
-                  <NotificationForm
-                    data={element}
-                    key={index}
-                    reRender={getNotifications}
-                  ></NotificationForm>
-                ))}
-              </div>
-            </div>
+        <div className="notification-container-array">
+          {data.filter(notification =>notification.officeId === officeId).map((element, index) => (
+            <NotificationForm
+              data={element}
+              key={index}
+              reRender={getNotifications}
+            ></NotificationForm>
+          ))}
+        </div>
+      </div>
       )
     }
   }
@@ -110,19 +109,6 @@ const Notification = () => {
               {" "}
               Create notification
             </button>
-            
-          </div>
-          <div className="notification-data">
-          
-            <div className="notification-container-array">
-              {data.filter(notification =>notification.officeId === officeId).map((element, index) => (
-                <NotificationForm
-                  data={element}
-                  key={index}
-                  reRender={getNotifications}
-                ></NotificationForm>
-              ))}
-            </div>
           </div>
           {showData()}
         </>
