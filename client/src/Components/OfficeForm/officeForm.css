@@ -44,14 +44,15 @@
 
 .offices .office_option .office_img{
   background: #e9e5fa;  
-  max-width: 190px;
-  width: 100%;
+  width: 190px;
+  /*width: 100%;*/
   height: 190px;
   margin: 0 auto;
   border-radius: 50%;
-  padding: 5px;
   position: relative;
   cursor: pointer;
+  padding: 5px;
+  transition: .3s all ease-in-out;
 }
 
 .offices .office_option .office_img img{
@@ -82,4 +83,8 @@
 .soon {
   opacity: 0.6;
   cursor: none;
+}
+
+.office_option:hover .office_img{
+  padding: 0px;
 }
