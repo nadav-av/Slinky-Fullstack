@@ -39,15 +39,15 @@ const NotificationForm = ({ data, index, reRender }) => {
   const renderSwitch = (category) => {
     switch (category) {
       case "problem":
-        return 0;
-      case "idea":
-        return 1;
-      case "note":
-        return 2;
-      case "announcment":
         return 3;
-      case "emergancy":
+      case "idea":
+        return 0;
+      case "giveaway":
+        return 1;
+      case "announcment":
         return 4;
+      case "emergancy":
+        return 3;
       default:
         return 0;
     }

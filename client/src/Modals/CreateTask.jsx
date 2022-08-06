@@ -19,7 +19,7 @@ const CreateTask = ({ onSubmit, reRender }) => {
   let categories = [
     { value: "problem", label: "Problem" },
     { value: "idea", label: "Idea" },
-    { value: "note", label: "Givaway" },
+    { value: "giveaway", label: "Giveaway" },
     { value: "announcment", label: "Announcment" },
     { value: "emergancy", label: "Emergancy" },
   ];
