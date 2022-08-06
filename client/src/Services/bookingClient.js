@@ -12,8 +12,10 @@ class bookingClient {
     const takenHours = await this.getTakenHours(officeId, bookingPlace, startDate, endDate);
     if (takenHours.length !== 0) {
       takenHours.forEach((element) => {
-        const diff = element.endHour - element.startHour;
-        const index = availableHours.indexOf(element.startHour);
+        const newEndDate = new Date(element.endDate);
+        const newStartDate = new Date(element.startDate);
+        const diff = newEndDate.getHours() - newStartDate.getHours();
+        const index = availableHours.indexOf(newStartDate.getHours());
         if (index !== -1) {
           availableHours.splice(index, diff);
         }

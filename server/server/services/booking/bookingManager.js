@@ -77,21 +77,11 @@ class BookingManager {
     );
     const bookedHours = allBookings.map((bookingOrder) => {
       return {
-        startHour: bookingOrder.startDate.getHours(),
-        endHour: bookingOrder.endDate.getHours(),
+        startDate: bookingOrder.startDate,
+        endDate: bookingOrder.endDate,
       };
     });
     return bookedHours;
-  }
-  async getBookingByDate(date) {
-    return await this.bookingDatabase.getBookingByDate(
-      date,
-    );
-  }
-  async getBookingByDate(date) {
-    return await this.bookingDatabase.getBookingByDate(
-      date,
-    );
   }
   async getBookingByDate(date) {
     return await this.bookingDatabase.getBookingByDate(
