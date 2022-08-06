@@ -1,58 +1,75 @@
-.CreateTaskWrapper
+.add-notification-center
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.add-notification-text-area
 {
     position: relative;
-    width: 100%;
-    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 340px;
+    height: 200px;
+    background-color: #d9e4f5;
+    backdrop-filter: blur(5px);
+    margin-bottom: 30px;
+    margin-top: 20px;
+    resize: none;
 }
-.create-task-container{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height:450px;
-    width: 400px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
-    text-align: center;
-    padding: 20px 0;
-    border-bottom: 1px solid silver;
-    padding: 10px 80px;
-    box-sizing: border-box
-  }
-  .create-task-body{
-    margin-top: 200px;
+
+.add-notification-header
+{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    padding: 20px;
+}
+
+
+.add-notification-center input[type="submit"]{
+    width: 60%;
+    height: 50px;
+    border: 1px solid;
+    background: #A77BCA;
+    border-radius: 25px;
+    font-size: 18px;
+    color: #e9f4fb;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
   }
 
-  .create-task{
-   
-  }
-  .hovertext:before {
-    content: attr(data-hover);
-  }
-#content-input:hover:before {
-  opacity: 1;
-  visibility: visible;
+.add-notification-submit
+{
+    margin-top: 20px;
 }
-#category-input:hover:before {
-  opacity: 1;
-  visibility: visible;
+
+.add-notification-form
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    width: 450px;
+    height: 500px;
+    border-radius: 20px;
+
 }
-#submit-notification{
-  position: relative;
-  width: 100%;
-  height: 50px;
-  border: 1px solid;
-  background: #2691d9;
-  border-radius: 25px;
-  font-size: 18px;
-  color: #e9f4fb;
-  font-weight: 700;
-  cursor: pointer;
-  outline: none;
-  margin-bottom: 20px;
-}
-#submit-notification:hover{
-  border-color: #2691d9;
-  transition: .5s;
+
+.add-notification-form-control
+{
+    width: 50%;
 }

@@ -52,15 +52,15 @@ const FoodOrderForm = ({
 
   return (
     <div className="center food-order-center">
-      <h1 className="food-order-header">What do you want to eat</h1>
-      <form onSubmit={handleSubmit}>
+      <form className="food-order-form" onSubmit={handleSubmit}>
+        <h1 className="food-order-header">What do you want to eat</h1>
         <textarea
           className="food-order-text-area"
           type="text"
           onChange={(e) => setFoodOrder(e.target.value)}
           required
         />
-        <FormControl fullWidth>
+        <FormControl className="food-order-form-control">
           <InputLabel id="demo-simple-select-label">Office</InputLabel>
           <Select
             labelId="demo-simple-select-label"

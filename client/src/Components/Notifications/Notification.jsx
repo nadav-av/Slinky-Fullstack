@@ -4,7 +4,6 @@ import NotificationForm from "../NotificationForm/NotificationForm";
 import CreateTask from "../../Modals/CreateTask";
 import GenericModal from "../GenericModal/genericModal";
 import notificationClient from "../../Services/notificationClient";
-import { INVALID_NOTIFICATIONS } from "../../Services/Consts";
 
 const Notification = () => {
   const [data, setData] = useState([]);
@@ -44,6 +43,7 @@ const Notification = () => {
               onSubmit={() => setModal(false)}
               toggle={toggle}
               modal={modal}
+              reRender={getNotifications}
             />
           }
         />
@@ -61,10 +61,14 @@ const Notification = () => {
               Create notification
             </button>
           </div>
-          <div className="notification-container">
+          <div className="notification-data">
             <div className="notification-container-array">
               {data.map((element, index) => (
-                <NotificationForm data={element} key={index}></NotificationForm>
+                <NotificationForm
+                  data={element}
+                  key={index}
+                  reRender={getNotifications}
+                ></NotificationForm>
               ))}
             </div>
           </div>
