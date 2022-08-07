@@ -67,17 +67,20 @@ const NotificationForm = ({ data, index, reRender }) => {
       <div
         className="card-top"
         style={{
-          "background-color": colors[renderSwitch(data.category)].primaryColor,
+          backgroundColor: colors[renderSwitch(data.category)].primaryColor,
         }}
       ></div>
       <div className="task-holder">
-        <h6 id="office-id-label">{data.officeId === 1 ?"Rubinshtein Twin Towers" :"Azrieli Square Tower"}</h6>
+        <h6 id="office-id-label">
+          {data.officeId === 1
+            ? "Rubinshtein Twin Towers"
+            : "Azrieli Square Tower"}
+        </h6>
         <span
           className="card-header"
           style={{
-            "background-color":
-              colors[renderSwitch(data.category)].primaryColor,
-            "border-radius": "10px",
+            backgroundColor: colors[renderSwitch(data.category)].primaryColor,
+            borderRadius: "10px",
           }}
         >
           {data.category}
@@ -88,9 +91,8 @@ const NotificationForm = ({ data, index, reRender }) => {
         <div
           className="content-holder"
           style={{
-            "background-color":
-              colors[renderSwitch(data.category)].secondaryColor,
-            "border-radius": "10px",
+            backgroundColor: colors[renderSwitch(data.category)].secondaryColor,
+            borderRadius: "10px",
           }}
         >
           <h5>{data.content}</h5>
