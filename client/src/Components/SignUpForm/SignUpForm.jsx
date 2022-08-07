@@ -46,7 +46,7 @@ const SignUpForm = () => {
         confetti();
         navigate("/");
       } else {
-        alert(res); //when redux -> toggle error message in res to preset at top of page
+        alert(res);
       }
     }
   };
@@ -61,23 +61,23 @@ const SignUpForm = () => {
   ) => {
     if (firstName.length < 3) {
       alert("First name must be at least 3 characters");
-      return false; //when redux is implemented, toggle error message to preset at top of page
+      return false;
     }
     if (lastName.length < 3) {
       alert("Last name must be at least 3 characters");
-      return false; //when redux is implemented, toggle error message to preset at top of page
+      return false;
     }
     if (!emailValidator.validate(email)) {
       alert("Email is not valid");
-      return false; //when redux is implemented, toggle error message to preset at top of page
+      return false;
     }
     if (password.length < 5) {
       alert("Password must be at least 5 characters");
-      return false; //when redux is implemented, toggle error message to preset at top of page
+      return false;
     }
     if (username.length < 5) {
       alert("Username must be at least 5 characters");
-      return false; //when redux is implemented, toggle error message to preset at top of page
+      return false;
     } else {
       return true;
     }

@@ -20,7 +20,6 @@ class UserClient {
       body: JSON.stringify({ userName, password }),
     });
     if (response.status === 200) {
-      //get x-auth-token from response
       const res = await response.json();
       localStorage.setItem("x-auth-token", res.token);
       return res.user;
@@ -86,7 +85,6 @@ class UserClient {
     });
     if (response.status === 200) {
       const res = await response.json();
-      //const parsedRes = this.parseUserBookings(res);
       return res;
     }
     if (response.status === 400) {

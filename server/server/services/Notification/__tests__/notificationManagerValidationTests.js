@@ -1,9 +1,4 @@
 const NotificationManagerValidator = require('../notificationManagerValidation');
-// officeId:DataTypes.INTEGER,
-//     bookingPlace:DataTypes.STRING,
-//     userName: DataTypes.STRING,
-//     startDate: DataTypes.DATE,
-//     endDate: DataTypes.DATE
 const notificationManagerValidator = new NotificationManagerValidator();
 
 test('test that check each type paramter,and some validation logic', () => {
