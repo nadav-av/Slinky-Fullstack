@@ -62,7 +62,7 @@ const UserBookingTable = () => {
         setUserPastBookings(PastBookings);
         setTimeout(() => {
           setIsLoading(false);
-        }, 500); //only for better visualization
+        }, 500);
       })
       .catch(setIsLoading(true));
   }, []);

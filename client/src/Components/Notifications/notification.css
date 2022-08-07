@@ -25,13 +25,11 @@
         display: flex;
         flex-direction:row;
         flex-wrap: wrap;
-        /* justify-content: space-between; */
-        /*height: 450px;*/
     }
 
 #create-btn-not{
 margin-left: 42%;
-background-color: #4c56af; /* Green */
+background-color: #4c56af;
 border: none;
 border-radius: 10px;
 color: white;

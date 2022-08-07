@@ -84,4 +84,5 @@ const CreateTask = ({ onSubmit, reRender }) => {
   );
 };
 
+<<<<<<< HEAD
 export default CreateTask;

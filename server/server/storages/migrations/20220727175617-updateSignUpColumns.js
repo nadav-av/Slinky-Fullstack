@@ -1,6 +1,5 @@
 "use strict";
 
-//migration to update the sign up columns - unique email and user name
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.changeColumn("Users", "email", {
