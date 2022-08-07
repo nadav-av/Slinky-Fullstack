@@ -15,6 +15,7 @@ const BookingForm = ({officeId,bookingPlace}) => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [startHour, setStartHour] = useState(-1);
+  const [endHour, setEndHour] = useState(-1);
   const [isStartHour, setIsStartHour] = useState(false);
   const [isEndHour, setIsEndHour] = useState(false);
   const [availableHours, setAvailableHours] = useState([]);
@@ -105,7 +106,7 @@ const BookingForm = ({officeId,bookingPlace}) => {
   }
 
   const showEndValue = () => {
-    if (startHour === -1 || !isEndHour) {
+    if (endHour === -1 || !isEndHour) {
        return null;
     }
     return convertToDropdownComp([endDate.getHours()])[0]
@@ -174,12 +175,14 @@ const BookingForm = ({officeId,bookingPlace}) => {
                     value={showEndValue()}
                     onOptionSelect={(input) => {
                       setIsEndHour(true);
+                      setEndHour(input.value);
                       endDate.setHours(input.value);
                       endDate.setMinutes(0);
                       endDate.setSeconds(0);
                     }}
                     onClear={() => {
-                      setIsEndHour(-1);
+                      setIsEndHour(false);
+                      setEndHour(-1);
                     }}
                     disabled={isStartHour ? false : true}
                   />
