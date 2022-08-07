@@ -23,7 +23,7 @@ app.use("/statistics", statistics);
 app.use("/orders", orders);
 
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.send("Server Is Up");
 });
 
 const port = process.env.PORT || "3042";

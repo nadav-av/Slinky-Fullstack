@@ -8,7 +8,6 @@ const NotificationForm = ({ data, index, reRender }) => {
   const myUser = useSelector((state) => state.allReducers.user.user);
 
   useEffect(() => {
-    console.log(myUser);
     if (myUser.userName === data.madeBy) {
       setDisplayAtt(true);
     }
