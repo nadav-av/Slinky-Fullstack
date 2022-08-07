@@ -53,17 +53,18 @@ class bookingClient {
   }
 
   async getDayBookings(date) {
+    const dateToSend = new Date(date);
+    dateToSend.setHours(11);
     const response = await fetch(`${this.url}/booking/all-booking-by-date`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        date: date,
+        date: dateToSend,
       }),
     });
     const dayBookings = await response.json();
-    console.log('bookingclient day-bookings '+JSON.stringify(dayBookings));
     return dayBookings;
   }
 

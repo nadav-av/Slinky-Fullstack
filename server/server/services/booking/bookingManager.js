@@ -1,7 +1,7 @@
 const BookingManagerValidator = require("./bookingManagerValidation");
 const BookingDatabaseManage = require("./bookingDatabaseManage");
 const { createError } = require("../General/errorCreator");
-const { isNotNumber } = require('../General/generalValidator');
+const { isNotNumber } = require("../General/generalValidator");
 
 class BookingManager {
   constructor() {
@@ -27,12 +27,12 @@ class BookingManager {
       endDate
     );
     const bookToReturn = {
-        id:bookOrder.id,
-        officeId:bookOrder.officeId,
-        bookingPlace:bookOrder.bookingPlace,
-        startDate:bookOrder.startDate,
-        endDate:bookOrder.endDate
-      }
+      id: bookOrder.id,
+      officeId: bookOrder.officeId,
+      bookingPlace: bookOrder.bookingPlace,
+      startDate: bookOrder.startDate,
+      endDate: bookOrder.endDate,
+    };
     return bookToReturn;
   }
   async getBookingsOfUser(userName) {
@@ -42,16 +42,24 @@ class BookingManager {
     return await this.bookingDatabase.getAllBookings();
   }
   async deleteBooking(bookingId, userName) {
-    return await this.bookingDatabase.deleteBooking(
-      bookingId,
-      userName
-    );
+    return await this.bookingDatabase.deleteBooking(bookingId, userName);
   }
-  async updateBooking(bookingId, officeId, bookingPlace, startDate, endDate, userName) {
+  async updateBooking(
+    bookingId,
+    officeId,
+    bookingPlace,
+    startDate,
+    endDate,
+    userName
+  ) {
     if (
       this.bookingManagerValidator.isBookingInformationValid(
-        officeId, bookingPlace, startDate, endDate
-      ) === false || isNotNumber(bookingId) === true
+        officeId,
+        bookingPlace,
+        startDate,
+        endDate
+      ) === false ||
+      isNotNumber(bookingId) === true
     ) {
       throw createError("parameters are not good", 400);
     }
@@ -84,9 +92,7 @@ class BookingManager {
     return bookedHours;
   }
   async getBookingByDate(date) {
-    return await this.bookingDatabase.getBookingByDate(
-      date,
-    );
+    return await this.bookingDatabase.getBookingByDate(date);
   }
 }
 
