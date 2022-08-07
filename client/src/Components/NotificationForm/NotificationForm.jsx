@@ -1,16 +1,17 @@
 import "./notificationForm.css";
 import React, { useEffect, useState } from "react";
 import notificationClient from "../../Services/notificationClient";
-import userClient from "../../Services/userClient";
+import { useSelector, useDispatch } from "react-redux";
+
 const NotificationForm = ({ data, index, reRender }) => {
   const [displayAtt, setDisplayAtt] = useState(false);
+  const myUser = useSelector((state) => state.allReducers.user.user);
 
   useEffect(() => {
-    userClient.getUser().then((myUser) => {
-      if (myUser.userName === data.madeBy) {
-        setDisplayAtt(true);
-      }
-    });
+    console.log(myUser);
+    if (myUser.userName === data.madeBy) {
+      setDisplayAtt(true);
+    }
   }, []);
 
   const colors = [

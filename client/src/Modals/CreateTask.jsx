@@ -47,10 +47,10 @@ const CreateTask = ({ onSubmit, reRender }) => {
             label="Office"
             onChange={handleOfficeChange}
           >
-            <MenuItem key={1} value={1}>
+            <MenuItem key={"Rubinshtein"} value={1}>
               Rubinshtein Twin Towers
             </MenuItem>
-            <MenuItem key={2} value={2}>
+            <MenuItem key={"Azrieli"} value={2}>
               Azrieli Square Tower
             </MenuItem>
           </Select>
@@ -65,7 +65,7 @@ const CreateTask = ({ onSubmit, reRender }) => {
             onChange={(e) => setCategory(e.target.value)}
           >
             {categories.map((category) => (
-              <MenuItem key={1} value={category.value}>
+              <MenuItem key={category.label} value={category.value}>
                 {category.label}
               </MenuItem>
             ))}
@@ -85,55 +85,3 @@ const CreateTask = ({ onSubmit, reRender }) => {
 };
 
 export default CreateTask;
-
-// <>
-//       <div className="createTaskWrapper">
-//         <div className="create-task-container">
-//           <h1>Your Notification</h1>
-//           <FormControl>
-//             <Dropdown
-//               placeholder="Office number"
-//               size={Dropdown.size.SMALL}
-//               options={offices}
-//               onOptionSelect={(input) => {
-//                 setOfficeId(input.value);
-//               }}
-//               onClear={() => {}}
-//             />
-//           </FormControl>
-//           <FormControl>
-//             <Dropdown
-//               placeholder="Category"
-//               size={Dropdown.size.SMALL}
-//               options={categories}
-//               onOptionSelect={(input) => {
-//                 setCategory(input.value);
-//               }}
-//               onClear={() => {}}
-//             />
-//           </FormControl>
-//           <br></br>
-//           <br></br>
-//           <br></br>
-//           <FormControl>
-//             <TextareaAutosize
-//               minRows={2}
-//               maxRows={4}
-//               aria-label="maximum height"
-//               placeholder="Content"
-//               style={{ width: 250 }}
-//               onChange={(e) => setContent(e.target.value)}
-//             />
-//           </FormControl>
-//           <br></br>
-//           <br></br>
-//           <Button
-//             id="submit-notification"
-//             onClick={addNotification}
-//             variant="raised"
-//           >
-//             Submit
-//           </Button>
-//         </div>
-//       </div>
-//     </>
