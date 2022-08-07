@@ -59,6 +59,7 @@ class bookingClient {
       }
     );
     const dayBookings = await response.json();
+    console.log('bookingclient day-bookings '+JSON.stringify(dayBookings));
     return dayBookings;
   }
 

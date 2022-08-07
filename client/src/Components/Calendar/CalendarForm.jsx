@@ -14,7 +14,9 @@ const CalendarForm = () => {
 
     const getDayEvents =async (date) => {
         const dayEvents = await bookingClient.getDayBookings(date);
-        setBookingsByDate (dayEvents)
+        console.log('calendarForm dayevents'+JSON.stringify(dayEvents));
+        setBookingsByDate(dayEvents);
+        console.log('calendarForm bookings after setBookings'+JSON.stringify(bookingsByDate));
     };
 
     const parseToFullCalendarView = (array) => {
