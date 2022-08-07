@@ -53,7 +53,7 @@ const NavBar = () => {
             }
             onClick={handleClick}
           >
-            SignUp
+            Sign Up
           </NavLink>
         </li>
       </ul>
@@ -148,7 +148,7 @@ const NavBar = () => {
             }
             onClick={handleLogout}
           >
-            LogOut
+            Log Out
           </NavLink>
         </li>
       </ul>

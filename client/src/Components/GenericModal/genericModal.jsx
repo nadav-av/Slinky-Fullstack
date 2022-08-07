@@ -1,6 +1,5 @@
 import React from "react";
 import Modal from "@mui/material/Modal";
-import {Button} from "@mui/material";
 import "./genericModal.css";
 
 const GenericModal = ({ open, onClose, content }) => {

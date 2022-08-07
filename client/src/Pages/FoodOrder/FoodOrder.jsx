@@ -16,7 +16,7 @@ const cards = [
   },
   {
     id: "2",
-    resturant: "tacobell",
+    resturant: "pandaexpress",
     variant: "hover",
     front: "Hover",
     back: "Back",
@@ -24,7 +24,7 @@ const cards = [
   },
   {
     id: "3",
-    resturant: "pandaexpress",
+    resturant: "tacobell",
     variant: "hover",
     front: "Hover",
     back: "Back",

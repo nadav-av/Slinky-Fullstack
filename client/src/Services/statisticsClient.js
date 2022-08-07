@@ -84,8 +84,8 @@ return data;
           return objectToReturn;
         }
         Object.keys(officePositions[officeId]).forEach(function(key){
-            const x = officePositions[officeId][key];
-            objectToReturn[x] = 0;
+            const keyPosition = officePositions[officeId][key];
+            objectToReturn[keyPosition] = 0;
         })
         dataArr.filter((element) => {
             objectToReturn[element.bookingPlace] = element.booked;
