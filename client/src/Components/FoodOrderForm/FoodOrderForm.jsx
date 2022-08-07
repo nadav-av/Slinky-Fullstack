@@ -17,7 +17,7 @@ const FoodOrderForm = ({
   setIsModalShown,
   logo,
 }) => {
-  const myUser = useSelector((state) => state.user.user);
+  const myUser = useSelector((state) => state.allReducers.user.user);
 
   let navigate = useNavigate();
   const [foodOrder, setFoodOrder] = useState();

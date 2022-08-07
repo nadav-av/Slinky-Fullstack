@@ -3,7 +3,7 @@ import "./loginForm.css";
 import userClient from "../../Services/userClient";
 import { useNavigate } from "react-router-dom";
 import { INVALID_PASSWORD, USER_NOT_FOUND } from "../../Services/Consts";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setUser, setIsLoggedIn } from "../../Redux/Slices/userSlice";
 
 const LoginForm = () => {

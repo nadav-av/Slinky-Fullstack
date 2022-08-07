@@ -10,8 +10,10 @@ import bookingClient from "../../Services/bookingClient";
 import { useNavigate } from "react-router-dom";
 import confetti from "canvas-confetti";
 import { parseToStringHour } from "../Generics/Parses/Parses"
+import { useSelector } from "react-redux";
 
-const BookingForm = ({officeId,bookingPlace}) => {
+const BookingForm = () => {
+  const bookingInfo = useSelector((state) => state.allReducers.booking.bookingInfo)
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [startHour, setStartHour] = useState(-1);
@@ -22,16 +24,14 @@ const BookingForm = ({officeId,bookingPlace}) => {
   const [availableEndHours, setAvailableEndHours] = useState([]);
   let navigate = useNavigate();
   const getAvailableHours = async (
-    officeId,
-    bookingPlace,
     startDate,
     endDate
   ) => {
     try {
       setAvailableHours(
         await bookingClient.getAvailableStartHours(
-          officeId,
-          bookingPlace,
+          bookingInfo.officeId,
+          bookingInfo.bookingPlace,
           startDate,
           endDate
         )
@@ -42,7 +42,7 @@ const BookingForm = ({officeId,bookingPlace}) => {
   };
 
   useEffect(() => {
-    getAvailableHours(officeId, bookingPlace, startDate, endDate);
+    getAvailableHours(startDate, endDate);
   }, [startDate]);
 
   const calcAvailableEndHours = () => {
@@ -72,8 +72,8 @@ const BookingForm = ({officeId,bookingPlace}) => {
     if (isStartHour && isEndHour) {
       try {
             await bookingClient.addBooking(
-              officeId,
-              bookingPlace,
+              bookingInfo.officeId,
+              bookingInfo.bookingPlace,
               startDate,
               endDate
             )
