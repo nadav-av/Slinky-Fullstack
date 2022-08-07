@@ -29,5 +29,3 @@ module.exports = {
     createNewErrorFromDatabaseError,
     createError
 };
-
-//TODO:FIX ERRORS

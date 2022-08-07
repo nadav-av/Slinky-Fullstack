@@ -23,47 +23,35 @@ const Statistics = () => {
   const handleChangeStatisticsChoose = async (event) => {
     switch (event.target.value) {
       case "Chairs information":
-        setStats(null, null, null, true)
-        // setIsShowOfficeIdRadioList(true);
+        setStats(null, null, null, true, "");
         setUserData([]);
-        // setWhichChart(null);
-        // setFirstDateOfCompareDates(null);
-        // setSecondDateOfCompareDates(null);
         setWhichInfo("Chairs information");
         setShowDates(false);
-        setOfficeId("");
         break;
       case "Offices information":
-        setStats("BarChart", null, null, false);
-        // setWhichChart("BarChart");
-        // setFirstDateOfCompareDates(null);
-        // setSecondDateOfCompareDates(null);
-        // setIsShowOfficeIdRadioList(false);
+        setStats("BarChart", null, null, false, "");
         setShowDates(false);
-        setOfficeId("");
         setUserData(await statisticsClient.getOfficesStatistics());
         break;
       case "Compare dates":
-        setStats(null, null, null, true)
+        setStats(null, null, null, true, "");
         setWhichInfo("Compare dates");
-        // setIsShowOfficeIdRadioList(true);
         setUserData([]);
-        // setWhichChart(null);
         if (officeId !== null) {
           setShowDates(true);
         }
-        setOfficeId("");
         break;
       default:
         break;
     }
   };
 
-  const setStats = (Chart, FirstDate, SecondDate, OfficeId) => {
+  const setStats = (Chart, FirstDate, SecondDate, OfficeId, setOfficeId) => {
     setWhichChart(Chart);
     setFirstDateOfCompareDates(FirstDate);
     setSecondDateOfCompareDates(SecondDate);
     setIsShowOfficeIdRadioList(OfficeId);
+    setOfficeId("");
   }
 
   const handleChangeOfficeId = async (event) => {

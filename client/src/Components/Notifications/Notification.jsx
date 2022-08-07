@@ -31,7 +31,7 @@ const Notification = () => {
         .then ((res) => {
           setTimeout(() => {
             setIsLoading(false);
-          }, 300) //only for better visualization
+          }, 300)
           setData(res);
         });
     } catch (err) {

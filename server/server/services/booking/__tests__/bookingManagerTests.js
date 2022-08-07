@@ -1,9 +1,4 @@
 const bookingManagerValidator = require('../bookingManagerValidation')
-// officeId:DataTypes.INTEGER,
-//     bookingPlace:DataTypes.STRING,
-//     userName: DataTypes.STRING,
-//     startDate: DataTypes.DATE,
-//     endDate: DataTypes.DATE
 const bookinValidator = new bookingManagerValidator();
 
 test('test that check each type paramter,and some validation logic, start date ', () => {
