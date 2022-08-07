@@ -7,7 +7,7 @@ class statisticsClient {
     async getChairsStatistics(officeId){
       const userJWTToken = localStorage.getItem("x-auth-token");
         const dataSetLabel = "Chairs"
-        const response = await fetch(`http://localhost:3042/statistics/${officeId}`,
+        const response = await fetch(`${this.url}/statistics/${officeId}`,
         {
           method: "GET",
           headers: {
@@ -21,7 +21,7 @@ class statisticsClient {
     async getOfficesStatistics(){
       const userJWTToken = localStorage.getItem("x-auth-token");
         const dataSetLabel = "Offices"
-        const response = await fetch(`http://localhost:3042/statistics`,
+        const response = await fetch(`${this.url}/statistics`,
         {
           method: "GET",
           headers: {
@@ -47,7 +47,7 @@ return data;
     }
     async compareTwoDatesOfOffice(officeId, date1, date2){
       const userJWTToken = localStorage.getItem("x-auth-token");
-        const response = await fetch(`http://localhost:3042/statistics/compare-days/${officeId}/${date1}/${date2}`,
+        const response = await fetch(`${this.url}/statistics/compare-days/${officeId}/${date1}/${date2}`,
         {
           method: "GET",
           headers: {
