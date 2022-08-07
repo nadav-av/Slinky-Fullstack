@@ -25,9 +25,9 @@ const OfficeForm = () => {
 
     return (
         <div>
-            {/* {isOpenModalBooking === true ?? */}
+            {isOpenModalBooking === true ?
             <GenericModal open ={isOpenModalBooking} onClose ={()=> {setIsOpenModalBooking(false)}} content={<BookingForm/>}/>
-            {/* } */}
+            :<></>}
             {isOpenModalMap === true ? 
             <GenericModal open ={isOpenModalMap} onClose ={()=> {setIsOpenModalMap(false)}} content={
             <MapForm officeId={officeId}/>
