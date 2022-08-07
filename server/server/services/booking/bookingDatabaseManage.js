@@ -6,10 +6,10 @@ class BookingDatabaseManage {
   getAllBookings = async (officeId = null) => {
     try {
       let data;
-      if(officeId === null){
+      if (officeId === null) {
         data = await Booking.findAll();
       } else {
-        data = await Booking.findAll({where:{officeId}});
+        data = await Booking.findAll({ where: { officeId } });
       }
       return data;
     } catch (error) {
@@ -109,13 +109,16 @@ class BookingDatabaseManage {
       throw createNewErrorFromDatabaseError(error);
     }
   };
-  getBookingByDateAndOfficeId = async(officeId, date) => {
+  getBookingByDateAndOfficeId = async (officeId, date) => {
     try {
       const startDateLimit = new Date(
         date.getFullYear(),
         date.getMonth(),
         date.getDate(),
-        0,0,0,0
+        0,
+        0,
+        0,
+        0
       );
       const endDateLimist = new Date(
         date.getFullYear(),
@@ -134,10 +137,10 @@ class BookingDatabaseManage {
         },
       });
       return bookingByDateAndOfficeId;
-    } catch(error){
+    } catch (error) {
       throw createNewErrorFromDatabaseError(error);
     }
-  }
+  };
 
   getBookingByDate = async (date) => {
     try {
@@ -145,17 +148,23 @@ class BookingDatabaseManage {
         date.getFullYear(),
         date.getMonth(),
         date.getDate(),
-        0,0,0,0
+        0,
+        0,
+        0,
+        0
       );
       const endDateLimist = new Date(
         date.getFullYear(),
         date.getMonth(),
         date.getDate() + 1,
-        0,0,0,0
+        0,
+        0,
+        0,
+        0
       );
       const bookingByDate = Booking.findAll({
         where: {
-          startDate: { [Op.gt]: startDateLimit },
+          startDate: { [Op.gte]: startDateLimit },
           endDate: { [Op.lt]: endDateLimist },
         },
       });

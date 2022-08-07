@@ -81,13 +81,17 @@ const UserBookingTable = () => {
     setValue(newValue);
   };
 
-  const showNoBookings = () => {
+  const showNoBookings = (tab) => {
     return (
       <>
         <div className="empty-table-container">
           <i className="fa-solid fa-hourglass empty-table-icon"></i>
         </div>
-        <h3>You don`t have any upcoming bookings</h3>
+        {tab === "past" ? (
+          <h3>You don`t have any upcoming bookings</h3>
+        ) : (
+          <h3>You don`t have any old bookings</h3>
+        )}
       </>
     );
   };
@@ -134,7 +138,7 @@ const UserBookingTable = () => {
                 </table>
               </div>
             ) : (
-              showNoBookings()
+              showNoBookings("past")
             )}
           </TabPanel>
           <TabPanel value={value} index={1}>
@@ -151,7 +155,7 @@ const UserBookingTable = () => {
                 </table>
               </div>
             ) : (
-              showNoBookings()
+              showNoBookings("future")
             )}
           </TabPanel>
         </>
