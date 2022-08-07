@@ -62,8 +62,8 @@
     align-items: center;
     justify-content: center;
     background-color: white;
-    width: 450px;
-    height: 400px;
+    width: 500;
+    height: 550px;
     border-radius: 20px;
 
 }
@@ -73,3 +73,9 @@
     width: 50%;
 }
 
+.food-order-form-logo img
+{
+    margin-top: 15px;
+    width: 100px;
+    height: 100px;
+}
