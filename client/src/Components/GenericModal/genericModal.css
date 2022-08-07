@@ -1,6 +1,6 @@
 
 .content-container {
-  height: 100%;
+  
   border: none;
   position: relative;
   margin-top:60px;
@@ -12,7 +12,9 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  overflow-y: auto;
+  /*overflow-y: auto;*/
+  height: fit-content;
+  width: fit-content;
 }
 
 .content-container:focus
