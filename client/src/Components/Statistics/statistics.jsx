@@ -26,32 +26,28 @@ const Statistics = () => {
         setStats(null, null, null, true, "");
         setUserData([]);
         setWhichInfo("Chairs information");
-        setShowDates(false);
         break;
       case "Offices information":
         setStats("BarChart", null, null, false, "");
-        setShowDates(false);
         setUserData(await statisticsClient.getOfficesStatistics());
         break;
       case "Compare dates":
         setStats(null, null, null, true, "");
         setWhichInfo("Compare dates");
         setUserData([]);
-        if (officeId !== null) {
-          setShowDates(true);
-        }
         break;
       default:
         break;
     }
   };
 
-  const setStats = (Chart, FirstDate, SecondDate, OfficeId, setOfficeId) => {
+  const setStats = (Chart, FirstDate, SecondDate, OfficeIdBool, id) => {
     setWhichChart(Chart);
     setFirstDateOfCompareDates(FirstDate);
     setSecondDateOfCompareDates(SecondDate);
-    setIsShowOfficeIdRadioList(OfficeId);
-    setOfficeId("");
+    setIsShowOfficeIdRadioList(OfficeIdBool);
+    setOfficeId(id);
+    setShowDates(false);
   }
 
   const handleChangeOfficeId = async (event) => {
