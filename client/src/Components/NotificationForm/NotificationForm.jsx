@@ -71,11 +71,6 @@ const NotificationForm = ({ data, index, reRender }) => {
         }}
       ></div>
       <div className="task-holder">
-        <h6 id="office-id-label">
-          {data.officeId === 1
-            ? "Rubinshtein Twin Towers"
-            : "Azrieli Square Tower"}
-        </h6>
         <span
           className="card-header"
           style={{
