@@ -10,7 +10,7 @@ import bookingClient from "../../Services/bookingClient";
 import { useNavigate } from "react-router-dom";
 import confetti from "canvas-confetti";
 import { parseToStringHour } from "../Generics/Parses/Parses"
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const BookingForm = () => {
   const bookingInfo = useSelector((state) => state.allReducers.booking.bookingInfo)

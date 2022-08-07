@@ -8,7 +8,7 @@ import officeReducer from "./Slices/officeSlice";
 const allReducers = combineReducers({
   user: userReducer,
   booking:bookingReducer,
-  office:officeReducer,
+  office:officeReducer
 });
 
 export const store = configureStore({
