@@ -1,12 +1,14 @@
 import React from "react";
 import Modal from "@mui/material/Modal";
+import {Button} from "@mui/material";
 import "./genericModal.css";
 
 const GenericModal = ({ open, onClose, content }) => {
   return (
     <div className="modal">
       <Modal open={open} onClose={onClose}>
-        <div className="content-container">{content}</div>
+        <div className="content-container">
+          {content}</div>
       </Modal>
     </div>
   );

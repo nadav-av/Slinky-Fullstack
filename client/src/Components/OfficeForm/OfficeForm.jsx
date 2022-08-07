@@ -1,24 +1,35 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./officeForm.css";
 import office_1 from "./offices-images/yitzhak-sadeh-6.jpg"
 import office_2 from "./offices-images/azrieli.jpg"
 import office_3 from "./offices-images/gav-yam1.jpg"
 import MapForm from "../mapForm/MapForm";
 import GenericModal from "../GenericModal/genericModal";
-
+import { useSelector, useDispatch } from "react-redux";
+import { setOnClose, setBookingForm } from "../../Redux/Slices/officeSlice";
+import BookingForm from "../BookingForm/BookingForm";
 
 const OfficeForm = () => {
+    const dispatch = useDispatch();
     const [officeId, setofficeId] = useState(0);
-    const [isOpenModal, setIsOpenModal] = useState(false);
+    const [isOpenModalMap, setIsOpenModalMap] = useState(false);
+    const [isOpenModalBooking, setIsOpenModalBooking] = useState(false);
     const getOffice = async (officeId) => {  
         setofficeId(officeId);
-        setIsOpenModal(true);
+        setIsOpenModalMap(true);
     };
+    useEffect(() => {
+        dispatch(setOnClose(setIsOpenModalMap))
+        dispatch(setBookingForm(setIsOpenModalBooking))
+    }, [])
 
     return (
         <div>
-            {isOpenModal === true ? 
-            <GenericModal open ={isOpenModal} onClose ={()=> {setIsOpenModal(false)}} content={
+            {/* {isOpenModalBooking === true ?? */}
+            <GenericModal open ={isOpenModalBooking} onClose ={()=> {setIsOpenModalBooking(false)}} content={<BookingForm/>}/>
+            {/* } */}
+            {isOpenModalMap === true ? 
+            <GenericModal open ={isOpenModalMap} onClose ={()=> {setIsOpenModalMap(false)}} content={
             <MapForm officeId={officeId}/>
             }/>
             :

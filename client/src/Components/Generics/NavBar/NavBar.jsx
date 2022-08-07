@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setIsLoggedIn } from "../../../Redux/Slices/userSlice";
 
 const NavBar = () => {
-  const loggedIn = useSelector((state) => state.user.isLoggedIn);
+  const loggedIn = useSelector((state) => state.allReducers.user.isLoggedIn);
   const dispatch = useDispatch();
 
   const [click, setClick] = useState(false);
