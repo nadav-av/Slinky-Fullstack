@@ -5,7 +5,7 @@ import office_2 from "../../../Components/OfficeForm/offices-images/azrieli.jpg"
 import office_3 from "../../../Components/OfficeForm/offices-images/gav-yam1.jpg";
 
 const backgroundOffice = {
-  "background-color": "#f5e3e6",
+  backgroundColor: "#f5e3e6",
 };
 
 const Offices = () => {

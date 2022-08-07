@@ -19,6 +19,10 @@ const SignUpForm = () => {
   const [company, setCompany] = useState("");
   let navigate = useNavigate();
 
+  const firstLetterToUpperCase = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const isDataValid = isUserDataValid(
@@ -31,8 +35,8 @@ const SignUpForm = () => {
     );
     if (isDataValid) {
       const newUser = {
-        firstName: firstName,
-        lastName: lastName,
+        firstName: firstLetterToUpperCase(firstName),
+        lastName: firstLetterToUpperCase(lastName),
         email: email,
         password: password,
         userName: username,

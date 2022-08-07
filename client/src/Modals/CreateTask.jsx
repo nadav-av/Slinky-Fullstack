@@ -47,8 +47,12 @@ const CreateTask = ({ onSubmit, reRender }) => {
             label="Office"
             onChange={handleOfficeChange}
           >
-            <MenuItem value={1}>Rubinshtein Twin Towers</MenuItem>
-            <MenuItem value={2}>Azrieli Square Tower</MenuItem>
+            <MenuItem key={"Rubinshtein"} value={1}>
+              Rubinshtein Twin Towers
+            </MenuItem>
+            <MenuItem key={"Azrieli"} value={2}>
+              Azrieli Square Tower
+            </MenuItem>
           </Select>
         </FormControl>
         <FormControl margin="normal" className="add-notification-form-control">
@@ -61,7 +65,9 @@ const CreateTask = ({ onSubmit, reRender }) => {
             onChange={(e) => setCategory(e.target.value)}
           >
             {categories.map((category) => (
-              <MenuItem value={category.value}>{category.label}</MenuItem>
+              <MenuItem key={category.label} value={category.value}>
+                {category.label}
+              </MenuItem>
             ))}
           </Select>
         </FormControl>
@@ -78,4 +84,5 @@ const CreateTask = ({ onSubmit, reRender }) => {
   );
 };
 
+<<<<<<< HEAD
 export default CreateTask;

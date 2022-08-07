@@ -1,16 +1,17 @@
 import "./notificationForm.css";
 import React, { useEffect, useState } from "react";
 import notificationClient from "../../Services/notificationClient";
-import userClient from "../../Services/userClient";
+import { useSelector, useDispatch } from "react-redux";
+
 const NotificationForm = ({ data, index, reRender }) => {
   const [displayAtt, setDisplayAtt] = useState(false);
+  const myUser = useSelector((state) => state.allReducers.user.user);
 
   useEffect(() => {
-    userClient.getUser().then((myUser) => {
-      if (myUser.userName === data.madeBy) {
-        setDisplayAtt(true);
-      }
-    });
+    console.log(myUser);
+    if (myUser.userName === data.madeBy) {
+      setDisplayAtt(true);
+    }
   }, []);
 
   const colors = [
@@ -67,16 +68,15 @@ const NotificationForm = ({ data, index, reRender }) => {
       <div
         className="card-top"
         style={{
-          "background-color": colors[renderSwitch(data.category)].primaryColor,
+          backgroundColor: colors[renderSwitch(data.category)].primaryColor,
         }}
       ></div>
       <div className="task-holder">
         <span
           className="card-header"
           style={{
-            "background-color":
-              colors[renderSwitch(data.category)].primaryColor,
-            "border-radius": "10px",
+            backgroundColor: colors[renderSwitch(data.category)].primaryColor,
+            borderRadius: "10px",
           }}
         >
           {data.category}
@@ -87,9 +87,8 @@ const NotificationForm = ({ data, index, reRender }) => {
         <div
           className="content-holder"
           style={{
-            "background-color":
-              colors[renderSwitch(data.category)].secondaryColor,
-            "border-radius": "10px",
+            backgroundColor: colors[renderSwitch(data.category)].secondaryColor,
+            borderRadius: "10px",
           }}
         >
           <h5>{data.content}</h5>
