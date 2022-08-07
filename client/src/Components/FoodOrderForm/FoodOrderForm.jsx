@@ -15,6 +15,7 @@ const FoodOrderForm = ({
   namesAndOrders,
   setNamesAndOrders,
   setIsModalShown,
+  logo,
 }) => {
   const myUser = useSelector((state) => state.allReducers.user.user);
 
@@ -53,6 +54,9 @@ const FoodOrderForm = ({
   return (
     <div className="center food-order-center">
       <form className="food-order-form" onSubmit={handleSubmit}>
+        <div className="food-order-form-logo">
+          <img src={logo} alt="logo" />
+        </div>
         <h1 className="food-order-header">What do you want to eat</h1>
         <textarea
           className="food-order-text-area"

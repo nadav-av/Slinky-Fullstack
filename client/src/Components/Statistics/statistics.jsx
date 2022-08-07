@@ -111,7 +111,13 @@ const Statistics = () => {
     } else {
       return (
         <>
-          <div>No Data yet</div>
+          <div className="empty-data-container">
+            <i className="fa-solid fa-chart-column empty-data-icon"></i>
+          </div>
+          <h4>
+            In order to see anlayzed data, please choose the information you
+            want to see, in the menu above.
+          </h4>
         </>
       );
     }
@@ -121,45 +127,45 @@ const Statistics = () => {
       <div className="form-control">
         <div className="statstic-form-options">
           <div className="statistic-statistic-body">
-            <div  className="formcontrol-style">
-            <FormControl fullWidth spacing={2}>
-              <InputLabel id="Statistics-select-label" margin="dense">
-                Statistics
-              </InputLabel>
-              <Select
-                labelId="Statistics-select-label"
-                id="Statistics-select"
-                defaultValue={""}
-                label="Statistics"
-                onChange={handleChangeStatisticsChoose}
-              >
-                <MenuItem value={"Chairs information"}>
-                  Chairs information
-                </MenuItem>
-                <MenuItem value={"Offices information"}>
-                  Offices information
-                </MenuItem>
-                <MenuItem value={"Compare dates"}>Compare dates</MenuItem>
-              </Select>
-            </FormControl>
+            <div className="formcontrol-style">
+              <FormControl fullWidth spacing={2}>
+                <InputLabel id="Statistics-select-label" margin="dense">
+                  Statistics
+                </InputLabel>
+                <Select
+                  labelId="Statistics-select-label"
+                  id="Statistics-select"
+                  defaultValue={""}
+                  label="Statistics"
+                  onChange={handleChangeStatisticsChoose}
+                >
+                  <MenuItem value={"Chairs information"}>
+                    Chairs information
+                  </MenuItem>
+                  <MenuItem value={"Offices information"}>
+                    Offices information
+                  </MenuItem>
+                  <MenuItem value={"Compare dates"}>Compare dates</MenuItem>
+                </Select>
+              </FormControl>
             </div>
           </div>
           {isShowOfficeIdRadioList === true ? (
             <div className="statistic-officesanddates-body">
               <div className="formcontrol-style">
-              <FormControl fullWidth spacing={2}>
-                <InputLabel id="Office-id-select-label">Offices</InputLabel>
-                <Select
-                  labelId="office-id-select"
-                  id="office-id-select"
-                  value={officeId}
-                  label="Office"
-                  onChange={handleChangeOfficeId}
-                >
-                  <MenuItem value={"1"}>Rubinshtein Twin Towers</MenuItem>
-                  <MenuItem value={"2"}>Azrieli Square Tower</MenuItem>
-                </Select>
-              </FormControl>
+                <FormControl fullWidth spacing={2}>
+                  <InputLabel id="Office-id-select-label">Offices</InputLabel>
+                  <Select
+                    labelId="office-id-select"
+                    id="office-id-select"
+                    value={officeId}
+                    label="Office"
+                    onChange={handleChangeOfficeId}
+                  >
+                    <MenuItem value={"1"}>Rubinshtein Twin Towers</MenuItem>
+                    <MenuItem value={"2"}>Azrieli Square Tower</MenuItem>
+                  </Select>
+                </FormControl>
               </div>
               {showDates === true ? (
                 <div className="statistic-dates-body">

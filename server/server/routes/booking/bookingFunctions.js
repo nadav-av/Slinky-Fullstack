@@ -102,9 +102,7 @@ async function getBookingByDate(req, res) {
   try {
     const { date } = req.body;
     const newDate = new Date(date);
-    const listOfBookings = await BookingManager.getBookingByDate(
-      newDate
-    );
+    const listOfBookings = await BookingManager.getBookingByDate(newDate);
     const bookedHours = listOfBookings.map((bookingOrder) => {
       return {
         officeId: bookingOrder.officeId,

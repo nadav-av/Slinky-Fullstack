@@ -40,9 +40,23 @@ text-align: center;
 text-decoration: none;
 display: inline-block;
 font-size: 16px;
+cursor: pointer;
+}
+
+
+#create-btn-not:hover{
+background-color: #4c70af;
+
 
 }
+
 #board-title-txt{
 margin-top: 5%;
 margin-left: 38%;
+}
+
+.notifi-loader{
+    position: absolute;
+    top: 50%;
+    left: 50%;
 }

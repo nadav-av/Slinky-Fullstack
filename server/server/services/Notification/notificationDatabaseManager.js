@@ -36,7 +36,6 @@ class NotificationDatabaseManage {
       });
       return del;
     } catch (error) {
-      console.log("THERE WAS ERROR =====> ",error);
       throw createNewErrorFromDatabaseError(error);
     }
   };

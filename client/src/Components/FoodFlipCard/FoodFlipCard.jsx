@@ -7,7 +7,6 @@ import FoodOrderForm from "./../FoodOrderForm/FoodOrderForm";
 import foodOrderClient from "../../Services/foodOrderClient";
 import { CSVLink } from "react-csv";
 
-
 function FoodFlipCard({ card }) {
   const [showBack, setShowBack] = useState(false);
   const [isModalShown, setIsModalShown] = useState(false);
@@ -74,6 +73,7 @@ function FoodFlipCard({ card }) {
               namesAndOrders={namesAndOrders}
               setNamesAndOrders={setNamesAndOrders}
               setIsModalShown={setIsModalShown}
+              logo={card.img}
             />
           }
         />

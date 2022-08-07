@@ -12,7 +12,6 @@ const CreateTask = ({ onSubmit, reRender }) => {
   const [category, setCategory] = useState("idea");
 
   const handleOfficeChange = (e) => {
-    console.log(e.target.value);
     setOfficeId(e.target.value);
   };
 
